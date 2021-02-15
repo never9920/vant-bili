@@ -10,6 +10,10 @@ const buy = () =>
     import ('../views/buy/buy')
 const mine = () =>
     import ('../views/mine/mine')
+const search = () =>
+    import ('../views/search/search')
+const message = () =>
+    import ('../views/message/message')
 
 Vue.use(VueRouter)
 
@@ -36,6 +40,20 @@ const routes = [{
     {
         path: '/mine',
         component: mine
+    },
+    {
+        path: '/search',
+        component: search,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/message',
+        component: message,
+        meta: {
+            isshow: true
+        }
     }
 ]
 
