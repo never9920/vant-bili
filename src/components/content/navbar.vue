@@ -52,8 +52,8 @@ export default {
   align-items: center;
 }
 .navbar img {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
 }
 .left {
