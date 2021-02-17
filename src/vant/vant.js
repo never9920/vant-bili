@@ -5,7 +5,10 @@ import {
     TabbarItem,
     Icon,
     Tab,
-    Tabs
+    Tabs,
+    Swipe,
+    SwipeItem,
+    Lazyload
 } from 'vant'
 
 Vue.use(Button);
@@ -14,3 +17,6 @@ Vue.use(TabbarItem);
 Vue.use(Icon);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
+Vue.use(Lazyload);

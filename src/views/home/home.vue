@@ -2,13 +2,16 @@
   <div>
     <navbar :imgsrc="imgsrc"></navbar>
     <div class="center">
-      <vtab :tabs="tabs" :homecurrent="homecurrent" @change="change"></vtab>
+      <vtab :tabs="tabs" :homecurrent="homecurrent" @change="change">
+        <vswipe :banner="banner" hight=165px></vswipe>
+      </vtab>
     </div>
   </div>
 </template>
 
 <script>
 import navbar from "../../components/content/navbar.vue";
+import vswipe from '../../components/vant/vswipe.vue';
 import vtab from '../../components/vant/vtab.vue';
 export default {
   name: "home",
@@ -17,14 +20,19 @@ export default {
       imgsrc: "",
       homecurrent:1,
       tabs:[
-        {title:'直播'},
-        {title:'推荐'},
-        {title:'热门'},
-        {title:'追番'},
-        {title:'影视'},
-        {title:'抗击肺炎'},
-        {title:'小康'},
-        ]
+        {title:'直播',name:0},
+        {title:'推荐',name:1},
+        {title:'热门',name:2},
+        {title:'追番',name:3},
+        {title:'影视',name:4},
+        {title:'抗击肺炎',name:5},
+        {title:'小康',name:6},
+        ],
+        banner:[
+          require('@/assets/img/1.png'),
+          require('@/assets/img/2.png'),
+          require('@/assets/img/3.png'),
+          require('@/assets/img/4.png'),]
     };
   },
 
@@ -32,7 +40,7 @@ export default {
     this.getuser();
   },
 
-  components: { navbar, vtab },
+  components: { navbar, vtab, vswipe },
 
   computed: {},
 
