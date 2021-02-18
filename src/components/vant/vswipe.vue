@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-swipe :autoplay="1000" class="swiper" :show-indicators=false>
+    <van-swipe :autoplay="3000" class="swiper" :show-indicators=false>
      <van-swipe-item v-for="(item,i) in banner" :key="i" :style="{height:hight}">
        <img :src="image(item)" @click = "link(item)"/>
      </van-swipe-item>
@@ -51,5 +51,6 @@ name:"swipe",
 <style scoped>
 .swiper img{
   width:100%;
+  border-radius: 10px;
 }
 </style>
