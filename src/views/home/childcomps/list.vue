@@ -38,12 +38,14 @@ export default {
 </script>
 <style scoped>
 .detail {
-  width: 45%;
+  width: 47%;
   font-size: 10 px;
   background-color: #fff;
   border-radius: 10px;
   margin: 5px 0;
   box-shadow: 0px 2px 2px #888888;
+  border: solid 1px #aaa;
+  overflow: hidden;
 }
 .list {
   display: flex;

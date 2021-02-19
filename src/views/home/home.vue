@@ -3,10 +3,33 @@
     <navbar :imgsrc="imgsrc"></navbar>
     <div class="center">
       <vtab :tabs="tabs" :current="current" @change="change">
-        <div class="top">
-          <vswipe :banner="banner" hight="165px"></vswipe>
-        </div>
-        <list v-if="show" :hometab="hometab[current].list"></list>
+        <vrefresh
+          @refresh="refresh"
+          :loading="loading"
+          @loadingchange="loadingchange"
+        >
+          <vlist
+            @load="loadmore"
+            :finished="hometab[current].finished"
+            :care="hometab[current].loading"
+            v-if="show"
+            @changecare="changecare"
+          >
+            <div class="top" v-show="firsttab[current].swipeshow">
+              <vswipe :banner="banner" hight="165px"></vswipe>
+            </div>
+            <list v-if="show" :hometab="firsttab[current].list"></list>
+            <div
+              v-show="!firsttab[current].swipeshow"
+              @click="refresh"
+              class="text"
+            >
+              <vicon name="replay"></vicon>
+              上次刷新到这里，点击再次刷新
+            </div>
+            <list v-if="show" :hometab="hometab[current].list"></list>
+          </vlist>
+        </vrefresh>
       </vtab>
     </div>
   </div>
@@ -14,9 +37,12 @@
 
 <script>
 import navbar from "../../components/content/navbar.vue";
+import vicon from "../../components/vant/vicon.vue";
+import vrefresh from "../../components/vant/vrefresh.vue";
 import vswipe from "../../components/vant/vswipe.vue";
 import vtab from "../../components/vant/vtab.vue";
 import list from "./childcomps/list.vue";
+import vlist from "../../components/vant/vlist.vue";
 export default {
   name: "home",
   data() {
@@ -40,6 +66,9 @@ export default {
       ],
       hometab: {},
       show: false,
+      loading: false,
+
+      firsttab: {},
     };
   },
 
@@ -47,8 +76,7 @@ export default {
     this.getuser(), this.gethome();
   },
 
-  components: { navbar, vtab, vswipe, list },
-  computed: {},
+  components: { navbar, vtab, vswipe, list, vrefresh, vicon, vlist },
 
   methods: {
     async getuser() {
@@ -88,8 +116,11 @@ export default {
       this.hometab = category;
       for (let i in this.hometab) {
         this.getdetail(i);
+        this.firsttab[i] = {};
+        this.firsttab[i].list = [];
+        this.firsttab[i].swipeshow = true;
       }
-      //console.log(this.hometab)
+      //console.log(this.firsttab)
     },
     async getdetail(id) {
       const page = this.hometab[id].page + 1;
@@ -108,6 +139,45 @@ export default {
       this.show = true;
       //console.log(this.hometab)
     },
+    async unshiftdetail(id) {
+      const page = this.hometab[id].page + 1;
+      const { data: res } = await this.$http.get(
+        "/detail/" + this.hometab[id]._id,
+        {
+          params: { page, pagesize: 10 },
+        }
+      );
+      this.hometab[id].list.unshift(...this.firsttab[id].list);
+      this.firsttab[id].list = res;
+      this.hometab[id].page += 1;
+      this.hometab[id].loading = false;
+      if (res.length < 10) {
+        this.hometab[id].finished = true;
+      }
+      this.show = true;
+      //console.log(this.hometab[id].list)
+    },
+    refresh() {
+      this.loading = true;
+      scrollTo(0, 0);
+      setTimeout(() => {
+        this.loading = false;
+        this.firsttab[this.current].swipeshow = false;
+        this.unshiftdetail(this.current);
+      }, 1000);
+    },
+    loadingchange(val) {
+      this.loading = val;
+    },
+    loadmore() {
+      setTimeout(() => {
+        this.getdetail(this.current);
+      }, 1000);
+    },
+    changecare(val) {
+      //console.log(val);
+      this.hometab[this.current].loading = val;
+    },
   },
 };
 </script>
@@ -120,5 +190,13 @@ export default {
 }
 .top img {
   border-radius: 10px;
+}
+.text {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fb7a9f;
 }
 </style>

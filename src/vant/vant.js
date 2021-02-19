@@ -8,7 +8,10 @@ import {
     Tabs,
     Swipe,
     SwipeItem,
-    Lazyload
+    Lazyload,
+    PullRefresh,
+    Toast,
+    List
 } from 'vant'
 
 Vue.use(Button);
@@ -20,3 +23,6 @@ Vue.use(Tabs);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Lazyload);
+Vue.use(PullRefresh);
+Vue.use(Toast);
+Vue.use(List);

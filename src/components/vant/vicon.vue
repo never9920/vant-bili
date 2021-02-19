@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vicon">
     <van-icon :name="name" :size="size"></van-icon>
   </div>
 </template>
@@ -28,4 +28,9 @@ export default {
 };
 </script>
 <style scoped>
+.vicon{
+  padding: 0;
+  height: 16px;
+  width: 16px;
+}
 </style>

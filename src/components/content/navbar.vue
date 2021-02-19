@@ -4,7 +4,7 @@
       <img :src="imgsrc" alt="" @click="tomine" />
     </div>
     <div class="center" @click="tosearch">
-      <vicon name="search" size="16px"></vicon>
+      <vicon name="search" size="16px" class="icons"></vicon>
     </div>
     <div class="right" @click="tomessage">
       <vicon name="comment-circle-o" size="20px"></vicon>
@@ -68,6 +68,9 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 15px;
+}
+.icons {
+  margin-left: 3px;
 }
 .right {
   margin: 0 auto;
