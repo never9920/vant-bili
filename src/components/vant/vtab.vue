@@ -6,14 +6,16 @@
       color="#fff"
       swipeable
       sticky
+      animated
     >
       <van-tab
         :title="item.title"
         v-for="(item, i) in tabs"
         :key="i"
         :name="item.name"
+        :to="item.path"
       >
-        <slot>{{ item.title }}</slot>
+        <router-view></router-view>
       </van-tab>
     </van-tabs>
   </div>
@@ -33,22 +35,16 @@ export default {
       type: Array,
       default: () => [],
     },
-    homecurrent: {
-      type: Number,
-    },
     btns: {
       type: Boolean,
       default: false,
     },
   },
 
-  watch: {
-    activename() {
-      this.$emit("change", this.activename);
-    },
-    homecurrent(val) {
-      this.activename = val;
-    },
+  mounted(){
+    this.$bus.$on('totuijian',()=>{
+      this.activename = 1
+    })
   },
 
   components: {},

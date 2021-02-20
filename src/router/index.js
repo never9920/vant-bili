@@ -14,12 +14,59 @@ const search = () =>
     import ('../views/search/search')
 const message = () =>
     import ('../views/message/message')
+const zhibo = () =>
+    import ('../views/home/childcomps/zhibo')
+const tuijian = () =>
+    import ('../views/home/childcomps/tuijian')
+const remen = () =>
+    import ('../views/home/childcomps/remen')
+const yingshi = () =>
+    import ('../views/home/childcomps/yingshi')
+const zhuifan = () =>
+    import ('../views/home/childcomps/zhuifan')
+const xiaokan = () =>
+    import ('../views/home/childcomps/xiaokan')
+const kangji = () =>
+    import ('../views/home/childcomps/kangji')
 
 Vue.use(VueRouter)
 
 const routes = [{
         path: '/home',
-        component: home
+        component: home,
+        children: [{
+                path: '/home/zhibo',
+                component: zhibo
+            },
+            {
+                path: '/home/tuijian',
+                component: tuijian
+            },
+            {
+                path: '',
+                redirect: '/home/tuijian'
+            },
+            {
+                path: '/home/remen',
+                component: remen
+            },
+            {
+                path: '/home/yingshi',
+                component: yingshi
+            },
+            {
+                path: '/home/xiaokan',
+                component: xiaokan
+            },
+            {
+                path: '/home/kangji',
+                component: kangji
+            },
+            {
+                path: '/home/zhuifan',
+                component: zhuifan
+            },
+        ]
     },
     {
         path: '',
