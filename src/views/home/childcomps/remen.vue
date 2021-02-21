@@ -1,5 +1,5 @@
 <template>
-  <div>remen</div>
+  <div>热门</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>xiaokan</div>
+  <div>小康</div>
 </template>
 
 <script>

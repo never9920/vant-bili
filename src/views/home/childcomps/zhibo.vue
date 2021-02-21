@@ -1,5 +1,5 @@
 <template>
-  <div>zhibo</div>
+  <div>直播</div>
 </template>
 
 <script>

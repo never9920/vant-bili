@@ -35,37 +35,37 @@ const routes = [{
         path: '/home',
         component: home,
         children: [{
-                path: '/home/zhibo',
+                path: '/zhibo',
                 component: zhibo
             },
             {
-                path: '/home/tuijian',
+                path: '/tuijian',
                 component: tuijian
             },
             {
-                path: '',
-                redirect: '/home/tuijian'
-            },
-            {
-                path: '/home/remen',
+                path: '/remen',
                 component: remen
             },
             {
-                path: '/home/yingshi',
+                path: '/yingshi',
                 component: yingshi
             },
             {
-                path: '/home/xiaokan',
+                path: '/xiaokan',
                 component: xiaokan
             },
             {
-                path: '/home/kangji',
+                path: '/kangji',
                 component: kangji
             },
             {
-                path: '/home/zhuifan',
+                path: '/zhuifan',
                 component: zhuifan
             },
+            {
+                path: '',
+                redirect: '/zhibo'
+            }
         ]
     },
     {
@@ -109,5 +109,13 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+const originalPush = VueRouter.prototype.push
+
+VueRouter.prototype.push = function push(location) {
+
+    return originalPush.call(this, location).catch(err => err)
+
+}
 
 export default router

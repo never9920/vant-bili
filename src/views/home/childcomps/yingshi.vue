@@ -1,5 +1,5 @@
 <template>
-  <div>yingshi</div>
+  <div>影视</div>
 </template>
 
 <script>

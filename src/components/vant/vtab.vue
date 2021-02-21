@@ -7,12 +7,13 @@
       swipeable
       sticky
       animated
+      @click="setact"
     >
       <van-tab
         :title="item.title"
         v-for="(item, i) in tabs"
         :key="i"
-        :name="item.name"
+        :name="item.path"
         :to="item.path"
       >
         <router-view></router-view>
@@ -26,7 +27,7 @@ export default {
   name: "vtab",
   data() {
     return {
-      activename: 1,
+      activename: "/zhibo",
     };
   },
 
@@ -41,17 +42,29 @@ export default {
     },
   },
 
-  mounted(){
-    this.$bus.$on('totuijian',()=>{
-      this.activename = 1
-    })
+  created() {
+    this.getact();
+  },
+
+  mounted() {
+    this.getact();
   },
 
   components: {},
 
   computed: {},
 
-  methods: {},
+  methods: {
+    setact(name) {
+      sessionStorage.setItem("activename", name);
+      this.$bus.$emit("setpath", name);
+    },
+    getact() {
+      if (sessionStorage.getItem("activename")) {
+        this.activename = sessionStorage.getItem("activename");
+      }
+    },
+  },
 };
 </script>
 <style>

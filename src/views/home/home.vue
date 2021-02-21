@@ -18,13 +18,13 @@ export default {
     return {
       imgsrc: "",
       tabs: [
-        { title: "直播", name: 0, path: "/home/zhibo" },
-        { title: "推荐", name: 1, path: "/home/tuijian" },
-        { title: "热门", name: 2, path: "/home/remen" },
-        { title: "追番", name: 3, path: "/home/zhuifan" },
-        { title: "影视", name: 4, path: "/home/yingshi" },
-        { title: "抗击肺炎", name: 5, path: "/home/kangji" },
-        { title: "小康", name: 6, path: "/home/xiaokan" },
+        { title: "直播", name: 'zhibo', path: "/zhibo" },
+        { title: "推荐", name: 'tuijian', path: "/tuijian" },
+        { title: "热门", name: 'remen', path: "/remen" },
+        { title: "追番", name: 'zhuifan', path: "/zhuifan" },
+        { title: "影视", name: 'yingshi', path: "/yingshi" },
+        { title: "抗击肺炎", name: 'kangji', path: "/kangji" },
+        { title: "小康", name: 'xiaokan', path: "/xiaokan" },
       ],
     };
   },
@@ -52,7 +52,7 @@ export default {
           "//s1.hdslb.com/bfs/static/jinkela/long/images/login.png@48w_48h_1c.png";
         //console.log(this.imgsrc)
       }
-    },
+    }
   },
 };
 </script>

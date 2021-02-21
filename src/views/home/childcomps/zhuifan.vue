@@ -1,5 +1,5 @@
 <template>
-  <div>zhifan</div>
+  <div>追番</div>
 </template>
 
 <script>

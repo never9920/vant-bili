@@ -1,5 +1,5 @@
 <template>
-  <div>kangji</div>
+  <div>抗击</div>
 </template>
 
 <script>
