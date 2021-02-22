@@ -58,6 +58,6 @@ export default {
 </script>
 <style scoped>
 .center {
-  background-color: #f6f6f6;
+  background-color: rgb(233, 233, 233);
 }
 </style>

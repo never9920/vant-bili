@@ -1,8 +1,8 @@
 <template>
   <div>
-    <van-swipe :autoplay="3000" class="swiper" :show-indicators=false>
+    <van-swipe :autoplay="3000" class="swiper" :show-indicators="shadow">
      <van-swipe-item v-for="(item,i) in banner" :key="i" :style="{height:hight}">
-       <img :src="image(item)" @click = "link(item)"/>
+       <img :src="image(item)" @click = "link(item)" :style="{height:hight}"/>
      </van-swipe-item>
    </van-swipe>
   </div>
@@ -18,6 +18,10 @@ export default {
     hight:{
       type:String,
       default:'195px'
+    },
+    shadow:{
+      type:Boolean,
+      default:false
     }
   },
 name:"swipe",
@@ -50,7 +54,7 @@ name:"swipe",
 </script>
 <style scoped>
 .swiper img{
-  width:100%;
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 100%;
 }
 </style>

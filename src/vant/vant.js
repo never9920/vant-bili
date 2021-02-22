@@ -11,7 +11,9 @@ import {
     Lazyload,
     PullRefresh,
     Toast,
-    List
+    List,
+    Grid,
+    GridItem
 } from 'vant'
 
 Vue.use(Button);
@@ -26,3 +28,5 @@ Vue.use(Lazyload);
 Vue.use(PullRefresh);
 Vue.use(Toast);
 Vue.use(List);
+Vue.use(Grid);
+Vue.use(GridItem);
