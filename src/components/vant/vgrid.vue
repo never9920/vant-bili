@@ -45,9 +45,13 @@ export default {
   white-space: nowrap;
   width: 48px;
   justify-content: center;
+  margin: 5px 0;
 }
 .grid img {
   height: 30px;
   width: 30px;
+}
+.van-grid-item__content{
+  padding:10px 8px ;
 }
 </style>

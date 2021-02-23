@@ -4,7 +4,6 @@
       v-model="activename"
       title-active-color="#fb7a9f"
       color="#fff"
-      swipeable
       sticky
       animated
       @click="setact"
@@ -57,6 +56,7 @@ export default {
   methods: {
     setact(name) {
       sessionStorage.setItem("activename", name);
+      sessionStorage.setItem("active", name);
       this.$bus.$emit("setpath", name);
     },
     getact() {

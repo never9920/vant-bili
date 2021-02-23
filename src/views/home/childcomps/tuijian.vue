@@ -20,7 +20,7 @@
         <div class="top" v-show="firsttab[1].swipeshow">
           <vswipe :banner="banner" hight="165px"></vswipe>
         </div>
-        <list v-if="show" :hometab="hometab[1].list"></list>
+        <list v-if="show" :hometab="hometab[1].list" gaodu="165px"></list>
       </vlist>
     </vrefresh>
   </div>
@@ -143,7 +143,7 @@ export default {
 </script>
 <style scoped>
 .top {
-  margin: 5px 10px 0 5px;
+  margin: 10px 5px 0 5px;
 }
 .top img {
   border-radius: 10px;

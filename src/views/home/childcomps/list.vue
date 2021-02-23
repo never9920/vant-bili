@@ -6,7 +6,12 @@
       class="detail"
       @click="tovideo(item)"
     >
-      <listitem :hometab="item"></listitem>
+      <listitem
+        :hometab="item"
+        :type="type"
+        :danhang="danhang"
+        :gaodu="gaodu"
+      ></listitem>
     </div>
   </div>
 </template>
@@ -23,6 +28,15 @@ export default {
     hometab: {
       type: Array,
     },
+    type: {
+      type: String,
+    },
+    danhang: {
+      type: Boolean,
+    },
+    gaodu: {
+      type: String,
+    },
   },
 
   components: { listitem },
@@ -38,11 +52,11 @@ export default {
 </script>
 <style scoped>
 .detail {
-  width: 47%;
-  font-size: 10 px;
+  width: 48.5%;
+  font-size: 10px;
   background-color: #fff;
-  border-radius: 10px;
-  margin: 5px 0;
+  border-radius: 5px;
+  margin: 3px 0;
   box-shadow: 0px 2px 2px #888888;
   border: solid 1px #aaa;
   overflow: hidden;
@@ -50,6 +64,7 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin: 0 8px;
 }
 </style>

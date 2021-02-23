@@ -19,11 +19,23 @@
           <vgrid :icons="icons" :num="5"></vgrid>
         </div>
         <div class="center">
-          <img src="~assets/img/zhibo.svg" alt=""/>
+          <img src="~assets/img/zhibo.svg" alt="" />
           推荐直播
-          </div>
-        <list v-if="show" :hometab="firsttab[0].list"></list>
-        <list v-if="show" :hometab="hometab[0].list"></list>
+        </div>
+        <list
+          v-if="show"
+          :hometab="firsttab[0].list"
+          type="zhibo"
+          :danhang="true"
+          gaodu="140px"
+        ></list>
+        <list
+          v-if="show"
+          :hometab="hometab[0].list"
+          type="zhibo"
+          :danhang="true"
+          gaodu="140px"
+        ></list>
       </vlist>
     </vrefresh>
   </div>
@@ -50,16 +62,16 @@ export default {
       loading: false,
       firsttab: {},
       icons: [
-        { title: '王者荣耀',img:  require("@/assets/img/wz.jpg")},
-        { title: '全屏直播',img:  require("@/assets/img/zb.svg") },
-        { title: '英雄联盟',img:  require("@/assets/img/yx.jpg") },
-        { title: '娱乐影视' ,img:  require("@/assets/img/yule.svg")},
-        { title: '单机游戏',img:  require("@/assets/img/youxi.svg") },
-        { title: '电台直播',img:  require("@/assets/img/diantai.svg") },
-        { title: '虚拟直播' ,img:  require("@/assets/img/xn.svg")},
-        { title: '英雄联盟手游',img:  require("@/assets/img/yxsy.jpg") },
-        { title: '视屏唱见',img:  require("@/assets/img/cj.svg") },
-        { title: '全部标签' ,img:  require("@/assets/img/fl.svg")},
+        { title: "王者荣耀", img: require("@/assets/img/wz.jpg") },
+        { title: "全屏直播", img: require("@/assets/img/zb.svg") },
+        { title: "英雄联盟", img: require("@/assets/img/yx.jpg") },
+        { title: "娱乐影视", img: require("@/assets/img/yule.svg") },
+        { title: "单机游戏", img: require("@/assets/img/youxi.svg") },
+        { title: "电台直播", img: require("@/assets/img/diantai.svg") },
+        { title: "虚拟直播", img: require("@/assets/img/xn.svg") },
+        { title: "英雄联盟手游", img: require("@/assets/img/yxsy.jpg") },
+        { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
+        { title: "全部标签", img: require("@/assets/img/fl.svg") },
       ],
     };
   },
@@ -160,18 +172,18 @@ export default {
 .top {
   margin: 8px 10px 0 8px;
 }
-.icons{
+.icons {
   margin: 10px 8px;
   border-radius: 5px;
   overflow: hidden;
 }
-.center{
+.center {
   display: flex;
   font-size: 15px;
   align-items: center;
-  margin: 10px 8px 10px ;
+  margin: 10px 8px 10px;
 }
-.center img{
+.center img {
   height: 15px;
   width: 15px;
   margin-right: 10px;

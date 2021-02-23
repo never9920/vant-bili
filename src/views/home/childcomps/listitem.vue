@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="{ height: gaodu }" class="listitem">
     <div class="itemimg">
       <img
         v-if="hometab.img"
@@ -7,7 +7,7 @@
         class="detailimg"
         :onerror="changeimg"
       />
-      <div class="kankan">
+      <div class="kankan" v-if="type === 'tuijian'">
         <span class="video">
           <img src="~assets/img/bofang.svg" />
           168万
@@ -18,8 +18,27 @@
         </span>
         <span class="time"> 00:30 </span>
       </div>
+      <div class="kankan" v-if="type === 'zhibo'">
+        <span class="video">
+          {{ hometab.id }}
+        </span>
+        <span class="renshu">
+          <img src="~assets/img/renshu.svg" />
+          2333
+        </span>
+      </div>
     </div>
-    <div class="name">{{ hometab.id }}{{ hometab.name }}</div>
+    <div class="name" :class="{ danhang: danhang }">
+      {{ hometab.id }}{{ hometab.name }}
+    </div>
+    <div class="xia" v-if="type === 'tuijian'">
+      <span>推荐视频都一样啦</span>
+      <img src="~assets/img/dian.svg" alt="" />
+    </div>
+    <div class="zhiboxia" v-if="type === 'zhibo'">
+      <span>直播电台</span>
+      <img src="~assets/img/cha.svg" alt="" />
+    </div>
   </div>
 </template>
 
@@ -37,6 +56,17 @@ export default {
     hometab: {
       type: Object,
     },
+    type: {
+      type: String,
+      default: "tuijian",
+    },
+    danhang: {
+      type: Boolean,
+      default: false,
+    },
+    gaodu: {
+      type: String,
+    },
   },
 
   watch: {
@@ -53,6 +83,9 @@ export default {
 };
 </script>
 <style scoped>
+.listitem {
+  position: relative;
+}
 .detailimg {
   width: 100%;
   height: 95px;
@@ -89,5 +122,45 @@ export default {
   flex: 1;
   text-align: right;
   padding-right: 5px;
+}
+.renshu {
+  display: flex;
+  flex: 1;
+  padding-left: 110px;
+}
+.danhang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.xia {
+  width: 96%;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: #aaa;
+  position: absolute;
+  bottom: 2px;
+  margin: 0 5px;
+  justify-content: space-between;
+}
+.xia img {
+  height: 15px;
+  width: 15px;
+}
+.zhiboxia {
+  width: 92%;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: #aaa;
+  position: absolute;
+  bottom: 2px;
+  margin: 0 5px;
+  justify-content: space-between;
+}
+.zhiboxia img {
+  width: 10px;
+  height: 10px;
 }
 </style>
