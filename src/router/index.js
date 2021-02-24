@@ -64,7 +64,7 @@ const routes = [{
             },
             {
                 path: '',
-                redirect: '/zhibo'
+                redirect: '/tuijian'
             }
         ]
     },

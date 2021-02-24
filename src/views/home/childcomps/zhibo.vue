@@ -16,7 +16,7 @@
           <vswipe :banner="banner" :shadow="true" hight="100px"></vswipe>
         </div>
         <div class="icons">
-          <vgrid :icons="icons" :num="5"></vgrid>
+          <vgrid :icons="icons" :num="5" :danhang="true"></vgrid>
         </div>
         <div class="center">
           <img src="~assets/img/zhibo.svg" alt="" />
@@ -46,7 +46,7 @@ import vrefresh from "components/vant/vrefresh.vue";
 import vswipe from "components/vant/vswipe.vue";
 import list from "./list";
 import vlist from "components/vant/vlist.vue";
-import vgrid from "../../../components/vant/vgrid.vue";
+import vgrid from "components/vant/vgrid.vue";
 export default {
   name: "zhibo",
   data() {

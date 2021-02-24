@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       bardata: [
-        { title: "首页", icon: "wap-home-o", path: "/zhibo" },
+        { title: "首页", icon: "wap-home-o", path: "/tuijian" },
         { title: "频道", icon: "apps-o", path: "/category" },
         { title: "动态", icon: "orders-o", path: "/updata" },
         { title: "会员购", icon: "shop-o", path: "/buy" },

@@ -26,7 +26,7 @@ export default {
   name: "vtab",
   data() {
     return {
-      activename: "/zhibo",
+      activename: "/tuijian",
     };
   },
 

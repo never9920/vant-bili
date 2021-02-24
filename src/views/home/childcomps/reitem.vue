@@ -71,7 +71,7 @@ export default {
 }
 .time {
   position: absolute;
-  bottom: 23px;
+  bottom: 15px;
   right: 15px;
   font-size: 12px;
   background-color: rgb(22, 22, 22, 0.4);
@@ -103,14 +103,14 @@ export default {
   border-radius: 5px;
 }
 .you img {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
 }
 .up,
 .shijian {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 .you p {
   margin: 0 5px;

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import navbar from "../../components/content/navbar.vue";
-import vtab from "../../components/vant/vtab.vue";
+import navbar from "components/content/navbar.vue";
+import vtab from "components/vant/vtab.vue";
 export default {
   name: "home",
   data() {

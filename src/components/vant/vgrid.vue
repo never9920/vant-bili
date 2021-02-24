@@ -8,7 +8,7 @@
         text="文字"
       >
         <img :src="item.img" />
-        <p>{{ item.title }}</p>
+        <p :class="{danhang:danhang}">{{ item.title }}</p>
       </van-grid-item>
     </van-grid>
   </div>
@@ -28,6 +28,10 @@ export default {
     icons: {
       type: Array,
     },
+    danhang:{
+      type:Boolean,
+      default:false
+    }
   },
 
   components: {},
@@ -39,10 +43,8 @@ export default {
 </script>
 <style>
 .grid p {
+  display: flex;
   font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   width: 48px;
   justify-content: center;
   margin: 5px 0;
@@ -53,5 +55,11 @@ export default {
 }
 .van-grid-item__content{
   padding:10px 8px ;
+}
+.danhang{
+  display: block!important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

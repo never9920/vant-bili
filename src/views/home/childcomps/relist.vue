@@ -41,6 +41,6 @@ export default {
   background-color: #fff;
   border-bottom: solid 1px #ebebeb;
   padding: 0 10px;
-  height: 124px;
+  height: 114px;
 }
 </style>

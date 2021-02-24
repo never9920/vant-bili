@@ -1,6 +1,5 @@
 <template>
   <div>
-    <vgrid :icons="icons" :num="4"></vgrid>
     <vrefresh
       @refresh="refresh"
       :loading="loading"
@@ -13,20 +12,15 @@
         v-if="show"
         @changecare="changecare"
       >
-        <relist
-          v-if="show"
-          :hometab="hometab[2].list"
-          type="zhibo"
-          :danhang="true"
-          gaodu="140px"
-        ></relist>
+        <vgrid :icons="icons" :num="4"></vgrid>
+        <relist v-if="show" :hometab="hometab[2].list"></relist>
       </vlist>
     </vrefresh>
   </div>
 </template>
 
 <script>
-import vgrid from "../../../components/vant/vgrid.vue";
+import vgrid from "components/vant/vgrid.vue";
 import relist from "./relist.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vlist from "components/vant/vlist.vue";
@@ -97,7 +91,6 @@ export default {
       this.show = true;
       //console.log(this.hometab)
     },
-
     loadingchange(val) {
       this.loading = val;
     },

@@ -143,7 +143,7 @@ export default {
 </script>
 <style scoped>
 .top {
-  margin: 10px 5px 0 5px;
+  margin: 10px 8px 0 8px;
 }
 .top img {
   border-radius: 10px;
