@@ -2,13 +2,19 @@
   <div>
     <div class="words">
       <div>{{ title }}</div>
-      <div class="right">查看全部 &nbsp; ＞</div>
+      <div class="right">查看更多 &nbsp; ＞</div>
     </div>
     <div class="items">
       <div v-for="(item, i) in hometab.slice(0, 4)" :key="i" class="item">
         <div class="shang">
           <img v-if="item.img" :src="item.img" :onerror="changeimg" />
           <div class="nei">2333万追番</div>
+          <div class="like" v-if="show[i].likeshow" @click="changelike(i)">
+            <img src="~assets/img/xin.svg" alt="" />
+          </div>
+          <div class="like" v-else @click="changelike(i)">
+            <img src="~assets/img/xin1.svg" alt="" />
+          </div>
         </div>
         <div class="xia">
           <div class="title">{{ item.id }}{{ item.name }}</div>
@@ -29,6 +35,12 @@ export default {
   data() {
     return {
       changeimg: 'this.src="' + require("@/assets/img/tidai.jpg") + '"',
+      show: [
+        { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
+      ],
     };
   },
 
@@ -38,7 +50,11 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    changelike(i) {
+      this.show[i].likeshow = !this.show[i].likeshow;
+    },
+  },
 };
 </script>
 <style scoped>
@@ -60,6 +76,8 @@ export default {
 .item {
   width: 48.5%;
   margin: 5px 0;
+  border-radius: 5px;
+  overflow: hidden;
 }
 .shang {
   position: relative;
@@ -105,5 +123,21 @@ export default {
   font-size: 10px;
   color: #fb7299;
   height: 30px;
+  margin-bottom: 5px;
+}
+.like {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.like img {
+  height: 20px;
+  width: 20px;
 }
 </style>

@@ -7,72 +7,45 @@
     >
       <vlist
         @load="loadmore"
-        :finished="hometab[0].finished"
-        :care="hometab[0].loading"
+        :finished="hometab[1].finished"
+        :care="hometab[1].loading"
         v-if="show"
         @changecare="changecare"
       >
-        <div class="top" v-show="firsttab[0].swipeshow">
-          <vswipe :banner="banner" :shadow="true" hight="100px"></vswipe>
+        <list v-if="show" :hometab="firsttab[1].list"></list>
+        <div v-show="!firsttab[1].swipeshow" @click="refresh" class="text">
+          <vicon name="replay"></vicon>
+          上次刷新到这里，点击再次刷新
         </div>
-        <div class="icons">
-          <vgrid :icons="icons" :num="5" :danhang="true"></vgrid>
+        <div class="top" v-show="firsttab[1].swipeshow">
+          <vswipe :banner="banner" hight="165px"></vswipe>
         </div>
-        <div class="center">
-          <img src="~assets/img/zhibo.svg" alt="" />
-          推荐直播
-        </div>
-        <list
-          v-if="show"
-          :hometab="firsttab[0].list"
-          type="zhibo"
-          :danhang="true"
-          gaodu="140px"
-        ></list>
-        <list
-          v-if="show"
-          :hometab="hometab[0].list"
-          type="zhibo"
-          :danhang="true"
-          gaodu="140px"
-        ></list>
+        <list v-if="show" :hometab="hometab[1].list" gaodu="165px"></list>
       </vlist>
     </vrefresh>
   </div>
 </template>
 
 <script>
+import vicon from "components/vant/vicon.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vswipe from "components/vant/vswipe.vue";
-import list from "./list";
+import list from "../list";
 import vlist from "components/vant/vlist.vue";
-import vgrid from "components/vant/vgrid.vue";
 export default {
-  name: "zhibo",
+  name: "tuijian",
   data() {
     return {
       banner: [
-        require("@/assets/img/zhibo1.jpg"),
-        require("@/assets/img/zhibo2.jpg"),
-        require("@/assets/img/zhibo3.jpg"),
-        require("@/assets/img/zhibo4.jpg"),
+        require("@/assets/img/1.png"),
+        require("@/assets/img/2.png"),
+        require("@/assets/img/3.png"),
+        require("@/assets/img/4.png"),
       ],
       hometab: {},
       show: false,
       loading: false,
       firsttab: {},
-      icons: [
-        { title: "王者荣耀", img: require("@/assets/img/wz.jpg") },
-        { title: "全屏直播", img: require("@/assets/img/zb.svg") },
-        { title: "英雄联盟", img: require("@/assets/img/yx.jpg") },
-        { title: "娱乐影视", img: require("@/assets/img/yule.svg") },
-        { title: "单机游戏", img: require("@/assets/img/youxi.svg") },
-        { title: "电台直播", img: require("@/assets/img/diantai.svg") },
-        { title: "虚拟直播", img: require("@/assets/img/xn.svg") },
-        { title: "英雄联盟手游", img: require("@/assets/img/yxsy.jpg") },
-        { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
-        { title: "全部标签", img: require("@/assets/img/fl.svg") },
-      ],
     };
   },
 
@@ -80,7 +53,7 @@ export default {
     this.gethome();
   },
 
-  components: { vrefresh, vswipe, list, vlist, vgrid },
+  components: { vicon, vrefresh, vswipe, list, vlist },
 
   computed: {},
 
@@ -90,8 +63,8 @@ export default {
       scrollTo(0, 0);
       setTimeout(() => {
         this.loading = false;
-        this.firsttab[0].swipeshow = false;
-        this.unshiftdetail(0);
+        this.firsttab[1].swipeshow = false;
+        this.unshiftdetail(1);
       }, 1000);
     },
     async gethome() {
@@ -158,34 +131,29 @@ export default {
     },
     loadmore() {
       setTimeout(() => {
-        this.getdetail(0);
+        this.getdetail(1);
       }, 1000);
     },
     changecare(val) {
       //console.log(val);
-      this.hometab[0].loading = val;
+      this.hometab[1].loading = val;
     },
   },
 };
 </script>
 <style scoped>
 .top {
-  margin: 8px 10px 0 8px;
+  margin: 10px 8px 0 8px;
 }
-.icons {
-  margin: 10px 8px;
-  border-radius: 5px;
-  overflow: hidden;
+.top img {
+  border-radius: 10px;
 }
-.center {
+.text {
+  height: 50px;
+  width: 100%;
   display: flex;
-  font-size: 15px;
   align-items: center;
-  margin: 10px 8px 10px;
-}
-.center img {
-  height: 15px;
-  width: 15px;
-  margin-right: 10px;
+  justify-content: center;
+  color: #fb7a9f;
 }
 </style>

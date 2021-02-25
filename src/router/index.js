@@ -15,19 +15,19 @@ const search = () =>
 const message = () =>
     import ('../views/message/message')
 const zhibo = () =>
-    import ('../views/home/childcomps/zhibo')
+    import ('../views/home/childcomps/zhibo/zhibo')
 const tuijian = () =>
-    import ('../views/home/childcomps/tuijian')
+    import ('../views/home/childcomps/tuijian/tuijian')
 const remen = () =>
-    import ('../views/home/childcomps/remen')
+    import ('../views/home/childcomps/remen/remen')
 const yingshi = () =>
-    import ('../views/home/childcomps/yingshi')
+    import ('../views/home/childcomps/yingshi/yingshi')
 const zhuifan = () =>
-    import ('../views/home/childcomps/zhuifan')
+    import ('../views/home/childcomps/zhuifan/zhuifan')
 const xiaokan = () =>
-    import ('../views/home/childcomps/xiaokan')
+    import ('../views/home/childcomps/xiaokan/xiaokan')
 const kangji = () =>
-    import ('../views/home/childcomps/kangji')
+    import ('../views/home/childcomps/kangji/kangji')
 
 Vue.use(VueRouter)
 

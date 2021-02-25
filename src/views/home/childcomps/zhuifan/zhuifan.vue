@@ -1,5 +1,5 @@
 <template>
-  <div id="zhuifan">
+  <div id="zhuifan" v-if="show">
     <vrefresh
       @refresh="refresh"
       :loading="loading"
@@ -16,18 +16,31 @@
           <div>猜你想追</div>
           <div class="right">查看全部 &nbsp; ＞</div>
         </div>
-        <div class="test" v-if="show">
+        <div class="test">
           <div v-for="(item, i) in hometab[3].list" :key="i">
             <zhuiitem :hometab="item"></zhuiitem>
           </div>
         </div>
       </div>
-      <div class="fanju" v-if="show">
+      <div class="fanju">
         <zhuisi :hometab="hometab[3].list" title="番剧推荐"></zhuisi>
       </div>
-      <div class="fanju" v-if="show">
+      <div class="fanju">
         <zhuisi :hometab="hometab[3].list" title="国创推荐"></zhuisi>
       </div>
+      <tabcontrol
+        @tabclick="tabclick"
+        :titles="titles"
+        class="tabcon"
+      ></tabcontrol>
+      <div class="tui">
+        <zhoutui :homedata="hometab[current].list"></zhoutui>
+      </div>
+      <bangdan :hometab="hometab"></bangdan>
+      <threeitem :hometab="hometab[4].list" title="搞笑·番剧"></threeitem>
+      <threeitem :hometab="hometab[5].list" title="热血·番剧"></threeitem>
+      <threeitem :hometab="hometab[6].list" title="校园·番剧" :three="false"></threeitem>
+      <div class="di">╮(╯3╰)╭&nbsp;再怎么找也没有啦</div>
     </vrefresh>
   </div>
 </template>
@@ -38,6 +51,10 @@ import vrefresh from "components/vant/vrefresh.vue";
 import vgrid from "components/vant/vgrid.vue";
 import zhuiitem from "./zhuiitem";
 import zhuisi from "./zhuisi";
+import tabcontrol from "components/content/tabcontrol.vue";
+import zhoutui from "./zhoutui.vue";
+import bangdan from "./bangdan.vue";
+import threeitem from "./threeitem.vue";
 export default {
   name: "zhuifan",
   data() {
@@ -59,6 +76,8 @@ export default {
       ],
       hometab: {},
       show: false,
+      titles: ["一", "二", "三", "四", "五", "六", "日"],
+      current: 0,
     };
   },
 
@@ -66,7 +85,17 @@ export default {
     this.gethome();
   },
 
-  components: { vswipe, vrefresh, vgrid, zhuiitem, zhuisi },
+  components: {
+    vswipe,
+    vrefresh,
+    vgrid,
+    zhuiitem,
+    zhuisi,
+    tabcontrol,
+    zhoutui,
+    bangdan,
+    threeitem,
+  },
 
   computed: {},
 
@@ -96,8 +125,9 @@ export default {
         return item;
       });
       this.hometab = category;
-      this.getdetail(3, 8);
-      //console.log(this.firsttab)
+      for (var i = 0; i < 7; i++) {
+        this.getdetail(i, 8);
+      }
     },
     async getdetail(id, pagesize) {
       const page = this.hometab[id].page + 1;
@@ -114,7 +144,12 @@ export default {
         this.hometab[id].finished = true;
       }
       this.show = true;
-      //console.log(this.hometab)
+    },
+    tabclick(index) {
+      //console.log(index)
+      this.titles = ["一", "二", "三", "四", "五", "六", "日"];
+      this.titles[index] = "周" + this.titles[index];
+      this.current = index;
     },
   },
 };
@@ -153,5 +188,20 @@ export default {
 }
 .right {
   color: #aaa;
+}
+.di {
+  width: 100%;
+  height: 70px;
+  font-size: 12px;
+  padding: 10px;
+  color: #aaa;
+  text-align: center;
+}
+.tabcon,
+.tui {
+  padding: 20px 20px 0 20px;
+}
+.tui {
+  border-bottom: solid 1px #ebebeb;
 }
 </style>
