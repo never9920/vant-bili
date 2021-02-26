@@ -2,10 +2,10 @@
   <div>
     <div class="words">
       <div>{{ title }}</div>
-      <div class="right">查看更多 &nbsp; ＞</div>
+      <div class="right" v-if="isshow">{{ name }} &nbsp; ＞</div>
     </div>
     <div class="items">
-      <div v-for="(item, i) in hometab.slice(0, 4)" :key="i" class="item">
+      <div v-for="(item, i) in hometab.slice(0, num)" :key="i" class="item">
         <div class="shang">
           <img v-if="item.img" :src="item.img" :onerror="changeimg" />
           <div class="nei">2333万追番</div>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="shua">
+    <div class="shua" v-if="xiashow">
       <img src="~assets/img/shua.svg" alt="" />
       <div>换一换</div>
     </div>
@@ -40,11 +40,36 @@ export default {
         { likeshow: false },
         { likeshow: false },
         { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
       ],
     };
   },
 
-  props: ["title", "hometab"],
+  props: {
+    title: {
+      type: String,
+    },
+    hometab: {
+      type: Array,
+    },
+    num: {
+      type: Number,
+      default: 4,
+    },
+    isshow: {
+      type: Boolean,
+      default: true,
+    },
+    xiashow: {
+      type: Boolean,
+      default: true,
+    },
+    name: {
+      type: String,
+      default: "查看更多",
+    },
+  },
 
   components: {},
 
@@ -61,7 +86,7 @@ export default {
 .words {
   display: flex;
   justify-content: space-between;
-  margin: 5px 10px;
+  margin: 10px;
   font-size: 12px;
 }
 .right {

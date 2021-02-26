@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="remen">
     <vrefresh
       @refresh="refresh"
       :loading="loading"
@@ -107,4 +107,7 @@ export default {
 };
 </script>
 <style scoped>
+#remen{
+  background-color: #fff;
+}
 </style>

@@ -2,10 +2,10 @@
   <div :class="{ three: three }">
     <div class="words">
       <div>{{ title }}</div>
-      <div class="right" v-if="zuoshow">{{ name }} &nbsp; ＞</div>
+      <div class="right">{{ name }} &nbsp; ＞</div>
     </div>
     <div class="items">
-      <div v-for="(item, i) in hometab.slice(0, 3)" :key="i" class="item">
+      <div v-for="(item, i) in hometab.slice(0, 6)" :key="i" class="item">
         <div class="left">
           <img v-if="item.img" :src="item.img" :onerror="changeimg" />
           <div class="nei">2333万追番</div>
@@ -22,10 +22,6 @@
         </div>
       </div>
     </div>
-    <div class="shua" v-if="xiashow">
-      <img src="~assets/img/shua.svg" alt="" />
-      <div>换一换</div>
-    </div>
   </div>
 </template>
 
@@ -35,7 +31,14 @@ export default {
   data() {
     return {
       changeimg: 'this.src="' + require("@/assets/img/tidai.jpg") + '"',
-      chlike: [{ likeshow: false }, { likeshow: false }, { likeshow: false }],
+      chlike: [
+        { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
+        { likeshow: false },
+      ],
     };
   },
 
@@ -50,17 +53,8 @@ export default {
     title: {
       type: String,
     },
-    zuoshow: {
-      type: Boolean,
-      default: false,
-    },
     name: {
       type: String,
-      default: "查看更多",
-    },
-    xiashow: {
-      type: Boolean,
-      default: true,
     },
   },
 
@@ -90,6 +84,7 @@ export default {
 }
 .items {
   display: flex;
+  flex-flow: row wrap;
   margin: 0 10px;
   justify-content: space-between;
 }
@@ -147,19 +142,5 @@ export default {
   color: #aaa;
   font-size: 10px;
   margin: 3px 0;
-}
-.shua img {
-  height: 10px;
-  width: 10px;
-  margin-right: 5px;
-}
-.shua {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  color: #fb7299;
-  height: 30px;
-  margin-bottom: 5px;
 }
 </style>

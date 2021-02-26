@@ -2,7 +2,7 @@
   <div class="item">
     <div class="shang">
       <img v-if="hometab.img" :src="hometab.img" :onerror="changeimg" />
-      <div class="nei">更新至第233话</div>
+      <div class="nei">{{ title }}</div>
     </div>
     <div class="xia">
       <div class="title">{{ hometab.id }}{{ hometab.name }}</div>
@@ -20,7 +20,7 @@ export default {
     };
   },
 
-  props: ["hometab"],
+  props: ["hometab", "title"],
 
   components: {},
 
@@ -47,7 +47,7 @@ export default {
   color: white;
   position: absolute;
   background-color: rgb(22, 22, 22, 0.4);
-  width: 90px;
+  padding: 0 10px;
   height: 20px;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@ export default {
   border-radius: 5px;
   color: white;
   bottom: 5px;
-  right: 5px;
+  right: 3px;
 }
 .xia {
   font-size: 10px;

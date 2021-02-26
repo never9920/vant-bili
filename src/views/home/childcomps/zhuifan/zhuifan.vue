@@ -6,22 +6,12 @@
       @loadingchange="loadingchange"
     >
       <div class="top">
-        <vswipe :banner="banner" hight="140px" :shadow="true"></vswipe>
+        <vswipe :banner="banner" hight="165px" :shadow="true"></vswipe>
       </div>
       <div class="grids">
         <vgrid :icons="icons" :num="5"></vgrid>
       </div>
-      <div class="xiangzhui">
-        <div class="words">
-          <div>猜你想追</div>
-          <div class="right">查看全部 &nbsp; ＞</div>
-        </div>
-        <div class="test">
-          <div v-for="(item, i) in hometab[3].list" :key="i">
-            <zhuiitem :hometab="item"></zhuiitem>
-          </div>
-        </div>
-      </div>
+      <xiangzhui :hometab="hometab[3].list" title="更新至第233话"></xiangzhui>
       <div class="fanju">
         <zhuisi :hometab="hometab[3].list" title="番剧推荐"></zhuisi>
       </div>
@@ -39,7 +29,11 @@
       <bangdan :hometab="hometab"></bangdan>
       <threeitem :hometab="hometab[4].list" title="搞笑·番剧"></threeitem>
       <threeitem :hometab="hometab[5].list" title="热血·番剧"></threeitem>
-      <threeitem :hometab="hometab[6].list" title="校园·番剧" :three="false"></threeitem>
+      <threeitem
+        :hometab="hometab[6].list"
+        title="校园·番剧"
+        :three="false"
+      ></threeitem>
       <div class="di">╮(╯3╰)╭&nbsp;再怎么找也没有啦</div>
     </vrefresh>
   </div>
@@ -49,12 +43,12 @@
 import vswipe from "components/vant/vswipe.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vgrid from "components/vant/vgrid.vue";
-import zhuiitem from "./zhuiitem";
 import zhuisi from "./zhuisi";
 import tabcontrol from "components/content/tabcontrol.vue";
 import zhoutui from "./zhoutui.vue";
 import bangdan from "./bangdan.vue";
 import threeitem from "./threeitem.vue";
+import xiangzhui from "./xiangzhui.vue";
 export default {
   name: "zhuifan",
   data() {
@@ -89,12 +83,12 @@ export default {
     vswipe,
     vrefresh,
     vgrid,
-    zhuiitem,
     zhuisi,
     tabcontrol,
     zhoutui,
     bangdan,
     threeitem,
+    xiangzhui,
   },
 
   computed: {},
@@ -158,36 +152,16 @@ export default {
 #zhuifan {
   background-color: #fff;
 }
-.test {
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex;
-  margin: 5px;
-}
-.test::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
 .top {
   padding: 10px 8px 0 8px;
 }
 .top img {
   border-radius: 10px;
 }
-.xiangzhui,
 .fanju,
 .grids {
   border-bottom: solid 1px #ebebeb;
   margin-top: 10px;
-}
-.words {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 10px;
-  font-size: 12px;
-}
-.right {
-  color: #aaa;
 }
 .di {
   width: 100%;
