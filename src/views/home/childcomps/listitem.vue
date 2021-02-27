@@ -7,7 +7,7 @@
         class="detailimg"
         :onerror="changeimg"
       />
-      <div class="kankan" v-if="type === 'tuijian'">
+      <div class="kankan" v-if="type === 'tuijian' || type === 'kangji'">
         <span class="video">
           <img src="~assets/img/bofang.svg" />
           168万
@@ -58,7 +58,6 @@ export default {
     },
     type: {
       type: String,
-      default: "tuijian",
     },
     danhang: {
       type: Boolean,
@@ -94,6 +93,10 @@ export default {
 .name {
   margin: 5px;
   font-size: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .itemimg {
   position: relative;
