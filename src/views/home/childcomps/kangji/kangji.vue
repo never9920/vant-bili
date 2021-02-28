@@ -5,7 +5,7 @@
       :loading="loading"
       @loadingchange="loadingchange"
     >
-      <vswipe :banner="banner" hight="165px" class="top"></vswipe>
+      <vswipe :banner="banner" hight="165px" class="top" :shadow="true"></vswipe>
       <vgrid :icons="icons" :num="5" class="grid"></vgrid>
       <fouritem
         title="要点聚焦"

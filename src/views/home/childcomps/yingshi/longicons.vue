@@ -37,7 +37,7 @@ export default {
 }
 .item {
   text-align: center;
-  margin-right: 20px;
+  padding-right: 20px;
   font-size: 12px;
 }
 .item img {

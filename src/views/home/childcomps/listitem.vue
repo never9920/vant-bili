@@ -7,7 +7,7 @@
         class="detailimg"
         :onerror="changeimg"
       />
-      <div class="kankan" v-if="type === 'tuijian' || type === 'kangji'">
+      <div class="kankan" v-if="type === 'tuijian' || type === 'kangji'|| type === 'xiaokang'">
         <span class="video">
           <img src="~assets/img/bofang.svg" />
           168万
@@ -38,6 +38,9 @@
     <div class="zhiboxia" v-if="type === 'zhibo'">
       <span>直播电台</span>
       <img src="~assets/img/cha.svg" alt="" />
+    </div>
+    <div class="zhiboxia" v-if="type === 'xiaokang'">
+      <span>热点</span>
     </div>
   </div>
 </template>
