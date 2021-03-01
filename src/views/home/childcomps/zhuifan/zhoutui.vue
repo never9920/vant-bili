@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="items">
-      <div v-for="(item, i) in homedata" :key="i" class="item">
+      <div
+        v-for="(item, i) in homedata"
+        :key="i"
+        class="item"
+        @click="tovideo(item.id)"
+      >
         <div class="shang">
           <img v-if="item.img" :src="item.img" :onerror="changeimg" />
         </div>
@@ -30,7 +35,11 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    tovideo(id) {
+      this.$router.push("/detail/" + id);
+    },
+  },
 };
 </script>
 <style scoped>

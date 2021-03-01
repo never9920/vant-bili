@@ -7,7 +7,11 @@
       </div>
       <div class="test">
         <div v-for="(item, i) in hometab" :key="i">
-          <zhuiitem :hometab="item" :title="title"></zhuiitem>
+          <zhuiitem
+            :hometab="item"
+            :title="title"
+            @click.native="tovideo(item)"
+          ></zhuiitem>
         </div>
       </div>
     </div>
@@ -28,7 +32,11 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    tovideo(item) {
+      this.$router.push("/detail/" + item.id);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -37,7 +45,7 @@ export default {
   overflow-x: auto;
   overflow-y: hidden;
   display: flex;
-  margin: 5px;
+  margin-left: 5px;
 }
 .test::-webkit-scrollbar {
   display: none; /* Chrome Safari */

@@ -31,7 +31,7 @@ export default {
 
   methods: {
     tovideo(val) {
-      this.$router.push("/video/" + val.id);
+      this.$router.push("/detail/" + val.id);
     },
   },
 };

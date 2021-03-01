@@ -5,7 +5,12 @@
       <div class="right" v-if="isshow">{{ name }} &nbsp; ＞</div>
     </div>
     <div class="items">
-      <div v-for="(item, i) in hometab.slice(0, num)" :key="i" class="item">
+      <div
+        v-for="(item, i) in hometab.slice(0, num)"
+        :key="i"
+        class="item"
+        @click="tovideo(item.id)"
+      >
         <div class="shang">
           <img v-if="item.img" :src="item.img" :onerror="changeimg" />
           <div class="nei">2333万追番</div>
@@ -79,6 +84,9 @@ export default {
     changelike(i) {
       this.show[i].likeshow = !this.show[i].likeshow;
     },
+    tovideo(id) {
+      this.$router.push("/detail/" + id);
+    },
   },
 };
 </script>
@@ -103,6 +111,7 @@ export default {
   margin: 5px 0;
   border-radius: 5px;
   overflow: hidden;
+  background-color: #f9f9f9;
 }
 .shang {
   position: relative;

@@ -31,7 +31,7 @@ export default {
 </script>
 <style scoped>
 .item {
-  margin: 3px;
+  padding: 5px 5px 5px 0;
   width: 150px;
 }
 .shang img {

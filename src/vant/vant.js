@@ -13,7 +13,7 @@ import {
     Toast,
     List,
     Grid,
-    GridItem
+    GridItem,
 } from 'vant'
 
 Vue.use(Button);
@@ -26,7 +26,8 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Lazyload);
 Vue.use(PullRefresh);
-Vue.use(Toast);
 Vue.use(List);
 Vue.use(Grid);
 Vue.use(GridItem);
+
+Vue.prototype.$toast = Toast

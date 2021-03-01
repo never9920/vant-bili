@@ -28,6 +28,8 @@ const xiaokan = () =>
     import ('../views/home/childcomps/xiaokan/xiaokan')
 const kangji = () =>
     import ('../views/home/childcomps/kangji/kangji')
+const detail = () =>
+    import ('../views/detail/detail')
 
 Vue.use(VueRouter)
 
@@ -98,6 +100,13 @@ const routes = [{
     {
         path: '/message',
         component: message,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/detail/:id',
+        component: detail,
         meta: {
             isshow: true
         }

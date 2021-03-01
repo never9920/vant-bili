@@ -1,7 +1,7 @@
 <template>
   <div id="yingshidan">
     <div class="test">
-      <div v-for="(item, i) in hometab" :key="i">
+      <div v-for="(item, i) in hometab" :key="i" @click="tovideo(item.id)">
         <div class="item">
           <div class="shang">
             <img v-if="item.img" :src="item.img" :onerror="changeimg" />
@@ -51,6 +51,9 @@ export default {
   methods: {
     changelike(i) {
       this.show[i].likeshow = !this.show[i].likeshow;
+    },
+    tovideo(id) {
+      this.$router.push("/detail/" + id);
     },
   },
 };

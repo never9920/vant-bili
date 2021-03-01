@@ -3,7 +3,12 @@
     <div class="name">
       {{ title }}
     </div>
-    <div v-for="(item, i) in hometab.slice(0, 3)" :key="i" class="item">
+    <div
+      v-for="(item, i) in hometab.slice(0, 3)"
+      :key="i"
+      class="item"
+      @click="tovideo(item.id)"
+    >
       <div class="left">
         <img :src="item.img" :onerror="changeimg" />
         <div class="like" v-if="show[i].likeshow" @click="changelike(i)">
@@ -46,13 +51,16 @@ export default {
     changelike(i) {
       this.show[i].likeshow = !this.show[i].likeshow;
     },
+    tovideo(id) {
+      this.$router.push("/detail/" + id);
+    },
   },
 };
 </script>
 <style scoped>
 .items {
   background-color: rgb(233, 233, 233);
-  margin-left: 10px;
+  margin-right: 10px;
   border-radius: 5px;
 }
 .idname {

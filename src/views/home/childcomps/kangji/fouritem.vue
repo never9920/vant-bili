@@ -48,7 +48,7 @@ export default {
 
   methods: {
     tovideo(val) {
-      this.$router.push("/video/" + val.id);
+      this.$router.push("/detail/" + val.id);
     },
   },
 };
@@ -60,11 +60,11 @@ export default {
 .detail {
   width: 48.5%;
   font-size: 10px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border-radius: 5px;
   margin: 3px 0;
-  box-shadow: 0px 2px 2px #888888;
-  border: solid 1px #aaa;
+  box-shadow: 0px 2px 2px #f6f6f6;
+  border: solid 1px #f9f9f9;
   overflow: hidden;
 }
 .list {

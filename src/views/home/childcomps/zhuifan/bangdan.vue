@@ -56,7 +56,7 @@ export default {
   overflow-x: auto;
   overflow-y: hidden;
   display: flex;
-  margin-right: 10px;
+  margin: 0 10px;
 }
 .test::-webkit-scrollbar {
   display: none; /* Chrome Safari */
