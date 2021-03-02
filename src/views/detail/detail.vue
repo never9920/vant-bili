@@ -16,7 +16,7 @@
         </div>
         <div v-if="model.userinfo" class="detailfo">
           <img src="~assets/img/up.svg" />
-          <span class="third">{{ model.userinfo.name }}</span>
+          <span class="third" @click="tovis(model.userid)">{{ model.userinfo.name }}</span>
           <span class="second">168万次播放</span>
           <span class="second">6688弹幕</span>
           <span class="second">{{ model.date }}</span>
@@ -46,6 +46,20 @@
         </div>
       </div>
       <list :hometab="comment" class="list"></list>
+      <comment
+        :picsrc="imgsrc"
+        :numlength="numlength"
+        @posttext="posttext"
+        :status="status"
+        ref="comcom"
+      ></comment>
+      <commentitem
+        v-if="model.userid"
+        @getnumber="getnumber"
+        :status="status"
+        @userpub="userpub"
+        :reid="model.userid"
+      ></commentitem>
     </div>
   </div>
 </template>
@@ -53,6 +67,8 @@
 <script>
 import navbar from "components/content/navbar";
 import list from "../home/childcomps/list";
+import comment from "./childcomps/comment.vue";
+import commentitem from "./childcomps/commentitem.vue";
 export default {
   name: "home",
   data() {
@@ -61,6 +77,14 @@ export default {
       model: [],
       show1: true,
       comment: [],
+      numlength: 0,
+      param: {
+        comment_content: "",
+        comment_date: "",
+        parent_id: null,
+        article_id: null,
+      },
+      status: 0,
       show2: true,
       changevideo: 'this.src="' + require("@/assets/img/lego.mp4") + '"',
     };
@@ -69,6 +93,8 @@ export default {
   components: {
     navbar,
     list,
+    comment,
+    commentitem,
   },
 
   created() {
@@ -98,8 +124,7 @@ export default {
         }
         //console.log(this.imgsrc)
       } else {
-        this.imgsrc =
-          "//s1.hdslb.com/bfs/static/jinkela/long/images/login.png@48w_48h_1c.png";
+        this.imgsrc = require("@/assets/img/touxiang.jpg");
         //console.log(this.imgsrc)
       }
     },
@@ -114,6 +139,56 @@ export default {
     async getcomment() {
       const { data: res } = await this.$http.get("/commend");
       this.comment = res;
+      //console.log(res)
+    },
+    getnumber(val) {
+      this.numlength = val;
+    },
+    async posttext(val) {
+      if (!val) {
+        this.$toast.fail("请说点什么吧");
+        return;
+      }
+      this.param.comment_content = val;
+      let data = new Date();
+      let m = data.getMonth() + 1;
+      let d = data.getDate();
+      if (m < 10) {
+        m = "0" + m;
+      }
+      if (d < 10) {
+        d = "0" + d;
+      }
+      let str = `${m}-${d}`;
+      this.param.comment_date = str;
+      this.param.article_id = this.$route.params.id;
+      //console.log(this.param)
+      const res = await this.$http.post(
+        "/comment_post/" + sessionStorage.getItem("id"),
+        this.param
+      );
+      //console.log(res.status)
+      if (res.status === 200) {
+        this.$toast.success("发表成功");
+        this.status = this.status + 1;
+        this.param.parent_id = "";
+        this.$refs.comcom.$refs.cominput.placeholder = "说点什么吧";
+      } else {
+        this.$toast.fail("发表失败");
+      }
+    },
+    userpub(val) {
+      this.param.parent_id = val.comment_id;
+      //console.log(val)
+      let username = "";
+      if (val.userinfo.name) {
+        username = val.userinfo.name;
+        //console.log(this.username);
+      } else {
+        username = "";
+      }
+      this.$refs.comcom.$refs.cominput.placeholder = "回复" + username;
+      this.$refs.comcom.inputfoc();
     },
     async postcoll() {
       if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
@@ -131,7 +206,9 @@ export default {
         }
       } else {
         this.$toast.fail("请先登录");
-        setTimeout(() => {}, 500);
+        setTimeout(() => {
+          this.$router.push("/login");
+        }, 500);
       }
     },
     async collectioninit() {
@@ -164,7 +241,9 @@ export default {
         }
       } else {
         this.$toast.fail("请先登录");
-        setTimeout(() => {}, 500);
+        setTimeout(() => {
+          this.$router.push("/login");
+        }, 500);
       }
     },
     async folinit() {
@@ -184,6 +263,15 @@ export default {
     tobi() {
       window.open("https://www.bilibili.com/", "_self");
     },
+    tovis(val){
+      //console.log(val)
+      sessionStorage.setItem('img',this.model.userinfo.user_img)
+      sessionStorage.setItem('gender',this.model.userinfo.gender)
+      sessionStorage.setItem('visid',this.model.userinfo.id)
+      sessionStorage.setItem('name',this.model.userinfo.name)
+      sessionStorage.setItem('desc',this.model.userinfo.user_desc)
+      this.$router.push('/visitor/' + val)
+    }
   },
 };
 </script>
