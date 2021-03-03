@@ -30,6 +30,8 @@ const kangji = () =>
     import ('../views/home/childcomps/kangji/kangji')
 const detail = () =>
     import ('../views/detail/detail')
+const vistor = () =>
+    import ('../views/vistor/vistor')
 
 Vue.use(VueRouter)
 
@@ -107,6 +109,13 @@ const routes = [{
     {
         path: '/detail/:id',
         component: detail,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/vistor/:id',
+        component: vistor,
         meta: {
             isshow: true
         }

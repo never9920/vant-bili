@@ -16,7 +16,9 @@
         </div>
         <div v-if="model.userinfo" class="detailfo">
           <img src="~assets/img/up.svg" />
-          <span class="third" @click="tovis(model.userid)">{{ model.userinfo.name }}</span>
+          <span class="third" @click="tovis(model.userid)">{{
+            model.userinfo.name
+          }}</span>
           <span class="second">168万次播放</span>
           <span class="second">6688弹幕</span>
           <span class="second">{{ model.date }}</span>
@@ -124,7 +126,8 @@ export default {
         }
         //console.log(this.imgsrc)
       } else {
-        this.imgsrc = require("@/assets/img/touxiang.jpg");
+        this.imgsrc =
+          "//s1.hdslb.com/bfs/static/jinkela/long/images/login.png@48w_48h_1c.png";
         //console.log(this.imgsrc)
       }
     },
@@ -263,15 +266,15 @@ export default {
     tobi() {
       window.open("https://www.bilibili.com/", "_self");
     },
-    tovis(val){
+    tovis(val) {
       //console.log(val)
-      sessionStorage.setItem('img',this.model.userinfo.user_img)
-      sessionStorage.setItem('gender',this.model.userinfo.gender)
-      sessionStorage.setItem('visid',this.model.userinfo.id)
-      sessionStorage.setItem('name',this.model.userinfo.name)
-      sessionStorage.setItem('desc',this.model.userinfo.user_desc)
-      this.$router.push('/visitor/' + val)
-    }
+      sessionStorage.setItem("img", this.model.userinfo.user_img);
+      sessionStorage.setItem("gender", this.model.userinfo.gender);
+      sessionStorage.setItem("visid", this.model.userinfo.id);
+      sessionStorage.setItem("name", this.model.userinfo.name);
+      sessionStorage.setItem("desc", this.model.userinfo.user_desc);
+      this.$router.push("/vistor/" + val);
+    },
   },
 };
 </script>
