@@ -1,6 +1,6 @@
 <template>
   <div class="vicon">
-    <van-icon :name="name" :size="size"></van-icon>
+    <van-icon :name="name" :size="size" :color="color"></van-icon>
   </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
     size: {
       type: String,
     },
+    color:{
+      type:String
+    }
   },
 
   components: {},

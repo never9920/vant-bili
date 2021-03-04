@@ -59,6 +59,7 @@ export default {
   methods: {
     userpub(id){
       this.$emit('userpub',id)
+      console.log(id)
     }
   },
 };
@@ -86,6 +87,7 @@ export default {
   font-size: 13px;
   margin: 10px 0;
   display: flex;
+  flex-wrap: wrap;
 }
 .publish{
   color: #475ef0;
