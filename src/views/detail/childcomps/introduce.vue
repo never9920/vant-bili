@@ -48,16 +48,34 @@
       </vcollapse>
       <div class="icons">
         <div class="icon">
-          <div><img src="~assets/img/dianzan.svg" alt="" /></div>
-          <div>688</div>
+          <div v-if="dianzan" @click="chdian">
+            <img src="~assets/img/dianzan.svg" alt="" />
+            <div>688</div>
+          </div>
+          <div v-else @click="chdian">
+            <img src="~assets/img/dianzanpink.svg" alt="" />
+            <div>689</div>
+          </div>
         </div>
         <div class="icon">
-          <div><img src="~assets/img/bu.svg" alt="" /></div>
-          <div>2</div>
+          <div v-if="bu" @click="chbu">
+            <img src="~assets/img/bu.svg" alt="" />
+            <div>2</div>
+          </div>
+          <div v-else @click="chbu">
+            <img src="~assets/img/bupink.svg" alt="" />
+            <div>3</div>
+          </div>
         </div>
         <div class="icon">
-          <div><img src="~assets/img/bi.svg" alt="" /></div>
-          <div>168</div>
+          <div v-if="bi" @click="chbi">
+            <img src="~assets/img/bi.svg" alt="" />
+            <div>168</div>
+          </div>
+          <div v-else @click="chbi">
+            <img src="~assets/img/bipink.svg" alt="" />
+            <div>169</div>
+          </div>
         </div>
         <div @click="postcoll" class="icon">
           <div v-if="show1">
@@ -76,11 +94,13 @@
         </div>
       </div>
     </div>
+    <relist :hometab="comment"></relist>
   </div>
 </template>
 
 <script>
 import vcollapse from "components/vant/vcollapse.vue";
+import relist from "../../home/childcomps/remen/relist.vue";
 export default {
   name: "introduce",
   data() {
@@ -88,25 +108,29 @@ export default {
       show1: true,
       show: true,
       csstype: true,
+      dianzan: true,
+      bu: true,
+      bi: true,
+      comment: [],
     };
   },
 
   created() {
-    this.collectioninit();
+    this.collectioninit(), this.getcomment();
   },
 
   props: ["model", "show2"],
 
   components: {
     vcollapse,
+    relist,
   },
-
   computed: {},
 
   watch: {
     $route() {
       //console.log('bianhua')
-      this.collectioninit();
+      this.collectioninit(), this.getcomment();
       scrollTo(0, 0);
     },
     show2(val) {
@@ -193,6 +217,20 @@ export default {
         this.csstype = true;
       }
     },
+    chdian() {
+      this.dianzan = !this.dianzan;
+    },
+    chbu() {
+      this.bu = !this.bu;
+    },
+    chbi() {
+      this.bi = !this.bi;
+    },
+    async getcomment() {
+      const { data: res } = await this.$http.get("/commend");
+      this.comment = res;
+      //console.log(res)
+    },
   },
 };
 </script>
@@ -237,11 +275,6 @@ export default {
 .namexia span {
   margin-right: 10px;
 }
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
 .cares {
   position: absolute;
   background-color: #fb7299;
@@ -249,6 +282,9 @@ export default {
   padding: 5px 15px;
   border-radius: 5px;
   color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 .cares img {
   height: 12px;
@@ -262,6 +298,7 @@ export default {
   border-radius: 5px;
   color: white;
   background-color: #aaa;
+  font-size: 12px;
 }
 .danhang {
   overflow: hidden;
@@ -282,6 +319,8 @@ export default {
   justify-content: space-around;
   font-size: 12px;
   color: #aaa;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #f4f4f4;
 }
 .icons img {
   width: 20px;

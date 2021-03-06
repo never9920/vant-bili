@@ -1,33 +1,34 @@
 <template>
   <div>
-      <div class="video">
-        <video
-          :src="model.content"
-          controls="controls"
-          :onerror="changevideo"
-        ></video>
-      </div>
-      <detailtab @typech="typech"></detailtab>
-    <introduce :model="model" v-show="current===0" :show2="show2"></introduce>
-    <div v-show="current === 1">评论</div>
+    <div class="video">
+      <video
+        :src="model.content"
+        controls="controls"
+        :onerror="changevideo"
+      ></video>
+    </div>
+    <detailtab @typech="typech"></detailtab>
+    <introduce :model="model" v-show="current === 0" :show2="show2"></introduce>
+    <detailcomment v-show="current === 1" :reid="model.userid"></detailcomment>
   </div>
 </template>
 
 <script>
-import detailtab from './detailtab.vue';
-import introduce from './introduce.vue';
+import detailcomment from "./detailcomment.vue";
+import detailtab from "./detailtab.vue";
+import introduce from "./introduce.vue";
 export default {
   name: "detailinfo",
   data() {
     return {
       model: [],
       changevideo: 'this.src="' + require("@/assets/img/lego.mp4") + '"',
-      current:0,
-      show2:true,
+      current: 0,
+      show2: true,
     };
   },
   created() {
-       this.getvideo();
+    this.getvideo();
   },
 
   watch: {
@@ -38,7 +39,7 @@ export default {
     },
   },
 
-  components: {detailtab, introduce},
+  components: { detailtab, introduce, detailcomment },
 
   computed: {},
 
@@ -48,7 +49,7 @@ export default {
         "/article/" + this.$route.params.id
       );
       this.model = res[0];
-      console.log(this.model);
+      //console.log(this.model);
       this.folinit();
     },
     async folinit() {
@@ -64,10 +65,10 @@ export default {
         //console.log(res)
         this.show2 = !res.success;
       }
-    }, 
-    typech(val){
-      this.current = val
-    }
+    },
+    typech(val) {
+      this.current = val;
+    },
   },
 };
 </script>

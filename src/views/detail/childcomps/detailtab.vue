@@ -35,6 +35,12 @@ export default {
     this.getcomitem();
   },
 
+  watch:{
+    $route(){
+      this.getcomitem()
+    }
+  },
+
   components: {},
 
   computed: {},
@@ -77,13 +83,18 @@ export default {
   justify-content: space-between;
   height: 30px;
   box-shadow: 0 2px 2px #f4f4f4;
+  position: sticky;
+  top: 40px;
+  z-index: 1;
+  background-color: #fff;
 }
 .left {
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
 }
 .item {
-  padding: 5px 10px;
+  padding: 6px 0;
+  margin: 0 15px;
 }
 .right {
   font-size: 14px;

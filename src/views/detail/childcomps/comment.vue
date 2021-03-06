@@ -1,16 +1,9 @@
 <template>
   <div class="comment">
-    <div>
-      <p>
-        <span>评论</span>
-        <span class="num">({{ numlength }})</span>
-      </p>
-    </div>
     <div class="mine">
-      <img :src="picsrc" />
       <input
         type="text"
-        placeholder="说点什么吧"
+        placeholder="发表友善的评论"
         v-model="content"
         ref="cominput"
       />
@@ -29,12 +22,6 @@ export default {
   },
 
   props: {
-    picsrc: {
-      type: String,
-    },
-    numlength: {
-      type: Number,
-    },
     status: {
       type: Number,
     },
@@ -68,7 +55,8 @@ export default {
 </script>
 <style scoped>
 .comment {
-  padding: 30px 10px;
+  height: 30px;
+  box-shadow: 0 -1px 2px #ddd;
 }
 .num {
   color: #aaa;
@@ -80,8 +68,9 @@ export default {
   border-radius: 50%;
 }
 .mine {
-  padding-left: 10px;
+  padding-left: 5px;
   display: flex;
+  height: 100%;
 }
 .mine input {
   outline: none;
@@ -91,12 +80,12 @@ export default {
   padding: 0 10px 0 15px;
   margin-left: 10px;
   font-size: 12px;
-  width: 60%;
+  width: 70%;
 }
 .mine button {
   outline: none;
   border: 0;
-  border-radius: 12px;
+  border-radius: 15px;
   background-color: #fb7299;
   color: white;
   font-size: 12px;

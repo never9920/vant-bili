@@ -37,4 +37,7 @@ export default {
 .van-cell{
   padding:0;
 }
+.van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after{
+  border: none;
+}
 </style>

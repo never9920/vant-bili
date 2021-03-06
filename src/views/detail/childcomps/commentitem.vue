@@ -10,27 +10,57 @@
         <img v-else src="~assets/img/touxiang.jpg" alt="" />
       </div>
       <div class="iteminfo">
-        <p>
-          <span v-if="item.userinfo && item.userinfo.name" class="name">{{
-            item.userinfo.name
-          }}
-          <img v-if="reid === item.user_id" src="~assets/img/up.svg">
-          </span>
-          <span v-else>此用户未命名</span>
-          <span v-if="item.comment_date">{{ item.comment_date }}</span>
-          <span v-else>04-17</span>
-        </p>
+        <div class="firstcom">
+          <div v-if="item.userinfo && item.userinfo.name" class="name">
+            {{ item.userinfo.name }}
+            <img v-if="reid === item.user_id" src="~assets/img/up.svg" />
+          </div>
+          <div v-else>此用户未命名</div>
+          <div v-if="item.comment_date">{{ item.comment_date }}</div>
+          <div v-else>04-17</div>
+        </div>
         <div class="text" v-if="item.comment_content">
           {{ item.comment_content }}
-          <span class="publish" @click="userpub(item)">回复</span>
         </div>
-        <div class="text" v-else>
-           此用户什么都没说 
-          <span class="publish" @click="userpub(item)">回复</span>
+        <div class="text" v-else>此用户什么都没说</div>
+        <div class="icons">
+          <div class="icon">
+            <div v-if="dianch" @click="diantype">
+              <img src="~assets/img/dianzan.svg" alt="" />
+              <span>{{ item.user_id }}</span>
+            </div>
+            <div @click="diantype" v-else>
+              <img src="~assets/img/dianzanpink.svg" alt="" />
+              <span>{{ item.user_id +1 }}</span>
+            </div>
+          </div>
+          <div class="icon">
+            <div v-if="buch" @click="butype">
+              <img src="~assets/img/bu.svg" alt="" />
+            </div>
+            <div v-else @click="butype">
+              <img src="~assets/img/bupink.svg" alt="" />
+            </div>
+          </div>
+          <div class="icon" @click="tobi">
+            <div>
+              <img src="~assets/img/fen.svg" alt="" />
+            </div>
+          </div>
+          <div class="icon">
+            <div>
+              <img src="~assets/img/commentaaa.svg" alt="" />
+            </div>
+          </div>
         </div>
-        <div v-if="item.child.length!==0">
-        <secondcom :child="item.child" @userpub="userpub" class="bgc" :reid="reid"></secondcom>
-      </div>
+        <div v-if="item.child.length !== 0">
+          <secondcom
+            :child="item.child"
+            @userpub="userpub"
+            class="bgc"
+            :reid="reid"
+          ></secondcom>
+        </div>
       </div>
     </div>
   </div>
@@ -43,16 +73,18 @@ export default {
   data() {
     return {
       commdentdata: [],
+      dianch:true,
+      buch:true,
     };
   },
 
-  props:{
-    status:{
-      type:Number
+  props: {
+    status: {
+      type: Number,
     },
-    reid:{
-      type:Number
-    }
+    reid: {
+      type: Number,
+    },
   },
 
   created() {
@@ -63,13 +95,13 @@ export default {
     $route() {
       this.getcomitem();
     },
-    status(){
-      this.getcomitem()
+    status() {
+      this.getcomitem();
     },
   },
 
   components: {
-    secondcom
+    secondcom,
   },
 
   computed: {},
@@ -81,9 +113,6 @@ export default {
         "/comment/" + this.$route.params.id
       );
       //console.log(res);
-      if(res){
-        this.$emit('getnumber',res.length)
-      }
       this.commdentdata = this.changedata(res);
       //console.log(this.commdentdata);
     },
@@ -100,60 +129,84 @@ export default {
       }
       return fn(null);
     },
-    userpub(id){
-      this.$emit('userpub',id)
-    }
+    userpub(id) {
+      this.$emit("userpub", id);
+    },
+    diantype(){
+      this.dianch = ! this.dianch
+    },
+    butype(){
+      this.buch = ! this.buch
+    },
+    tobi() {
+      window.open("https://www.bilibili.com/", "_self");
+    },
   },
 };
 </script>
 <style scoped>
 .comitem {
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .item {
   display: flex;
   border-bottom: 1px solid #e7e7e7;
   padding: 10px 0;
+  width: 355px;
 }
 .itemimg img {
   width: 35px;
   height: 35px;
   border-radius: 50%;
 }
-.iteminfo p {
-  display: flex;
-  justify-content: space-between;
-  justify-items: center;
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 5px;
-}
 .iteminfo {
-  flex: 1;
   margin-left: 10px;
+  width: 310px;
 }
 .text {
   font-size: 13px;
   margin: 10px 0;
+  word-break: break-all;
 }
-.publish{
+.publish {
   position: absolute;
   right: 20px;
   color: #475ef0;
 }
-.bgc{
-  background-color:#f9f9f9;
+.bgc {
+  background-color: #f9f9f9;
   border-radius: 10px;
   max-height: 145px;
   padding: 5px 0;
   overflow: scroll;
 }
-.iteminfo img{
+.iteminfo img {
   height: 16px;
   width: 16px;
   margin-left: 5px;
 }
-.name{
+.name {
   display: flex;
+  margin-bottom: 3px;
+}
+.firstcom {
+  font-size: 12px;
+  color: grey;
+  margin-bottom: 5px;
+  width: 100%;
+}
+.icons{
+  display: flex;
+  margin: 5px 0;
+}
+.icons img{
+  width: 12px;
+  height: 12px;
+  margin-right: 3px;
+}
+.icon{
+  margin-right: 5px;
+  font-size: 10px;
+  color: grey;
 }
 </style>
