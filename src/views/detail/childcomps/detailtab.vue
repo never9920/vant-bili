@@ -35,10 +35,10 @@ export default {
     this.getcomitem();
   },
 
-  watch:{
-    $route(){
-      this.getcomitem()
-    }
+  watch: {
+    $route() {
+      this.getcomitem();
+    },
   },
 
   components: {},

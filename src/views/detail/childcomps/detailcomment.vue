@@ -9,13 +9,34 @@
     <div class="secondtop">
       <div>热门评论</div>
     </div>
-    <commentitem :reid="reid" :status="status" @userpub="userpub"></commentitem>
+    <commentitem
+      :reid="reid"
+      :status="status"
+      @userpub="userpub"
+      @showmore="showmore"
+    ></commentitem>
+    <vpopup :morestatus="morestatus" @statusch="statusch">
+      <div class="poptitle">
+        <div>评论详情</div>
+        <div @click="changestat" class="close">×</div>
+      </div>
+      <secondcom
+        :child="morechild"
+        @userpub="userpub"
+        :reid="reid"
+        @changestat="changestat"
+        :chang="morechild.length"
+      ></secondcom>
+      <div class="empty"></div>
+    </vpopup>
   </div>
 </template>
 
 <script>
 import comment from "./comment";
 import commentitem from "./commentitem.vue";
+import vpopup from "components/vant/vpopup.vue";
+import secondcom from "./secondcom";
 export default {
   name: "detailcomment",
   data() {
@@ -29,6 +50,8 @@ export default {
         article_id: null,
       },
       status: 0,
+      morestatus: false,
+      morechild: [],
     };
   },
 
@@ -38,7 +61,7 @@ export default {
     this.getuser();
   },
 
-  components: { comment, commentitem },
+  components: { comment, commentitem, vpopup, secondcom },
 
   computed: {},
 
@@ -106,20 +129,51 @@ export default {
       this.$refs.comcom.$refs.cominput.placeholder = "回复" + username;
       this.$refs.comcom.inputfoc();
     },
+    statusch(val) {
+      this.morestatus = val;
+    },
+    changestat() {
+      this.morestatus = false;
+    },
+    showmore(val) {
+      this.morechild = val;
+      this.morestatus = true;
+    },
   },
 };
 </script>
 <style scoped>
-.comments{
+.comments {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 5px 0;
   background-color: #fff;
-  z-index: 1;
+  z-index: 9999;
 }
-.secondtop{
+.secondtop {
   font-size: 12px;
   padding: 10px 10px 10px 15px;
+}
+.poptitle {
+  display: flex;
+  height: 30px;
+  padding: 3px 10px;
+  justify-content: space-between;
+  font-size: 12px;
+  align-items: center;
+  box-shadow: 0 2px 2px #f4f4f4;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+}
+.close {
+  color: #aaa;
+  font-size: 20px;
+  padding: 0;
+}
+.empty {
+  height: 40px;
 }
 </style>

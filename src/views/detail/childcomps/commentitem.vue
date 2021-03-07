@@ -1,21 +1,31 @@
 <template>
   <div class="comitem">
-    <div class="item" v-for="(item, i) in commdentdata" :key="i">
+    <div class="item" v-for="(item, index) in commdentdata" :key="index">
       <div class="itemimg">
         <img
           v-if="item.userinfo && item.userinfo.user_img"
           :src="item.userinfo.user_img"
           alt=""
+          @click="tovis(item.userinfo)"
         />
-        <img v-else src="~assets/img/touxiang.jpg" alt="" />
+        <img
+          v-else
+          src="~assets/img/touxiang.jpg"
+          alt=""
+          @click="tovis(item.userinfo)"
+        />
       </div>
       <div class="iteminfo">
         <div class="firstcom">
-          <div v-if="item.userinfo && item.userinfo.name" class="name">
+          <div
+            v-if="item.userinfo && item.userinfo.name"
+            class="name"
+            @click="tovis(item.userinfo)"
+          >
             {{ item.userinfo.name }}
             <img v-if="reid === item.user_id" src="~assets/img/up.svg" />
           </div>
-          <div v-else>此用户未命名</div>
+          <div v-else @click="tovis(item.userinfo)">此用户未命名</div>
           <div v-if="item.comment_date">{{ item.comment_date }}</div>
           <div v-else>04-17</div>
         </div>
@@ -25,20 +35,20 @@
         <div class="text" v-else>此用户什么都没说</div>
         <div class="icons">
           <div class="icon">
-            <div v-if="dianch" @click="diantype">
+            <div v-if="shows[index].dianch" @click="diantype(index)">
               <img src="~assets/img/dianzan.svg" alt="" />
               <span>{{ item.user_id }}</span>
             </div>
-            <div @click="diantype" v-else>
+            <div @click="diantype(index)" v-else>
               <img src="~assets/img/dianzanpink.svg" alt="" />
-              <span>{{ item.user_id +1 }}</span>
+              <span>{{ item.user_id + 1 }}</span>
             </div>
           </div>
           <div class="icon">
-            <div v-if="buch" @click="butype">
+            <div v-if="shows[index].buch" @click="butype(index)">
               <img src="~assets/img/bu.svg" alt="" />
             </div>
-            <div v-else @click="butype">
+            <div v-else @click="butype(index)">
               <img src="~assets/img/bupink.svg" alt="" />
             </div>
           </div>
@@ -47,19 +57,30 @@
               <img src="~assets/img/fen.svg" alt="" />
             </div>
           </div>
-          <div class="icon">
+          <div class="icon" @click="userpub(item)">
             <div>
               <img src="~assets/img/commentaaa.svg" alt="" />
             </div>
           </div>
         </div>
-        <div v-if="item.child.length !== 0">
-          <secondcom
-            :child="item.child"
-            @userpub="userpub"
-            class="bgc"
-            :reid="reid"
-          ></secondcom>
+        <div v-if="item.child.length !== 0" class="answer">
+          <div v-if="item.child.length > 3">
+            <middle
+              :child="item.child.slice(0, 3)"
+              @userpub="userpub"
+              :reid="reid"
+            ></middle>
+            <div class="more" @click="showmore(item.child)">
+              共{{ item.child.length }}条回复&nbsp;＞
+            </div>
+          </div>
+          <div v-else>
+            <middle
+              :child="item.child.slice(0, 3)"
+              @userpub="userpub"
+              :reid="reid"
+            ></middle>
+          </div>
         </div>
       </div>
     </div>
@@ -67,14 +88,15 @@
 </template>
 
 <script>
-import secondcom from "./secondcom";
+import middle from "./middle.vue";
 export default {
   name: "commentitem",
   data() {
     return {
       commdentdata: [],
-      dianch:true,
-      buch:true,
+      shows: [],
+      morestatus: false,
+      morechild: [],
     };
   },
 
@@ -100,9 +122,7 @@ export default {
     },
   },
 
-  components: {
-    secondcom,
-  },
+  components: { middle },
 
   computed: {},
 
@@ -114,6 +134,11 @@ export default {
       );
       //console.log(res);
       this.commdentdata = this.changedata(res);
+      for (let i in this.commdentdata) {
+        this.shows[i] = {};
+        this.shows[i].dianch = true;
+        this.shows[i].buch = true;
+      }
       //console.log(this.commdentdata);
     },
     changedata(data) {
@@ -132,14 +157,33 @@ export default {
     userpub(id) {
       this.$emit("userpub", id);
     },
-    diantype(){
-      this.dianch = ! this.dianch
+    diantype(i) {
+      this.$set(this.shows, i, {
+        dianch: !this.shows[i].dianch,
+        buch: this.shows[i].buch,
+      });
+      //console.log(this.shows[i].dianch)
     },
-    butype(){
-      this.buch = ! this.buch
+    butype(i) {
+      this.$set(this.shows, i, {
+        dianch: this.shows[i].dianch,
+        buch: !this.shows[i].buch,
+      });
     },
     tobi() {
       window.open("https://www.bilibili.com/", "_self");
+    },
+    showmore(child) {
+      this.$emit("showmore", child);
+    },
+    tovis(val) {
+      //console.log(val);
+      sessionStorage.setItem("img", val.user_img);
+      sessionStorage.setItem("gender", val.gender);
+      sessionStorage.setItem("visid", val.id);
+      sessionStorage.setItem("name", val.name);
+      sessionStorage.setItem("desc", val.user_desc);
+      this.$router.push("/vistor/" + val.id);
     },
   },
 };
@@ -168,11 +212,6 @@ export default {
   margin: 10px 0;
   word-break: break-all;
 }
-.publish {
-  position: absolute;
-  right: 20px;
-  color: #475ef0;
-}
 .bgc {
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -195,18 +234,27 @@ export default {
   margin-bottom: 5px;
   width: 100%;
 }
-.icons{
+.icons {
   display: flex;
   margin: 5px 0;
 }
-.icons img{
+.icons img {
   width: 12px;
   height: 12px;
   margin-right: 3px;
 }
-.icon{
+.icon {
   margin-right: 5px;
   font-size: 10px;
   color: grey;
+}
+.answer {
+  background-color: #ddd;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.more {
+  color: rgb(37, 136, 175);
 }
 </style>
