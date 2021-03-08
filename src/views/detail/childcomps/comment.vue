@@ -58,15 +58,6 @@ export default {
   height: 30px;
   box-shadow: 0 -1px 2px #ddd;
 }
-.num {
-  color: #aaa;
-  margin-left: 10px;
-}
-.mine img {
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-}
 .mine {
   padding-left: 5px;
   display: flex;

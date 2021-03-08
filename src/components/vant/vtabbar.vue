@@ -41,6 +41,12 @@ export default {
     this.getitem();
   },
 
+  watch: {
+    $route() {
+      this.getitem();
+    },
+  },
+
   components: {},
 
   computed: {},
