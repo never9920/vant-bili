@@ -39,13 +39,11 @@ export default {
 
   mounted() {
     this.getitem();
+    this.$bus.$on('tomine',()=>{
+      this.active = "/mine"
+    })
   },
 
-  watch: {
-    $route() {
-      this.getitem();
-    },
-  },
 
   components: {},
 

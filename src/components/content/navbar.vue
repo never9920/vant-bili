@@ -33,6 +33,7 @@ export default {
   methods: {
     tomine() {
       this.$router.push("/mine");
+      this.$bus.$emit('tomine');
       sessionStorage.setItem('active','/mine')
     },
     tosearch() {

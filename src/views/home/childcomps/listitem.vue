@@ -7,7 +7,15 @@
         class="detailimg"
         :onerror="changeimg"
       />
-      <div class="kankan" v-if="type === 'tuijian' || type === 'kangji'|| type === 'xiaokang'">
+      <div
+        class="kankan"
+        v-if="
+          type === 'tuijian' ||
+          type === 'kangji' ||
+          type === 'xiaokang' ||
+          type === 'dingyue'
+        "
+      >
         <span class="video">
           <img src="~assets/img/bofang.svg" />
           168万
@@ -95,7 +103,7 @@ export default {
   border-radius: 5px;
 }
 .name {
-  margin: 5px;
+  padding: 5px;
   font-size: 10px;
   overflow: hidden;
   display: -webkit-box;
