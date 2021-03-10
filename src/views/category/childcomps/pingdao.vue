@@ -16,7 +16,7 @@
           <div>全部频道</div>
         </div>
         <div>
-          <div class="circle2"><img src="~assets/img/jia.svg" alt="" /></div>
+          <div class="circle2"><img src="~assets/img/add.svg" alt="" /></div>
           <div>添加订阅</div>
         </div>
       </div>
