@@ -16,7 +16,9 @@ import {
     GridItem,
     Collapse,
     CollapseItem,
-    Popup
+    Popup,
+    Field,
+    NavBar
 } from 'vant'
 
 Vue.use(Button);
@@ -35,5 +37,7 @@ Vue.use(GridItem);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Popup);
+Vue.use(Field);
+Vue.use(NavBar);
 
 Vue.prototype.$toast = Toast

@@ -32,7 +32,8 @@ const detail = () =>
     import ('../views/detail/detail')
 const vistor = () =>
     import ('../views/vistor/vistor')
-
+const login = () =>
+    import ('../views/mine/childcomps/login')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -91,6 +92,13 @@ const routes = [{
     {
         path: '/mine',
         component: mine
+    },
+    {
+        path: '/login',
+        component: login,
+        meta: {
+            isshow: true
+        }
     },
     {
         path: '/search',

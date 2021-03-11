@@ -1,8 +1,15 @@
 <template>
-  <div class="fenqu">
-    <div v-for="(item, i) in icons" :key="i" class="item" @click="todetail(i)">
-      <img :src="item.img" alt="" />
-      <div class="title">{{ item.title }}</div>
+  <div>
+    <div class="fenqu">
+      <div
+        v-for="(item, i) in icons"
+        :key="i"
+        class="item"
+        @click="todetail(i)"
+      >
+        <img :src="item.img" alt="" />
+        <div class="title">{{ item.title }}</div>
+      </div>
     </div>
     <div class="empty"></div>
   </div>
