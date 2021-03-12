@@ -34,6 +34,8 @@ const vistor = () =>
     import ('../views/vistor/vistor')
 const login = () =>
     import ('../views/mine/childcomps/login')
+const register = () =>
+    import ('../views/mine/childcomps/register')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -96,6 +98,13 @@ const routes = [{
     {
         path: '/login',
         component: login,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/register',
+        component: register,
         meta: {
             isshow: true
         }
