@@ -36,6 +36,8 @@ const login = () =>
     import ('../views/mine/childcomps/login')
 const register = () =>
     import ('../views/mine/childcomps/register')
+const userinfo = () =>
+    import ('../views/mine/childcomps/userinfo')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -110,6 +112,13 @@ const routes = [{
         }
     },
     {
+        path: '/userinfo',
+        component: userinfo,
+        meta: {
+            isshow: true
+        }
+    },
+    {
         path: '/search',
         component: search,
         meta: {
@@ -152,5 +161,22 @@ VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 
 }
+
+router.beforeEach((to, from, next) => {
+    //to 将要访问的路径
+    //from 代表从哪个路径跳转来的
+    //next()表示放行 next('./login')表示强制返回login
+    //console.log(manager)
+    if (to.path === '/userinfo') {
+        const manager = sessionStorage.getItem('token')
+        if (!manager) {
+            Vue.prototype.$toast.fail('请先登录账号')
+            return next('/login');
+        }
+        next()
+    } else {
+        return next()
+    }
+})
 
 export default router

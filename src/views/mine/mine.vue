@@ -45,10 +45,6 @@ export default {
     return {};
   },
 
-  created() {
-    this.getcomitem();
-  },
-
   components: {},
 
   computed: {},
@@ -56,15 +52,7 @@ export default {
   methods: {
     tologin() {
       this.$router.push("/login");
-    },
-    async getcomitem() {
-      //console.log(this.$route.params.id);
-      const { data: res } = await this.$http.get(
-        "/comment/" + 3
-      );
-      console.log(res);
-      //console.log(this.commdentdata);
-    },
+    }
   },
 };
 </script>
