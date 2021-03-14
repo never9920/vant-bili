@@ -38,6 +38,8 @@ const register = () =>
     import ('../views/mine/childcomps/register')
 const userinfo = () =>
     import ('../views/mine/childcomps/userinfo')
+const edit = () =>
+    import ('../views/mine/childcomps/edit')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -114,6 +116,13 @@ const routes = [{
     {
         path: '/userinfo',
         component: userinfo,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/edit',
+        component: edit,
         meta: {
             isshow: true
         }

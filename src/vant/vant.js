@@ -18,7 +18,9 @@ import {
     CollapseItem,
     Popup,
     Field,
-    NavBar
+    NavBar,
+    Dialog,
+    Uploader
 } from 'vant'
 
 Vue.use(Button);
@@ -39,5 +41,7 @@ Vue.use(CollapseItem);
 Vue.use(Popup);
 Vue.use(Field);
 Vue.use(NavBar);
+Vue.use(Dialog);
+Vue.use(Uploader);
 
 Vue.prototype.$toast = Toast
