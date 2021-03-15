@@ -47,6 +47,10 @@ export default {
   justify-content: space-around;
   padding: 0 90px;
   font-size: 16px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
 }
 .item {
   padding: 5px 3px;
