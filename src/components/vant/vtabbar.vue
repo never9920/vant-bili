@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { getactivestorage, activestorage } from "common/mixin.js";
 export default {
   name: "vtabbar",
   props: {
@@ -39,11 +40,10 @@ export default {
 
   mounted() {
     this.getitem();
-    this.$bus.$on('tomine',()=>{
-      this.active = "/mine"
-    })
+    this.$bus.$on("tomine", () => {
+      this.active = "/mine";
+    });
   },
-
 
   components: {},
 
@@ -51,11 +51,11 @@ export default {
 
   methods: {
     setitem(item) {
-      sessionStorage.setItem("active", item.path);
+      activestorage(item.path);
     },
     getitem() {
       if (sessionStorage.getItem("active")) {
-        this.active = sessionStorage.getItem("active");
+        this.active = getactivestorage();
       }
     },
   },

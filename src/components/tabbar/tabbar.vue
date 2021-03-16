@@ -6,6 +6,7 @@
 
 <script>
 import vtabbar from "../vant/vtabbar.vue";
+import { getnamestorage } from "common/mixin.js";
 export default {
   name: "tabbar",
   data() {
@@ -37,7 +38,7 @@ export default {
   methods: {
     getact() {
       if (sessionStorage.getItem("activename")) {
-        this.bardata[0].path = sessionStorage.getItem("activename");
+        this.bardata[0].path = getnamestorage();
       }
     },
   },

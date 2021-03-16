@@ -14,6 +14,7 @@
 
 <script>
 import vicon from "../vant/vicon.vue";
+import { activestorage } from "common/mixin.js";
 export default {
   name: "navbar",
   data() {
@@ -33,8 +34,8 @@ export default {
   methods: {
     tomine() {
       this.$router.push("/mine");
-      this.$bus.$emit('tomine');
-      sessionStorage.setItem('active','/mine')
+      this.$bus.$emit("tomine");
+      activestorage("/mine");
     },
     tosearch() {
       this.$router.push("/search");

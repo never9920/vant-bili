@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { activestorage, namestorage, getnamestorage } from "common/mixin.js";
 export default {
   name: "vtab",
   data() {
@@ -55,13 +56,13 @@ export default {
 
   methods: {
     setact(name) {
-      sessionStorage.setItem("activename", name);
-      sessionStorage.setItem("active", name);
+      namestorage(name);
+      activestorage(name);
       this.$bus.$emit("setpath", name);
     },
     getact() {
       if (sessionStorage.getItem("activename")) {
-        this.activename = sessionStorage.getItem("activename");
+        this.activename = getnamestorage();
       }
     },
   },
