@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getactivestorage, activestorage } from "common/mixin.js";
+import { getactivestorage, activestorage,getnamestorage } from "common/mixin.js";
 export default {
   name: "vtabbar",
   props: {
@@ -52,6 +52,12 @@ export default {
   methods: {
     setitem(item) {
       activestorage(item.path);
+      const kkk = getnamestorage()
+      if(kkk){
+        console.log('llll')
+      }else{
+        console.log('ppp')
+      }
     },
     getitem() {
       if (sessionStorage.getItem("active")) {

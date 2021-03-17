@@ -111,6 +111,7 @@ export default {
         this.$toast.success("发表成功");
         this.status = this.status + 1;
         this.param.parent_id = "";
+        this.morestatus = false
         this.$refs.comcom.$refs.cominput.placeholder = "说点什么吧";
       } else {
         this.$toast.fail("发表失败");

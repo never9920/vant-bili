@@ -64,26 +64,20 @@
           </div>
         </div>
         <div v-if="item.child.length !== 0" class="answer">
-          <div v-if="item.child.length > 3">
+          <div>
             <middle
               :child="item.child.slice(0, 3)"
               @userpub="userpub"
               :reid="reid"
             ></middle>
             <div class="more" @click="showmore(item.child)">
-              共{{ item.child.length }}条回复&nbsp;＞
+              共{{ arrlen[index] }}条回复&nbsp;＞
             </div>
-          </div>
-          <div v-else>
-            <middle
-              :child="item.child.slice(0, 3)"
-              @userpub="userpub"
-              :reid="reid"
-            ></middle>
           </div>
         </div>
       </div>
     </div>
+    <div class="empty"></div>
   </div>
 </template>
 
@@ -97,6 +91,7 @@ export default {
       shows: [],
       morestatus: false,
       morechild: [],
+      arrlen:[]
     };
   },
 
@@ -138,8 +133,9 @@ export default {
         this.shows[i] = {};
         this.shows[i].dianch = true;
         this.shows[i].buch = true;
+        this.arrlen.push(this.arrlength(this.commdentdata[i].child))
       }
-      //console.log(this.commdentdata);
+      console.log(this.arrlen);
     },
     changedata(data) {
       function fn(temp) {
@@ -153,6 +149,20 @@ export default {
         return arr1;
       }
       return fn(null);
+    },
+    arrlength(child) {
+      var a = child.length;
+      function fn(arr) {
+        for (let i in arr) {
+          if (arr[i].child) {
+            a = a + arr[i].child.length;
+          }
+          fn(arr[i].child);
+        }
+        return a;
+      }
+      const b = fn(child);
+      return b;
     },
     userpub(id) {
       this.$emit("userpub", id);
@@ -256,5 +266,8 @@ export default {
 }
 .more {
   color: rgb(37, 136, 175);
+}
+.empty {
+  height: 40px;
 }
 </style>
