@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getactivestorage, activestorage,getnamestorage } from "common/mixin.js";
+import { getactivestorage, activestorage } from "common/mixin.js";
 export default {
   name: "vtabbar",
   props: {
@@ -38,6 +38,12 @@ export default {
     this.getitem();
   },
 
+  watch:{
+    $route(){
+      this.getitem()
+    }
+  },
+
   mounted() {
     this.getitem();
     this.$bus.$on("tomine", () => {
@@ -52,15 +58,10 @@ export default {
   methods: {
     setitem(item) {
       activestorage(item.path);
-      const kkk = getnamestorage()
-      if(kkk){
-        console.log('llll')
-      }else{
-        console.log('ppp')
-      }
     },
     getitem() {
-      if (sessionStorage.getItem("active")) {
+      let a = getactivestorage();
+      if (a) {
         this.active = getactivestorage();
       }
     },

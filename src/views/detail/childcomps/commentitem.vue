@@ -83,6 +83,7 @@
 
 <script>
 import middle from "./middle.vue";
+import { tovis } from "common/mixin.js";
 export default {
   name: "commentitem",
   data() {
@@ -91,7 +92,7 @@ export default {
       shows: [],
       morestatus: false,
       morechild: [],
-      arrlen:[]
+      arrlen: [],
     };
   },
 
@@ -106,6 +107,10 @@ export default {
 
   created() {
     this.getcomitem();
+  },
+
+  mounted(){
+    this.getcomitem()
   },
 
   watch: {
@@ -129,13 +134,14 @@ export default {
       );
       //console.log(res);
       this.commdentdata = this.changedata(res);
+      this.arrlen = []
       for (let i in this.commdentdata) {
         this.shows[i] = {};
         this.shows[i].dianch = true;
         this.shows[i].buch = true;
-        this.arrlen.push(this.arrlength(this.commdentdata[i].child))
+        this.arrlen.push(this.arrlength(this.commdentdata[i].child));
       }
-      console.log(this.arrlen);
+      //console.log(this.arrlen);
     },
     changedata(data) {
       function fn(temp) {
@@ -187,12 +193,7 @@ export default {
       this.$emit("showmore", child);
     },
     tovis(val) {
-      //console.log(val);
-      sessionStorage.setItem("img", val.user_img);
-      sessionStorage.setItem("gender", val.gender);
-      sessionStorage.setItem("visid", val.id);
-      sessionStorage.setItem("name", val.name);
-      sessionStorage.setItem("desc", val.user_desc);
+      tovis(val);
       this.$router.push("/vistor/" + val.id);
     },
   },

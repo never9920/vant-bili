@@ -63,5 +63,8 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
+.van-cell{
+  padding: 0;
+}
 </style>

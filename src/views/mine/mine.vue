@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { getidstorage, gettokenstorage } from "common/mixin.js";
 import mineitem from "./childcomps/mineitem.vue";
 export default {
   name: "mine",
@@ -108,11 +109,11 @@ export default {
       this.$router.push("/login");
     },
     async getuserinfo() {
-      if (sessionStorage.getItem("token") && sessionStorage.getItem("id")) {
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
         this.getid = false;
-        const { data: res } = await this.$http.get(
-          "/user/" + sessionStorage.getItem("id")
-        );
+        const { data: res } = await this.$http.get("/user/" + b);
         this.userinfo = res[0];
       }
     },

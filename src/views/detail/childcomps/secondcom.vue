@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import { tovis } from "common/mixin.js";
 export default {
   name: "secondcom",
   data() {
@@ -154,12 +155,7 @@ export default {
       //console.log(this.shows)
     },
     tovis(val) {
-      //console.log(val);
-      sessionStorage.setItem("img", val.user_img);
-      sessionStorage.setItem("gender", val.gender);
-      sessionStorage.setItem("visid", val.id);
-      sessionStorage.setItem("name", val.name);
-      sessionStorage.setItem("desc", val.user_desc);
+      tovis(val);
       this.$router.push("/vistor/" + val.id);
     },
   },

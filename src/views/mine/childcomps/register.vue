@@ -13,12 +13,14 @@
       placeholder="请输入姓名"
       rule="^.{3,16}$"
       @log="(res) => (name = res)"
+      class="item"
     />
     <vfield
       label="账号"
       placeholder="请输入账号"
       rule="^.{3,16}$"
       @log="(res) => (username = res)"
+      class="item"
     />
     <vfield
       label="密码"
@@ -26,6 +28,7 @@
       type="password"
       rule="^.{6,16}$"
       @log="(res) => (password = res)"
+      class="item"
     />
     <vbtns
       type="danger"
@@ -42,6 +45,8 @@
 import vbtns from "components/vant/vbtns.vue";
 import vfield from "components/vant/vfield.vue";
 import vnavbar from "components/vant/vnavbar.vue";
+import { activestorage } from "common/mixin.js";
+import { idstorage, tokenstorage } from "common/mixin.js";
 export default {
   name: "register",
   data() {
@@ -78,8 +83,8 @@ export default {
         console.log(res);
         if (res.code === 200) {
           this.$toast.success(res.msg);
-          sessionStorage.setItem("id", res.id);
-          sessionStorage.setItem("token", res.objtoken);
+          idstorage(res.id);
+          tokenstorage(res.objtoken);
           setTimeout(() => {
             this.$router.push("/userinfo");
           }, 1000);
@@ -96,6 +101,7 @@ export default {
     },
     back() {
       this.$router.push("/mine");
+      activestorage("/mine");
     },
   },
 };
@@ -103,5 +109,8 @@ export default {
 <style scoped>
 .login {
   background: red;
+}
+.item {
+  padding: 10px 16px;
 }
 </style>

@@ -49,6 +49,15 @@
 
 <script>
 import navbar from "components/content/navbar";
+import {
+  getidstorage,
+  gettokenstorage,
+  getimgstorage,
+  getgenderstorage,
+  getvisidstorage,
+  getstorage,
+  getdescstorage,
+} from "common/mixin.js";
 export default {
   name: "visitor",
   data() {
@@ -81,10 +90,9 @@ export default {
 
   methods: {
     async getuser() {
-      if (sessionStorage.getItem("id")) {
-        const { data: res } = await this.$http.get(
-          "/user/" + sessionStorage.getItem("id")
-        );
+      let b = getidstorage();
+      if (b) {
+        const { data: res } = await this.$http.get("/user/" + b);
         //console.log(res)
         this.imgsrc = res[0].user_img;
         if (!this.imgsrc) {
@@ -98,11 +106,11 @@ export default {
       }
     },
     visinfo() {
-      this.user_img = sessionStorage.getItem("img");
-      this.gender = sessionStorage.getItem("gender");
-      this.id = sessionStorage.getItem("visid");
-      this.name = sessionStorage.getItem("name");
-      this.desc = sessionStorage.getItem("desc");
+      this.user_img = getimgstorage();
+      this.gender = getgenderstorage();
+      this.id = getvisidstorage();
+      this.name = getstorage();
+      this.desc = getdescstorage();
       //console.log(this.user_img)
     },
     change() {
@@ -114,12 +122,13 @@ export default {
       }
     },
     async addcom() {
-      if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await this.$http.post(
-          "/sub_scription/" + sessionStorage.getItem("id"),
-          { sub_id: this.$route.params.id }
-        );
+        const { data: res } = await this.$http.post("/sub_scription/" + b, {
+          sub_id: this.$route.params.id,
+        });
         //console.log(res)
         if (res.code === 200) {
           this.$toast.success(res.msg);
@@ -135,15 +144,14 @@ export default {
       }
     },
     async folinit() {
-      if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
-        const { data: res } = await this.$http.get(
-          "/sub_scription/" + sessionStorage.getItem("id"),
-          {
-            params: {
-              sub_id: this.$route.params.id,
-            },
-          }
-        );
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
+        const { data: res } = await this.$http.get("/sub_scription/" + a, {
+          params: {
+            sub_id: this.$route.params.id,
+          },
+        });
         //console.log(res)
         this.show = !res.success;
       }

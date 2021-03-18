@@ -101,6 +101,7 @@
 <script>
 import vcollapse from "components/vant/vcollapse.vue";
 import relist from "../../home/childcomps/remen/relist.vue";
+import { getidstorage, gettokenstorage, tovis } from "common/mixin.js";
 export default {
   name: "introduce",
   data() {
@@ -143,12 +144,13 @@ export default {
 
   methods: {
     async postcoll() {
-      if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await this.$http.post(
-          "/collection/" + sessionStorage.getItem("id"),
-          { article_id: this.$route.params.id }
-        );
+        const { data: res } = await this.$http.post("/collection/" + b, {
+          article_id: this.$route.params.id,
+        });
         //console.log(res)
         if (res.code === 200) {
           this.$toast.success(res.msg);
@@ -164,26 +166,26 @@ export default {
       }
     },
     async collectioninit() {
-      if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
-        const { data: res } = await this.$http.get(
-          "/collection/" + sessionStorage.getItem("id"),
-          {
-            params: {
-              article_id: this.$route.params.id,
-            },
-          }
-        );
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
+        const { data: res } = await this.$http.get("/collection/" + b, {
+          params: {
+            article_id: this.$route.params.id,
+          },
+        });
         //console.log(res)
         this.show1 = !res.success;
       }
     },
     async postfol() {
-      if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await this.$http.post(
-          "/sub_scription/" + sessionStorage.getItem("id"),
-          { sub_id: this.model.userid }
-        );
+        const { data: res } = await this.$http.post("/sub_scription/" + b, {
+          sub_id: this.model.userid,
+        });
         //console.log(res)
         if (res.code === 200) {
           this.$toast.success(res.msg);
@@ -202,13 +204,8 @@ export default {
       window.open("https://www.bilibili.com/", "_self");
     },
     tovis(val) {
-      //console.log(val)
-      sessionStorage.setItem("img", this.model.userinfo.user_img);
-      sessionStorage.setItem("gender", this.model.userinfo.gender);
-      sessionStorage.setItem("visid", this.model.userinfo.id);
-      sessionStorage.setItem("name", this.model.userinfo.name);
-      sessionStorage.setItem("desc", this.model.userinfo.user_desc);
-      this.$router.push("/vistor/" + val);
+      tovis(val);
+      this.$router.push("/vistor/" + val.id);
     },
     typech(val) {
       if (val === 1) {

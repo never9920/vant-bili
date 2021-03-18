@@ -17,6 +17,7 @@
 import detailcomment from "./detailcomment.vue";
 import detailtab from "./detailtab.vue";
 import introduce from "./introduce.vue";
+import { getidstorage,gettokenstorage  } from "common/mixin.js";
 export default {
   name: "detailinfo",
   data() {
@@ -53,9 +54,11 @@ export default {
       this.folinit();
     },
     async folinit() {
-      if (sessionStorage.getItem("id") && sessionStorage.getItem("token")) {
+      let a = gettokenstorage()
+      let b =getidstorage()
+      if (a&&b) {
         const { data: res } = await this.$http.get(
-          "/sub_scription/" + sessionStorage.getItem("id"),
+          "/sub_scription/" + b,
           {
             params: {
               sub_id: this.model.userid,

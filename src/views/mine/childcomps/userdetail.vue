@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { getidstorage } from "common/mixin.js";
 export default {
   name: "userdetail",
   data() {
@@ -70,9 +71,8 @@ export default {
 
   methods: {
     async getuserinfo() {
-      const { data: res } = await this.$http.get(
-        "/user/" + sessionStorage.getItem("id")
-      );
+      let b = getidstorage();
+      const { data: res } = await this.$http.get("/user/" + b);
       this.userinfo = res[0];
       this.picsrc = this.userinfo.user_img;
       //console.log(this.userinfo)

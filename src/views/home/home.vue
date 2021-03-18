@@ -12,19 +12,20 @@
 <script>
 import navbar from "components/content/navbar.vue";
 import vtab from "components/vant/vtab.vue";
+import { getidstorage, gettokenstorage } from "common/mixin.js";
 export default {
   name: "home",
   data() {
     return {
       imgsrc: "",
       tabs: [
-        { title: "直播", name: 'zhibo', path: "/zhibo" },
-        { title: "推荐", name: 'tuijian', path: "/tuijian" },
-        { title: "热门", name: 'remen', path: "/remen" },
-        { title: "追番", name: 'zhuifan', path: "/zhuifan" },
-        { title: "影视", name: 'yingshi', path: "/yingshi" },
-        { title: "抗击肺炎", name: 'kangji', path: "/kangji" },
-        { title: "小康", name: 'xiaokan', path: "/xiaokan" },
+        { title: "直播", name: "zhibo", path: "/zhibo" },
+        { title: "推荐", name: "tuijian", path: "/tuijian" },
+        { title: "热门", name: "remen", path: "/remen" },
+        { title: "追番", name: "zhuifan", path: "/zhuifan" },
+        { title: "影视", name: "yingshi", path: "/yingshi" },
+        { title: "抗击肺炎", name: "kangji", path: "/kangji" },
+        { title: "小康", name: "xiaokan", path: "/xiaokan" },
       ],
     };
   },
@@ -37,10 +38,10 @@ export default {
 
   methods: {
     async getuser() {
-      if (sessionStorage.getItem("id")) {
-        const { data: res } = await this.$http.get(
-          "/user/" + sessionStorage.getItem("id")
-        );
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
+        const { data: res } = await this.$http.get("/user/" + b);
         //console.log(res)
         this.imgsrc = res[0].user_img;
         if (!this.imgsrc) {
@@ -52,7 +53,7 @@ export default {
           "//s1.hdslb.com/bfs/static/jinkela/long/images/login.png@48w_48h_1c.png";
         //console.log(this.imgsrc)
       }
-    }
+    },
   },
 };
 </script>

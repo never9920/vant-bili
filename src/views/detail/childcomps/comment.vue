@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { getidstorage,gettokenstorage  } from "common/mixin.js";
 export default {
   name: "comment",
   data() {
@@ -39,7 +40,9 @@ export default {
 
   methods: {
     checkuser() {
-      if (!sessionStorage.getItem("id") && !sessionStorage.getItem("token")) {
+      let a = gettokenstorage()
+      let b =getidstorage()
+      if (!a && !b) {
         this.$toast.fail("请先登录");
         this.$router.push("/login");
         return;

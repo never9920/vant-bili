@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { getidstorage, clearsess } from "common/mixin.js";
 import navbar from "components/content/navbar";
 import edititem from "./edititem";
 import vdialog from "components/vant/vdialog.vue";
@@ -82,11 +83,12 @@ export default {
       this.$router.back();
     },
     tuichu() {
-      sessionStorage.clear();
+      clearsess();
       this.$router.push("/login");
     },
     async getedit() {
-      const res = await this.$http.get("/user/" + sessionStorage.getItem("id"));
+      let b = getidstorage();
+      const res = await this.$http.get("/user/" + b);
       //console.log(res)
       this.model = res.data[0];
       //console.log(typeof(this.model.gender))
@@ -117,10 +119,8 @@ export default {
       this.update();
     },
     async update() {
-      const res = await this.$http.post(
-        "/update/" + sessionStorage.getItem("id"),
-        this.model
-      );
+      let b = getidstorage();
+      const res = await this.$http.post("/update/" + b, this.model);
       //console.log(res)
       if (res.data.code === 200) {
         this.$toast.success("修改成功");

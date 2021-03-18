@@ -61,7 +61,8 @@ export default {
       this.$bus.$emit("setpath", name);
     },
     getact() {
-      if (sessionStorage.getItem("activename")) {
+      let a = getnamestorage();
+      if (a) {
         this.activename = getnamestorage();
       }
     },

@@ -37,7 +37,8 @@ export default {
 
   methods: {
     getact() {
-      if (sessionStorage.getItem("activename")) {
+      let a= getnamestorage()
+      if (a) {
         this.bardata[0].path = getnamestorage();
       }
     },

@@ -37,11 +37,11 @@ import comment from "./comment";
 import commentitem from "./commentitem.vue";
 import vpopup from "components/vant/vpopup.vue";
 import secondcom from "./secondcom";
+import { getidstorage } from "common/mixin.js";
 export default {
   name: "detailcomment",
   data() {
     return {
-      imgsrc: "",
       numlength: 0,
       param: {
         comment_content: "",
@@ -57,32 +57,11 @@ export default {
 
   props: ["reid"],
 
-  created() {
-    this.getuser();
-  },
-
   components: { comment, commentitem, vpopup, secondcom },
 
   computed: {},
 
   methods: {
-    async getuser() {
-      if (sessionStorage.getItem("id")) {
-        const { data: res } = await this.$http.get(
-          "/user/" + sessionStorage.getItem("id")
-        );
-        //console.log(res)
-        this.imgsrc = res[0].user_img;
-        if (!this.imgsrc) {
-          this.imgsrc = require("@/assets/img/touxiang.jpg");
-        }
-        //console.log(this.imgsrc)
-      } else {
-        this.imgsrc =
-          "//s1.hdslb.com/bfs/static/jinkela/long/images/login.png@48w_48h_1c.png";
-        //console.log(this.imgsrc)
-      }
-    },
     async posttext(val) {
       if (!val) {
         this.$toast.fail("请说点什么吧");
@@ -102,16 +81,15 @@ export default {
       this.param.comment_date = str;
       this.param.article_id = this.$route.params.id;
       //console.log(this.param)
-      const res = await this.$http.post(
-        "/comment_post/" + sessionStorage.getItem("id"),
-        this.param
-      );
+
+      let b = getidstorage();
+      const res = await this.$http.post("/comment_post/" + b, this.param);
       //console.log(res.status)
       if (res.status === 200) {
         this.$toast.success("发表成功");
         this.status = this.status + 1;
         this.param.parent_id = "";
-        this.morestatus = false
+        this.morestatus = false;
         this.$refs.comcom.$refs.cominput.placeholder = "说点什么吧";
       } else {
         this.$toast.fail("发表失败");
