@@ -79,6 +79,7 @@ import vrefresh from "components/vant/vrefresh.vue";
 import vswipe from "components/vant/vswipe.vue";
 import vgrid from "components/vant/vgrid.vue";
 import fouritem from "../kangji/fouritem.vue";
+import { getcategory, getdetails } from "network/gethome.js";
 export default {
   name: "xiaokan",
   data() {
@@ -118,7 +119,7 @@ export default {
       }, 1000);
     },
     async gethome() {
-      const { data: res } = await this.$http.get("/category");
+      const { data: res } = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -139,12 +140,9 @@ export default {
     },
     async getdetail(id) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await this.$http.get(
-        "/detail/" + this.hometab[id]._id,
-        {
-          params: { page, pagesize: 4 },
-        }
-      );
+      const { data: res } = await getdetails(this.hometab[id]._id, {
+        params: { page, pagesize: 4 },
+      });
       this.hometab[id].list.push(...res);
       this.hometab[id].page += 1;
       this.hometab[id].loading = false;

@@ -39,8 +39,8 @@
 import vbtns from "components/vant/vbtns.vue";
 import vfield from "components/vant/vfield.vue";
 import vnavbar from "components/vant/vnavbar.vue";
-import { activestorage } from "common/mixin.js";
-import { idstorage, tokenstorage } from "common/mixin.js";
+import { activestorage, idstorage, tokenstorage } from "common/mixin.js";
+import { postlogin } from "network/gethome.js";
 export default {
   name: "register",
   data() {
@@ -64,7 +64,7 @@ export default {
       let rule = /^.{6,16}$/;
       if (rule.test(this.username) && rule.test(this.password)) {
         //console.log('kkk')
-        const { data: res } = await this.$http.post("/login", {
+        const { data: res } = await postlogin({
           username: this.username,
           password: this.password,
         });

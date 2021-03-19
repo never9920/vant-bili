@@ -49,6 +49,7 @@ import zhoutui from "./zhoutui.vue";
 import bangdan from "./bangdan.vue";
 import threeitem from "./threeitem.vue";
 import xiangzhui from "./xiangzhui.vue";
+import { getcategory, getdetails } from "network/gethome.js";
 export default {
   name: "zhuifan",
   data() {
@@ -105,7 +106,7 @@ export default {
       this.loading = val;
     },
     async gethome() {
-      const { data: res } = await this.$http.get("/category");
+      const { data: res } = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -125,12 +126,9 @@ export default {
     },
     async getdetail(id, pagesize) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await this.$http.get(
-        "/detail/" + this.hometab[id]._id,
-        {
-          params: { page, pagesize: pagesize },
-        }
-      );
+      const { data: res } = await getdetails(this.hometab[id]._id, {
+        params: { page, pagesize: pagesize },
+      });
       this.hometab[id].list = res;
       this.hometab[id].page += 1;
       this.hometab[id].loading = false;

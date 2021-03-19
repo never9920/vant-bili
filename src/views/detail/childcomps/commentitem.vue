@@ -84,6 +84,7 @@
 <script>
 import middle from "./middle.vue";
 import { tovis } from "common/mixin.js";
+import { getcomment } from "network/gethome.js";
 export default {
   name: "commentitem",
   data() {
@@ -109,8 +110,8 @@ export default {
     this.getcomitem();
   },
 
-  mounted(){
-    this.getcomitem()
+  mounted() {
+    this.getcomitem();
   },
 
   watch: {
@@ -129,12 +130,10 @@ export default {
   methods: {
     async getcomitem() {
       //console.log(this.$route.params.id);
-      const { data: res } = await this.$http.get(
-        "/comment/" + this.$route.params.id
-      );
+      const { data: res } = await getcomment(this.$route.params.id);
       //console.log(res);
       this.commdentdata = this.changedata(res);
-      this.arrlen = []
+      this.arrlen = [];
       for (let i in this.commdentdata) {
         this.shows[i] = {};
         this.shows[i].dianch = true;

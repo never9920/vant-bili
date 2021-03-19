@@ -73,6 +73,7 @@
 <script>
 import vicon from "components/vant/vicon.vue";
 import twoitem from "./twoitem.vue";
+import { getcategory, getdetails } from "network/gethome.js";
 export default {
   name: "pingdao",
   data() {
@@ -101,7 +102,7 @@ export default {
 
   methods: {
     async gethome() {
-      const { data: res } = await this.$http.get("/category");
+      const { data: res } = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -122,12 +123,9 @@ export default {
     },
     async getdetail(id) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await this.$http.get(
-        "/detail/" + this.hometab[id]._id,
-        {
-          params: { page, pagesize: 2 },
-        }
-      );
+      const { data: res } = await getdetails(this.hometab[id]._id, {
+        params: { page, pagesize: 2 },
+      });
       this.hometab[id].list.push(...res);
       this.hometab[id].page += 1;
       this.hometab[id].loading = false;

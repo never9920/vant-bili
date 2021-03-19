@@ -24,6 +24,7 @@ import vgrid from "components/vant/vgrid.vue";
 import relist from "./relist.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vlist from "components/vant/vlist.vue";
+import { getcategory, getdetails } from "network/gethome.js";
 export default {
   name: "remen",
   data() {
@@ -57,7 +58,7 @@ export default {
       }, 1000);
     },
     async gethome() {
-      const { data: res } = await this.$http.get("/category");
+      const { data: res } = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -76,12 +77,9 @@ export default {
     },
     async getdetail(id) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await this.$http.get(
-        "/detail/" + this.hometab[id]._id,
-        {
-          params: { page, pagesize: 10 },
-        }
-      );
+      const { data: res } = await getdetails(this.hometab[id]._id, {
+        params: { page, pagesize: 10 },
+      });
       this.hometab[id].list.push(...res);
       this.hometab[id].page += 1;
       this.hometab[id].loading = false;
@@ -107,7 +105,7 @@ export default {
 };
 </script>
 <style scoped>
-#remen{
+#remen {
   background-color: #fff;
 }
 </style>

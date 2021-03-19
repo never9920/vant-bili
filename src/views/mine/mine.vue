@@ -87,6 +87,7 @@
 <script>
 import { getidstorage, gettokenstorage } from "common/mixin.js";
 import mineitem from "./childcomps/mineitem.vue";
+import { getusers } from "network/gethome.js";
 export default {
   name: "mine",
   data() {
@@ -113,7 +114,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         this.getid = false;
-        const { data: res } = await this.$http.get("/user/" + b);
+        const { data: res } = await getusers(b);
         this.userinfo = res[0];
       }
     },

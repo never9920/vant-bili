@@ -45,8 +45,8 @@
 import vbtns from "components/vant/vbtns.vue";
 import vfield from "components/vant/vfield.vue";
 import vnavbar from "components/vant/vnavbar.vue";
-import { activestorage } from "common/mixin.js";
-import { idstorage, tokenstorage } from "common/mixin.js";
+import { activestorage, idstorage, tokenstorage } from "common/mixin.js";
+import { postreg } from "network/gethome.js";
 export default {
   name: "register",
   data() {
@@ -75,7 +75,7 @@ export default {
         rule.test(this.password)
       ) {
         //console.log('kkk')
-        const { data: res } = await this.$http.post("/register", {
+        const { data: res } = await postreg({
           name: this.name,
           username: this.username,
           password: this.password,

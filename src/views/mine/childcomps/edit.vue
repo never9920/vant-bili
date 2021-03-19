@@ -26,6 +26,7 @@ import navbar from "components/content/navbar";
 import edititem from "./edititem";
 import vdialog from "components/vant/vdialog.vue";
 import vfield from "components/vant/vfield.vue";
+import { getusers, postup, postupdate } from "network/gethome.js";
 export default {
   name: "edit",
   data() {
@@ -88,7 +89,7 @@ export default {
     },
     async getedit() {
       let b = getidstorage();
-      const res = await this.$http.get("/user/" + b);
+      const res = await getusers(b);
       //console.log(res)
       this.model = res.data[0];
       //console.log(typeof(this.model.gender))
@@ -110,7 +111,7 @@ export default {
       const from = new FormData();
       from.append("file", file.file);
       //'file'由后端决定
-      const res = await this.$http.post("/upload", from);
+      const res = await postup(from);
       //console.log(res)
       this.edititems[0].desc = res.data.url;
       this.model.user_img = res.data.url;
@@ -120,7 +121,7 @@ export default {
     },
     async update() {
       let b = getidstorage();
-      const res = await this.$http.post("/update/" + b, this.model);
+      const res = await postupdate(b, this.model);
       //console.log(res)
       if (res.data.code === 200) {
         this.$toast.success("修改成功");

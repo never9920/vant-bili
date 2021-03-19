@@ -38,6 +38,7 @@ import commentitem from "./commentitem.vue";
 import vpopup from "components/vant/vpopup.vue";
 import secondcom from "./secondcom";
 import { getidstorage } from "common/mixin.js";
+import { postcom } from "network/gethome.js";
 export default {
   name: "detailcomment",
   data() {
@@ -83,7 +84,7 @@ export default {
       //console.log(this.param)
 
       let b = getidstorage();
-      const res = await this.$http.post("/comment_post/" + b, this.param);
+      const res = await postcom(b, this.param);
       //console.log(res.status)
       if (res.status === 200) {
         this.$toast.success("发表成功");

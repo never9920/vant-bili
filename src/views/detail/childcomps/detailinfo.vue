@@ -17,7 +17,8 @@
 import detailcomment from "./detailcomment.vue";
 import detailtab from "./detailtab.vue";
 import introduce from "./introduce.vue";
-import { getidstorage,gettokenstorage  } from "common/mixin.js";
+import { getidstorage, gettokenstorage } from "common/mixin.js";
+import { getarticle, getsub } from "network/gethome.js";
 export default {
   name: "detailinfo",
   data() {
@@ -46,25 +47,20 @@ export default {
 
   methods: {
     async getvideo() {
-      const { data: res } = await this.$http(
-        "/article/" + this.$route.params.id
-      );
+      const { data: res } = await getarticle(this.$route.params.id);
       this.model = res[0];
       //console.log(this.model);
       this.folinit();
     },
     async folinit() {
-      let a = gettokenstorage()
-      let b =getidstorage()
-      if (a&&b) {
-        const { data: res } = await this.$http.get(
-          "/sub_scription/" + b,
-          {
-            params: {
-              sub_id: this.model.userid,
-            },
-          }
-        );
+      let a = gettokenstorage();
+      let b = getidstorage();
+      if (a && b) {
+        const { data: res } = await getsub(b, {
+          params: {
+            sub_id: this.model.userid,
+          },
+        });
         //console.log(res)
         this.show2 = !res.success;
       }

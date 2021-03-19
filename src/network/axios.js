@@ -2,18 +2,16 @@ import axios from 'axios'
 import router from '../router';
 import Vue from 'vue'
 
-const http = axios.create({
-    baseURL: 'http://112.74.99.5:3000/web/api'
-})
+axios.defaults.baseURL = 'http://112.74.99.5:3000/web/api'
 
-http.interceptors.request.use(function(config) {
+axios.interceptors.request.use(function(config) {
     if (sessionStorage.getItem('token') && sessionStorage.getItem('id')) {
         config.headers.Authorization = 'Bearer ' + sessionStorage.getItem('token')
     }
     return config;
 })
 
-http.interceptors.response.use(function(response) {
+axios.interceptors.response.use(function(response) {
         return response;
     },
     function(error) {
@@ -25,4 +23,26 @@ http.interceptors.response.use(function(response) {
         return Promise.reject(error)
     });
 
-export default http
+export function get(url, params = {}) {
+    return new Promise((resolve, reject) => {
+        axios.get(url, {
+            params: params
+        }).then(res => {
+            resolve(res.data);
+        }).catch(err => {
+            reject(err.data)
+        })
+    });
+}
+
+export function post(url, params) {
+    return new Promise((resolve, reject) => {
+        axios.post(url, params)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(err => {
+                reject(err.data)
+            })
+    });
+}

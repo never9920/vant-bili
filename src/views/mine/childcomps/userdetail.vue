@@ -44,6 +44,7 @@
 
 <script>
 import { getidstorage } from "common/mixin.js";
+import { getusers } from "network/gethome.js";
 export default {
   name: "userdetail",
   data() {
@@ -72,7 +73,7 @@ export default {
   methods: {
     async getuserinfo() {
       let b = getidstorage();
-      const { data: res } = await this.$http.get("/user/" + b);
+      const { data: res } = await getusers(b);
       this.userinfo = res[0];
       this.picsrc = this.userinfo.user_img;
       //console.log(this.userinfo)

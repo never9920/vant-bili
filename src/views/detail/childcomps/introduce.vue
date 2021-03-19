@@ -102,6 +102,7 @@
 import vcollapse from "components/vant/vcollapse.vue";
 import relist from "../../home/childcomps/remen/relist.vue";
 import { getidstorage, gettokenstorage, tovis } from "common/mixin.js";
+import { postcol, getcol, postsub, getcommend } from "network/gethome.js";
 export default {
   name: "introduce",
   data() {
@@ -148,7 +149,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await this.$http.post("/collection/" + b, {
+        const { data: res } = await postcol(b, {
           article_id: this.$route.params.id,
         });
         //console.log(res)
@@ -169,7 +170,7 @@ export default {
       let a = gettokenstorage();
       let b = getidstorage();
       if (a && b) {
-        const { data: res } = await this.$http.get("/collection/" + b, {
+        const { data: res } = await getcol(b, {
           params: {
             article_id: this.$route.params.id,
           },
@@ -183,7 +184,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await this.$http.post("/sub_scription/" + b, {
+        const { data: res } = await postsub(b, {
           sub_id: this.model.userid,
         });
         //console.log(res)
@@ -224,7 +225,7 @@ export default {
       this.bi = !this.bi;
     },
     async getcomment() {
-      const { data: res } = await this.$http.get("/commend");
+      const { data: res } = await getcommend();
       this.comment = res;
       //console.log(res)
     },

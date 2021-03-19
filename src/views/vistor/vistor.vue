@@ -49,6 +49,7 @@
 
 <script>
 import navbar from "components/content/navbar";
+import { getimg, getsub, postsub } from "network/gethome.js";
 import {
   getidstorage,
   gettokenstorage,
@@ -92,7 +93,7 @@ export default {
     async getuser() {
       let b = getidstorage();
       if (b) {
-        const { data: res } = await this.$http.get("/user/" + b);
+        const { data: res } = await getimg(b);
         //console.log(res)
         this.imgsrc = res[0].user_img;
         if (!this.imgsrc) {
@@ -126,7 +127,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await this.$http.post("/sub_scription/" + b, {
+        const { data: res } = await postsub(b, {
           sub_id: this.$route.params.id,
         });
         //console.log(res)
@@ -147,7 +148,7 @@ export default {
       let a = gettokenstorage();
       let b = getidstorage();
       if (a && b) {
-        const { data: res } = await this.$http.get("/sub_scription/" + a, {
+        const { data: res } = await getsub(b, {
           params: {
             sub_id: this.$route.params.id,
           },

@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { getcomment } from "network/gethome.js";
 export default {
   name: "detailtab",
   data() {
@@ -56,9 +57,7 @@ export default {
     },
     async getcomitem() {
       //console.log(this.$route.params.id);
-      const { data: res } = await this.$http.get(
-        "/comment/" + this.$route.params.id
-      );
+      const { data: res } = await getcomment(this.$route.params.id);
       //console.log(res);
       if (res) {
         this.numlength = res.length;
