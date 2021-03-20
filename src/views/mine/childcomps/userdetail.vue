@@ -73,7 +73,7 @@ export default {
   methods: {
     async getuserinfo() {
       let b = getidstorage();
-      const { data: res } = await getusers(b);
+      const res = await getusers(b);
       this.userinfo = res[0];
       this.picsrc = this.userinfo.user_img;
       //console.log(this.userinfo)

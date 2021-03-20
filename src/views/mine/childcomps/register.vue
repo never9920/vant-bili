@@ -75,7 +75,7 @@ export default {
         rule.test(this.password)
       ) {
         //console.log('kkk')
-        const { data: res } = await postreg({
+        const res = await postreg({
           name: this.name,
           username: this.username,
           password: this.password,

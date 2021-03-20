@@ -68,7 +68,6 @@ export default {
         this.$toast.fail("请说点什么吧");
         return;
       }
-      this.param.comment_content = val;
       let data = new Date();
       let m = data.getMonth() + 1;
       let d = data.getDate();
@@ -79,14 +78,16 @@ export default {
         d = "0" + d;
       }
       let str = `${m}-${d}`;
-      this.param.comment_date = str;
-      this.param.article_id = this.$route.params.id;
       //console.log(this.param)
 
       let b = getidstorage();
-      const res = await postcom(b, this.param);
-      //console.log(res.status)
-      if (res.status === 200) {
+      const res = await postcom(b, {
+        comment_content: val,
+        comment_date: str,
+        article_id: this.$route.params.id,
+        parent_id: this.param.parent_id,
+      });
+      if (res.protocol41) {
         this.$toast.success("发表成功");
         this.status = this.status + 1;
         this.param.parent_id = "";

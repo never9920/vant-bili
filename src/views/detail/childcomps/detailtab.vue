@@ -57,7 +57,7 @@ export default {
     },
     async getcomitem() {
       //console.log(this.$route.params.id);
-      const { data: res } = await getcomment(this.$route.params.id);
+      const res = await getcomment(this.$route.params.id);
       //console.log(res);
       if (res) {
         this.numlength = res.length;

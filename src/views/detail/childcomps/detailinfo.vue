@@ -47,7 +47,7 @@ export default {
 
   methods: {
     async getvideo() {
-      const { data: res } = await getarticle(this.$route.params.id);
+      const res = await getarticle(this.$route.params.id);
       this.model = res[0];
       //console.log(this.model);
       this.folinit();
@@ -56,10 +56,8 @@ export default {
       let a = gettokenstorage();
       let b = getidstorage();
       if (a && b) {
-        const { data: res } = await getsub(b, {
-          params: {
-            sub_id: this.model.userid,
-          },
+        const res = await getsub(b, {
+          sub_id: this.model.userid,
         });
         //console.log(res)
         this.show2 = !res.success;

@@ -15,7 +15,7 @@
     <div class="btns" @click="tuichu">退出登录</div>
     <div class="btns" @click="goback">返回空间</div>
     <vdialog :isshow="isshow" :title="title" @submit="submit" @guan="guan">
-      <vfield @log="log" :word="num" :rule="rule"></vfield>
+      <vfield @log="log" :word="num" :rule="rule" class="vfied"></vfield>
     </vdialog>
   </div>
 </template>
@@ -91,21 +91,21 @@ export default {
       let b = getidstorage();
       const res = await getusers(b);
       //console.log(res)
-      this.model = res.data[0];
+      this.model = res[0];
       //console.log(typeof(this.model.gender))
-      if (res.data[0].user_img) {
+      if (res[0].user_img) {
         //console.log('true')
-        this.edititems[0].desc = res.data[0].user_img;
+        this.edititems[0].desc = res[0].user_img;
         //this.show = true
       } else {
         //console.log('false')
         this.edititems[0].desc = require("@/assets/img/touxiang.jpg");
         //this.show = false
       }
-      this.edititems[1].desc = res.data[0].username;
-      this.edititems[2].desc = res.data[0].id;
-      this.edititems[3].desc = res.data[0].gender;
-      this.edititems[5].desc = res.data[0].user_desc;
+      this.edititems[1].desc = res[0].username;
+      this.edititems[2].desc = res[0].id;
+      this.edititems[3].desc = res[0].gender;
+      this.edititems[5].desc = res[0].user_desc;
     },
     async upload(file) {
       const from = new FormData();
@@ -113,8 +113,8 @@ export default {
       //'file'由后端决定
       const res = await postup(from);
       //console.log(res)
-      this.edititems[0].desc = res.data.url;
-      this.model.user_img = res.data.url;
+      this.edititems[0].desc = res.url;
+      this.model.user_img = res.url;
       //this.show = true
       //console.log(res.data.url)
       this.update();
@@ -123,7 +123,7 @@ export default {
       let b = getidstorage();
       const res = await postupdate(b, this.model);
       //console.log(res)
-      if (res.data.code === 200) {
+      if (res.code === 200) {
         this.$toast.success("修改成功");
       } else {
         this.$toast.fail("修改失败");
@@ -188,5 +188,8 @@ export default {
   padding: 15px;
   background-color: #fff;
   text-align: center;
+}
+.vfied {
+  padding: 10px 16px;
 }
 </style>

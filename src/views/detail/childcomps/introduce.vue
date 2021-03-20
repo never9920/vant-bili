@@ -80,11 +80,12 @@
         <div @click="postcoll" class="icon">
           <div v-if="show1">
             <img src="~assets/img/shou.svg" />
+            <div>2332</div>
           </div>
           <div v-else>
             <img src="~assets/img/shoupink.svg" />
+            <div>2333</div>
           </div>
-          <div>2333</div>
         </div>
         <div @click="tobi" class="icon">
           <div>
@@ -149,7 +150,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await postcol(b, {
+        const res = await postcol(b, {
           article_id: this.$route.params.id,
         });
         //console.log(res)
@@ -170,10 +171,8 @@ export default {
       let a = gettokenstorage();
       let b = getidstorage();
       if (a && b) {
-        const { data: res } = await getcol(b, {
-          params: {
-            article_id: this.$route.params.id,
-          },
+        const res = await getcol(b, {
+          article_id: this.$route.params.id,
         });
         //console.log(res)
         this.show1 = !res.success;
@@ -184,7 +183,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         //console.log("kkk+++++++");
-        const { data: res } = await postsub(b, {
+        const res = await postsub(b, {
           sub_id: this.model.userid,
         });
         //console.log(res)
@@ -225,7 +224,7 @@ export default {
       this.bi = !this.bi;
     },
     async getcomment() {
-      const { data: res } = await getcommend();
+      const res = await getcommend();
       this.comment = res;
       //console.log(res)
     },

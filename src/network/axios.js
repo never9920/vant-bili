@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '../router';
 import Vue from 'vue'
 
-axios.defaults.baseURL = 'http://112.74.99.5:3000/web/api'
+axios.defaults.baseURL = 'http://112.74.99.5:3000/web/api/'
 
 axios.interceptors.request.use(function(config) {
     if (sessionStorage.getItem('token') && sessionStorage.getItem('id')) {
@@ -22,6 +22,8 @@ axios.interceptors.response.use(function(response) {
         }
         return Promise.reject(error)
     });
+
+axios.defaults.timeout = 10000;
 
 export function get(url, params = {}) {
     return new Promise((resolve, reject) => {

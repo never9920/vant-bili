@@ -264,7 +264,7 @@ export default {
       this.loading = val;
     },
     async gethome() {
-      const { data: res } = await getcategory();
+      const res = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -284,8 +284,9 @@ export default {
     },
     async getdetail(id, pagesize) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await getdetails(this.hometab[id]._id, {
-        params: { page, pagesize: pagesize },
+      const res = await getdetails(this.hometab[id]._id, {
+        page,
+        pagesize: pagesize,
       });
       this.hometab[id].list = res;
       this.hometab[id].page += 1;

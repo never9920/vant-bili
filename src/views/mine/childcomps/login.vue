@@ -64,7 +64,7 @@ export default {
       let rule = /^.{6,16}$/;
       if (rule.test(this.username) && rule.test(this.password)) {
         //console.log('kkk')
-        const { data: res } = await postlogin({
+        const res = await postlogin({
           username: this.username,
           password: this.password,
         });

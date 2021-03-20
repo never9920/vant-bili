@@ -114,7 +114,7 @@ export default {
       let b = getidstorage();
       if (a && b) {
         this.getid = false;
-        const { data: res } = await getusers(b);
+        const res = await getusers(b);
         this.userinfo = res[0];
       }
     },

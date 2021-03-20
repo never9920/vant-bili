@@ -96,7 +96,7 @@ export default {
       }, 1000);
     },
     async gethome() {
-      const { data: res } = await getcategory();
+      const res = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -120,8 +120,9 @@ export default {
     },
     async getdetail(id) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await getdetails(this.hometab[id]._id, {
-        params: { page, pagesize: 10 },
+      const res = await getdetails(this.hometab[id]._id, {
+        page,
+        pagesize: 10,
       });
       this.hometab[id].list.push(...res);
       this.hometab[id].page += 1;
@@ -134,8 +135,9 @@ export default {
     },
     async unshiftdetail(id) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await getdetails(this.hometab[id]._id, {
-        params: { page, pagesize: 10 },
+      const res = await getdetails(this.hometab[id]._id, {
+        page,
+        pagesize: 10,
       });
       this.hometab[id].list.unshift(...this.firsttab[id].list);
       this.firsttab[id].list = res;

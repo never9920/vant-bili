@@ -102,7 +102,7 @@ export default {
 
   methods: {
     async gethome() {
-      const { data: res } = await getcategory();
+      const res = await getcategory();
       //console.log(res)
       this.changedata(res);
       //console.log(typeof(this.current))
@@ -123,9 +123,7 @@ export default {
     },
     async getdetail(id) {
       const page = this.hometab[id].page + 1;
-      const { data: res } = await getdetails(this.hometab[id]._id, {
-        params: { page, pagesize: 2 },
-      });
+      const res = await getdetails(this.hometab[id]._id, { page, pagesize: 2 });
       this.hometab[id].list.push(...res);
       this.hometab[id].page += 1;
       this.hometab[id].loading = false;

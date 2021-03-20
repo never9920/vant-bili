@@ -42,7 +42,7 @@ export default {
       let a = gettokenstorage();
       let b = getidstorage();
       if (a && b) {
-        const { data: res } = await getimg(b);
+        const res = await getimg(b);
         //console.log(res)
         this.imgsrc = res[0].user_img;
         if (!this.imgsrc) {

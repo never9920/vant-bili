@@ -130,7 +130,7 @@ export default {
   methods: {
     async getcomitem() {
       //console.log(this.$route.params.id);
-      const { data: res } = await getcomment(this.$route.params.id);
+      const res = await getcomment(this.$route.params.id);
       //console.log(res);
       this.commdentdata = this.changedata(res);
       this.arrlen = [];
