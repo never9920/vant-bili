@@ -73,7 +73,7 @@
 <script>
 import vicon from "components/vant/vicon.vue";
 import twoitem from "./twoitem.vue";
-import { getcategory, getdetails } from "network/gethome.js";
+import { usersdata } from "common/const.js";
 export default {
   name: "pingdao",
   data() {
@@ -89,51 +89,18 @@ export default {
       hometab: {},
       show: false,
       loading: false,
+      pagesize: 2,
+      numsize: 5,
     };
   },
 
-  created() {
-    this.gethome();
-  },
+  mixins: [usersdata],
 
   components: { vicon, twoitem },
 
   computed: {},
 
-  methods: {
-    async gethome() {
-      const res = await getcategory();
-      //console.log(res)
-      this.changedata(res);
-      //console.log(typeof(this.current))
-    },
-    changedata(val) {
-      const category = val.map((item, index) => {
-        item.list = [];
-        item.page = -1;
-        item.loading = false;
-        item.finished = false;
-        return item;
-      });
-      this.hometab = category;
-      for (let i = 0; i < 5; i++) {
-        this.getdetail(i);
-      }
-      //console.log(this.firsttab)
-    },
-    async getdetail(id) {
-      const page = this.hometab[id].page + 1;
-      const res = await getdetails(this.hometab[id]._id, { page, pagesize: 2 });
-      this.hometab[id].list.push(...res);
-      this.hometab[id].page += 1;
-      this.hometab[id].loading = false;
-      if (res.length < 10) {
-        this.hometab[id].finished = true;
-      }
-      this.show = true;
-      //console.log(this.hometab)
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped>

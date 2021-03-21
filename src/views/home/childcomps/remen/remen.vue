@@ -24,7 +24,7 @@ import vgrid from "components/vant/vgrid.vue";
 import relist from "./relist.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vlist from "components/vant/vlist.vue";
-import { getcategory, getdetails } from "network/gethome.js";
+import { usersdata } from "common/const.js";
 export default {
   name: "remen",
   data() {
@@ -35,11 +35,13 @@ export default {
         { title: "入站必刷", img: require("@/assets/img/jiang.svg") },
         { title: "春节电影", img: require("@/assets/img/chun.svg") },
       ],
-      hometab: {},
-      show: false,
       loading: false,
+      pagesize: 10,
+      numsize: 3,
     };
   },
+
+  mixins: [usersdata],
 
   created() {
     this.gethome();
@@ -57,50 +59,17 @@ export default {
         this.loading = false;
       }, 1000);
     },
-    async gethome() {
-      const res = await getcategory();
-      //console.log(res)
-      this.changedata(res);
-      //console.log(typeof(this.current))
-    },
-    changedata(val) {
-      const category = val.map((item, index) => {
-        item.list = [];
-        item.page = -1;
-        item.loading = false;
-        item.finished = false;
-        return item;
-      });
-      this.hometab = category;
-      this.getdetail(2);
-      //console.log(this.firsttab)
-    },
-    async getdetail(id) {
-      const page = this.hometab[id].page + 1;
-      const res = await getdetails(this.hometab[id]._id, {
-        page,
-        pagesize: 10,
-      });
-      this.hometab[id].list.push(...res);
-      this.hometab[id].page += 1;
-      this.hometab[id].loading = false;
-      if (res.length < 10) {
-        this.hometab[id].finished = true;
-      }
-      this.show = true;
-      //console.log(this.hometab)
-    },
     loadingchange(val) {
       this.loading = val;
+    },
+    changecare(val) {
+      //console.log(val);
+      this.hometab[2].loading = val;
     },
     loadmore() {
       setTimeout(() => {
         this.getdetail(2);
       }, 1000);
-    },
-    changecare(val) {
-      //console.log(val);
-      this.hometab[2].loading = val;
     },
   },
 };

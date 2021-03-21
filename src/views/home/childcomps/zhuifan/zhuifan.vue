@@ -49,7 +49,7 @@ import zhoutui from "./zhoutui.vue";
 import bangdan from "./bangdan.vue";
 import threeitem from "./threeitem.vue";
 import xiangzhui from "./xiangzhui.vue";
-import { getcategory, getdetails } from "network/gethome.js";
+import { usersdata } from "common/const.js";
 export default {
   name: "zhuifan",
   data() {
@@ -73,12 +73,12 @@ export default {
       show: false,
       titles: ["一", "二", "三", "四", "五", "六", "日"],
       current: 0,
+      pagesize: 8,
+      numsize: 7,
     };
   },
 
-  created() {
-    this.gethome();
-  },
+  mixins: [usersdata],
 
   components: {
     vswipe,
@@ -104,39 +104,6 @@ export default {
     },
     loadingchange(val) {
       this.loading = val;
-    },
-    async gethome() {
-      const res = await getcategory();
-      //console.log(res)
-      this.changedata(res);
-      //console.log(typeof(this.current))
-    },
-    changedata(val) {
-      const category = val.map((item, index) => {
-        item.list = [];
-        item.page = -1;
-        item.loading = false;
-        item.finished = false;
-        return item;
-      });
-      this.hometab = category;
-      for (var i = 0; i < 7; i++) {
-        this.getdetail(i, 8);
-      }
-    },
-    async getdetail(id, pagesize) {
-      const page = this.hometab[id].page + 1;
-      const res = await getdetails(this.hometab[id]._id, {
-        page,
-        pagesize: pagesize,
-      });
-      this.hometab[id].list = res;
-      this.hometab[id].page += 1;
-      this.hometab[id].loading = false;
-      if (res.length < 10) {
-        this.hometab[id].finished = true;
-      }
-      this.show = true;
     },
     tabclick(index) {
       //console.log(index)

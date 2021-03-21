@@ -8,7 +8,7 @@
           alt=""
         />
         <img src="~assets/img/touxiang.jpg" alt="" v-else />
-        <div @click="tovis(model.userid)">
+        <div @click="tovis(model.userinfo)">
           <div class="third">{{ model.userinfo.name }}</div>
           <div class="namexia">
             <span>2333粉丝</span>
@@ -204,6 +204,7 @@ export default {
       window.open("https://www.bilibili.com/", "_self");
     },
     tovis(val) {
+      //console.log(val)
       tovis(val);
       this.$router.push("/vistor/" + val.id);
     },

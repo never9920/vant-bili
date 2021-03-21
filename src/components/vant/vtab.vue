@@ -56,9 +56,9 @@ export default {
 
   methods: {
     setact(name) {
+      this.$bus.$emit("setpath", name);
       namestorage(name);
       activestorage(name);
-      this.$bus.$emit("setpath", name);
     },
     getact() {
       let a = getnamestorage();

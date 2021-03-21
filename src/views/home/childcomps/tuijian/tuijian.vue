@@ -37,7 +37,7 @@ import vrefresh from "components/vant/vrefresh.vue";
 import vswipe from "components/vant/vswipe.vue";
 import list from "../list";
 import vlist from "components/vant/vlist.vue";
-import { getcategory, getdetails } from "network/gethome.js";
+import { usersinfo } from "common/const.js";
 export default {
   name: "tuijian",
   data() {
@@ -48,16 +48,11 @@ export default {
         require("@/assets/img/3.png"),
         require("@/assets/img/4.png"),
       ],
-      hometab: {},
-      show: false,
       loading: false,
-      firsttab: {},
     };
   },
 
-  created() {
-    this.gethome();
-  },
+  mixins: [usersinfo],
 
   components: { vicon, vrefresh, vswipe, list, vlist },
 
@@ -73,62 +68,6 @@ export default {
         this.unshiftdetail(1);
       }, 1000);
     },
-    async gethome() {
-      const res = await getcategory();
-      //console.log(res);
-      this.changedata(res);
-      //console.log(typeof(this.current))
-    },
-    changedata(val) {
-      const category = val.map((item, index) => {
-        item.list = [];
-        item.page = -1;
-        item.loading = false;
-        item.finished = false;
-        return item;
-      });
-      this.hometab = category;
-      for (let i in this.hometab) {
-        this.getdetail(i);
-        this.firsttab[i] = {};
-        this.firsttab[i].list = [];
-        this.firsttab[i].swipeshow = true;
-      }
-      //console.log(this.firsttab)
-    },
-    async getdetail(id) {
-      const page = this.hometab[id].page + 1;
-      const res = await getdetails(this.hometab[id]._id, {
-        page,
-        pagesize: 10,
-      });
-      //console.log(res);
-      this.hometab[id].list.push(...res);
-      this.hometab[id].page += 1;
-      this.hometab[id].loading = false;
-      if (res.length < 10) {
-        this.hometab[id].finished = true;
-      }
-      this.show = true;
-      //console.log(this.hometab)
-    },
-    async unshiftdetail(id) {
-      const page = this.hometab[id].page + 1;
-      const  res  = await getdetails(this.hometab[id]._id, {
-        page,
-        pagesize: 10,
-      });
-      this.hometab[id].list.unshift(...this.firsttab[id].list);
-      this.firsttab[id].list = res;
-      this.hometab[id].page += 1;
-      this.hometab[id].loading = false;
-      if (res.length < 10) {
-        this.hometab[id].finished = true;
-      }
-      this.show = true;
-      //console.log(this.hometab[id].list)
-    },
-
     loadingchange(val) {
       this.loading = val;
     },

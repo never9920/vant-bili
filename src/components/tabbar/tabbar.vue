@@ -37,7 +37,7 @@ export default {
 
   methods: {
     getact() {
-      let a= getnamestorage()
+      let a = getnamestorage();
       if (a) {
         this.bardata[0].path = getnamestorage();
       }

@@ -38,12 +38,6 @@ export default {
     this.getitem();
   },
 
-  watch:{
-    $route(){
-      this.getitem()
-    }
-  },
-
   mounted() {
     this.getitem();
     this.$bus.$on("tomine", () => {

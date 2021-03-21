@@ -205,7 +205,7 @@ import sixitem from "./sixitem.vue";
 import threeitem from "../zhuifan/threeitem.vue";
 import yingshitab from "./yingshitab.vue";
 import yingshidan from "./yingshidan.vue";
-import { getcategory, getdetails } from "network/gethome.js";
+import { usersdata } from "common/const.js";
 export default {
   name: "yingshi",
   data() {
@@ -231,12 +231,12 @@ export default {
         { name: "抱抱独播", icon: require("@/assets/img/bao.svg") },
       ],
       current: 0,
+      pagesize: 8,
+      numsize: 10,
     };
   },
 
-  created() {
-    this.gethome();
-  },
+  mixins: [usersdata],
 
   components: {
     vswipe,
@@ -262,39 +262,6 @@ export default {
     },
     loadingchange(val) {
       this.loading = val;
-    },
-    async gethome() {
-      const res = await getcategory();
-      //console.log(res)
-      this.changedata(res);
-      //console.log(typeof(this.current))
-    },
-    changedata(val) {
-      const category = val.map((item, index) => {
-        item.list = [];
-        item.page = -1;
-        item.loading = false;
-        item.finished = false;
-        return item;
-      });
-      this.hometab = category;
-      for (var i = 0; i < 10; i++) {
-        this.getdetail(i, 8);
-      }
-    },
-    async getdetail(id, pagesize) {
-      const page = this.hometab[id].page + 1;
-      const res = await getdetails(this.hometab[id]._id, {
-        page,
-        pagesize: pagesize,
-      });
-      this.hometab[id].list = res;
-      this.hometab[id].page += 1;
-      this.hometab[id].loading = false;
-      if (res.length < 10) {
-        this.hometab[id].finished = true;
-      }
-      this.show = true;
     },
     tabclick(index) {
       this.current = index;
