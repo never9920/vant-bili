@@ -11,10 +11,10 @@
     >
       <div class="left">
         <img :src="item.img" :onerror="changeimg" />
-        <div class="like" v-if="show[i].likeshow" @click="changelike(i)">
+        <div class="like" v-if="show[i].likeshow" @click.stop="changelike(i)">
           <img src="~assets/img/xin.svg" alt="" />
         </div>
-        <div class="like" v-else @click="changelike(i)">
+        <div class="like" v-else @click.stop="changelike(i)">
           <img src="~assets/img/xin1.svg" alt="" />
         </div>
       </div>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { gettokenstorage, getidstorage } from "common/mixin.js";
 export default {
   name: "bangitem",
   data() {
@@ -49,7 +50,16 @@ export default {
 
   methods: {
     changelike(i) {
-      this.show[i].likeshow = !this.show[i].likeshow;
+      let b = getidstorage();
+      let a = gettokenstorage();
+      if (a && b) {
+        this.show[i].likeshow = !this.show[i].likeshow;
+      } else {
+        this.$toast.fail("请先登录");
+        setTimeout(() => {
+          this.$router.push("/login");
+        }, 500);
+      }
     },
     tovideo(id) {
       this.$router.push("/detail/" + id);

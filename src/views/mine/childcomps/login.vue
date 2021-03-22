@@ -90,6 +90,7 @@ export default {
     },
     back() {
       this.$router.push("/mine");
+      this.$bus.$emit("tomine");
       activestorage("/mine");
     },
   },
