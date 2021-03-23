@@ -26,7 +26,7 @@
         </span>
         <span class="time"> 00:30 </span>
       </div>
-      <div class="kankan" v-if="type === 'zhibo'">
+      <div class="kankan" v-if="type === 'zhibo' || type === 'nei'">
         <span class="video">
           {{ hometab.id }}
         </span>

@@ -40,6 +40,8 @@ const userinfo = () =>
     import ('../views/mine/childcomps/userinfo')
 const edit = () =>
     import ('../views/mine/childcomps/edit')
+const game = () =>
+    import ('../views/home/childcomps/zhibo/childcomps/game')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -47,7 +49,7 @@ const routes = [{
         component: home,
         children: [{
                 path: '/zhibo',
-                component: zhibo
+                component: zhibo,
             },
             {
                 path: '/tuijian',
@@ -151,6 +153,13 @@ const routes = [{
     {
         path: '/vistor/:id',
         component: vistor,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/zhibo/game',
+        component: game,
         meta: {
             isshow: true
         }

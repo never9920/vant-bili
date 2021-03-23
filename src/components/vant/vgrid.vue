@@ -6,9 +6,10 @@
         :key="i"
         icon="photo-o"
         text="文字"
+        :to="item.path"
       >
         <img :src="item.img" />
-        <p :class="{danhang:danhang}">{{ item.title }}</p>
+        <p :class="{ danhang: danhang }">{{ item.title }}</p>
       </van-grid-item>
     </van-grid>
   </div>
@@ -28,10 +29,10 @@ export default {
     icons: {
       type: Array,
     },
-    danhang:{
-      type:Boolean,
-      default:false
-    }
+    danhang: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   components: {},
@@ -53,11 +54,11 @@ export default {
   height: 30px;
   width: 30px;
 }
-.van-grid-item__content{
-  padding:10px 8px ;
+.van-grid-item__content {
+  padding: 10px 8px;
 }
-.danhang{
-  display: block!important;
+.danhang {
+  display: block !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -60,7 +60,7 @@ export default {
       ],
       loading: false,
       icons: [
-        { title: "王者荣耀", img: require("@/assets/img/wz.jpg") },
+        { title: "王者荣耀", img: require("@/assets/img/wz.jpg"),path:'/zhibo/game' },
         { title: "全屏直播", img: require("@/assets/img/zb.svg") },
         { title: "英雄联盟", img: require("@/assets/img/yx.jpg") },
         { title: "娱乐影视", img: require("@/assets/img/yule.svg") },
