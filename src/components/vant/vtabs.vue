@@ -24,7 +24,7 @@ export default {
   name: "vtabs",
   data() {
     return {
-      activename: "",
+      activename: null,
     };
   },
 

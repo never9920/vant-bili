@@ -7,7 +7,7 @@
         color="white"
         @click.native="toback"
       ></vicon>
-      <div class="text">手游</div>
+      <div class="text">网游</div>
       <vicon
         name="search"
         size="20px"
@@ -56,17 +56,17 @@ export default {
       pagesize: 10,
       numsize: 9,
       loading: false,
-      current: "1",
+      current: "0",
       tabs: [
         { title: "全部", name: "0" },
-        { title: "王者荣耀", name: "1" },
-        { title: "和平精英", name: "2" },
-        { title: "原神", name: "3" },
-        { title: "第五人格", name: "4" },
-        { title: "LOL手游", name: "5" },
-        { title: "公主连结", name: "6" },
-        { title: "火影忍者", name: "7" },
-        { title: "明日方舟", name: "8" },
+        { title: "绝地求生", name: "1" },
+        { title: "英雄联盟", name: "2" },
+        { title: "DOTA2", name: "3" },
+        { title: "DOTA", name: "4" },
+        { title: "穿越火线", name: "5" },
+        { title: "CS:GO", name: "6" },
+        { title: "DNF", name: "7" },
+        { title: "炉石传说", name: "8" },
       ],
     };
   },
