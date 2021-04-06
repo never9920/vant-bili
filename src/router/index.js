@@ -44,6 +44,8 @@ const game = () =>
     import ('../views/home/childcomps/zhibo/childcomps/game')
 const quanping = () =>
     import ('../views/home/childcomps/zhibo/childcomps/quanping')
+const yule = () =>
+    import ('../views/home/childcomps/zhibo/childcomps/yule')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -169,6 +171,13 @@ const routes = [{
     {
         path: '/zhibo/quanping',
         component: quanping,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/zhibo/yule',
+        component: yule,
         meta: {
             isshow: true
         }

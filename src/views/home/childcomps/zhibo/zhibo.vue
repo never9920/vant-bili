@@ -74,7 +74,11 @@ export default {
           img: require("@/assets/img/yx.jpg"),
           path: "/zhibo/quanping",
         },
-        { title: "娱乐影视", img: require("@/assets/img/yule.svg") },
+        {
+          title: "娱乐影视",
+          img: require("@/assets/img/yule.svg"),
+          path: "/zhibo/yule",
+        },
         { title: "单机游戏", img: require("@/assets/img/youxi.svg") },
         { title: "电台直播", img: require("@/assets/img/diantai.svg") },
         { title: "虚拟直播", img: require("@/assets/img/xn.svg") },

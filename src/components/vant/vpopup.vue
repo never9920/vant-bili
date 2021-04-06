@@ -3,8 +3,8 @@
     <van-popup
       v-model="show"
       position="bottom"
-      :style="{ height: '100%' }"
-      :overlay="false"
+      :style="{ height: height }"
+      :overlay="over"
     >
       <slot></slot>
     </van-popup>
@@ -20,7 +20,19 @@ export default {
     };
   },
 
-  props: ["morestatus"],
+  props: {
+    morestatus: {
+      type: Boolean,
+    },
+    height: {
+      type: String,
+      default: "100%",
+    },
+    over: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   watch: {
     morestatus(val) {
