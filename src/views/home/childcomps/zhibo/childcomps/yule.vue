@@ -16,55 +16,67 @@
         class="right"
       ></vicon>
     </div>
-    <vtabs
-      :tabs="tabs"
-      :current="current"
-      @change="change"
-      class="tabs"
-      :btn="true"
-    >
+    <div class="tabbar">
+      <tabcon :titles="tabs" @tabclick="tabclick" :current="current"></tabcon>
       <div @click="openpop" class="fenlei">
         <img src="@/assets/img/heng.svg" alt="" />
       </div>
-      <vrefresh
-        @refresh="refresh"
-        :loading="loading"
-        @loadingchange="loadingchange"
+    </div>
+    <vrefresh
+      @refresh="refresh"
+      :loading="loading"
+      @loadingchange="loadingchange"
+    >
+      <vlist
+        @load="loadmore"
+        :finished="hometab[current].finished"
+        :care="hometab[current].loading"
+        v-if="show"
+        @changecare="changecare"
       >
-        <vlist
-          @load="loadmore"
-          :finished="hometab[current].finished"
-          :care="hometab[current].loading"
+        <list
           v-if="show"
-          @changecare="changecare"
-        >
-          <list
-            v-if="show"
-            :hometab="hometab[current].list"
-            :danhang="true"
-            gaodu="140px"
-            type="zhibo"
-          ></list>
-        </vlist>
-      </vrefresh>
-    </vtabs>
+          :hometab="hometab[current].list"
+          :danhang="true"
+          gaodu="140px"
+          type="zhibo"
+        ></list>
+      </vlist>
+    </vrefresh>
     <vpopup
       :morestatus="morestatus"
       @statusch="statusch"
       height="80%"
       :over="true"
-    ></vpopup>
+    >
+      <div class="shang">
+        <div>全部</div>
+        <div>娱乐</div>
+        <div @click="closepop">×</div>
+      </div>
+      <div class="xia">
+        <div
+          v-for="(item, i) in tabs"
+          :key="i"
+          @click="totabs(i)"
+          class="items"
+        >
+          <img :src="item.img" alt="" />
+          <div>{{ item.title }}</div>
+        </div>
+      </div>
+    </vpopup>
   </div>
 </template>
 
 <script>
 import vicon from "components/vant/vicon.vue";
-import vtabs from "components/vant/vtabs.vue";
 import { usersdata } from "common/const.js";
 import list from "../../list.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vlist from "components/vant/vlist.vue";
 import vpopup from "components/vant/vpopup.vue";
+import tabcon from "./tabcon.vue";
 export default {
   name: "game",
   data() {
@@ -72,14 +84,14 @@ export default {
       pagesize: 10,
       numsize: 6,
       loading: false,
-      current: "1",
+      current: 2,
       tabs: [
-        { title: "全部", name: "0" },
-        { title: "视屏唱见", name: "1" },
-        { title: "视屏聊天", name: "2" },
-        { title: "舞见", name: "3" },
-        { title: "户外", name: "4" },
-        { title: "日常", name: "5" },
+        { title: "全部", img: require("@/assets/img/fl.svg") },
+        { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
+        { title: "视屏聊天", img: require("@/assets/img/zb.svg") },
+        { title: "舞见", img: require("@/assets/img/yule.svg") },
+        { title: "户外", img: require("@/assets/img/cun.svg") },
+        { title: "日常", img: require("@/assets/img/xn.svg") },
       ],
       morestatus: false,
     };
@@ -87,7 +99,7 @@ export default {
 
   mixins: [usersdata],
 
-  components: { vicon, vtabs, list, vrefresh, vlist, vpopup },
+  components: { vicon, list, vrefresh, vlist, vpopup, tabcon },
 
   computed: {},
 
@@ -117,15 +129,22 @@ export default {
         this.getdetail(this.current);
       }, 1000);
     },
-    change(val) {
-      this.current = val;
-      //console.log(val)
-    },
     openpop() {
       this.morestatus = true;
     },
+    closepop() {
+      this.morestatus = false;
+    },
     statusch(val) {
       this.morestatus = val;
+    },
+    totabs(i) {
+      this.current = i;
+      this.morestatus = false;
+      scrollTo(0, 0);
+    },
+    tabclick(i) {
+      this.current = i;
     },
   },
 };
@@ -154,15 +173,49 @@ export default {
   right: 0;
   background-color: #fff;
   z-index: 1;
-  height: 44px;
+  height: 40px;
   padding: 0;
   margin: 0;
 }
 .fenlei img {
-  height: 44px;
+  height: 40px;
   width: 30px;
   box-shadow: -2px 0 1px #ddd;
   padding: 0;
   margin: 0;
+}
+.shang {
+  display: flex;
+  height: 44px;
+  padding: 0 10px;
+  box-shadow: 0 2px 2px #f4f4f4;
+  align-items: center;
+  justify-content: space-between;
+  color: #fb7299;
+}
+.xia {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.items {
+  width: 100px;
+  text-align: center;
+  margin: 10px 5px;
+  font-size: 14px;
+  color: #666;
+}
+.items img {
+  height: 40px;
+  width: 40px;
+}
+.tabbar {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  box-shadow: 0 1px 1px #ddd;
+  margin-bottom: 5px;
 }
 </style>

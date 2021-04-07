@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="guding">
+  <div id="detail">
       <div class="top" :class="{ bgcch: bgcch }">
         <vicon
           name="arrow-left"
@@ -11,8 +10,7 @@
         ></vicon>
         <img src="~assets/img/whitedian.svg" alt="" />
       </div>
-      <detailinfo></detailinfo>
-    </div>
+    <detailinfo class="detailinfo"></detailinfo>
   </div>
 </template>
 
@@ -55,7 +53,7 @@ export default {
 };
 </script>
 <style scoped>
-.guding {
+#detail {
   position: relative;
 }
 .top {
@@ -63,7 +61,7 @@ export default {
   justify-content: space-between;
   width: 100%;
   z-index: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
 }
 .top img {
@@ -75,8 +73,10 @@ export default {
   padding: 10px;
 }
 .bgcch {
-  position: sticky;
   background-color: #fb7299;
+}
+.detailinfo {
+  position: absolute;
   top: 0;
 }
 </style>

@@ -16,39 +16,67 @@
         class="right"
       ></vicon>
     </div>
-    <vtabs :tabs="tabs" :current="current" @change="change">
-      <vrefresh
-        @refresh="refresh"
-        :loading="loading"
-        @loadingchange="loadingchange"
+    <div class="tabbar">
+      <tabcon :titles="tabs" @tabclick="tabclick" :current="current"></tabcon>
+      <div @click="openpop" class="fenlei">
+        <img src="@/assets/img/heng.svg" alt="" />
+      </div>
+    </div>
+    <vrefresh
+      @refresh="refresh"
+      :loading="loading"
+      @loadingchange="loadingchange"
+    >
+      <vlist
+        @load="loadmore"
+        :finished="hometab[current].finished"
+        :care="hometab[current].loading"
+        v-if="show"
+        @changecare="changecare"
       >
-        <vlist
-          @load="loadmore"
-          :finished="hometab[current].finished"
-          :care="hometab[current].loading"
+        <list
           v-if="show"
-          @changecare="changecare"
+          :hometab="hometab[current].list"
+          :danhang="true"
+          gaodu="120px"
+          type="nei"
+        ></list>
+      </vlist>
+    </vrefresh>
+    <vpopup
+      :morestatus="morestatus"
+      @statusch="statusch"
+      height="80%"
+      :over="true"
+    >
+      <div class="shang">
+        <div>全部</div>
+        <div>网游</div>
+        <div @click="closepop">×</div>
+      </div>
+      <div class="xia">
+        <div
+          v-for="(item, i) in tabs"
+          :key="i"
+          @click="totabs(i)"
+          class="items"
         >
-          <list
-            v-if="show"
-            :hometab="hometab[current].list"
-            :danhang="true"
-            gaodu="120px"
-            type="nei"
-          ></list>
-        </vlist>
-      </vrefresh>
-    </vtabs>
+          <img :src="item.img" alt="" />
+          <div>{{ item.title }}</div>
+        </div>
+      </div>
+    </vpopup>
   </div>
 </template>
 
 <script>
 import vicon from "components/vant/vicon.vue";
-import vtabs from "components/vant/vtabs.vue";
 import { usersdata } from "common/const.js";
 import list from "../../list.vue";
 import vrefresh from "components/vant/vrefresh.vue";
 import vlist from "components/vant/vlist.vue";
+import vpopup from "components/vant/vpopup.vue";
+import tabcon from "./tabcon.vue";
 export default {
   name: "game",
   data() {
@@ -56,24 +84,25 @@ export default {
       pagesize: 10,
       numsize: 9,
       loading: false,
-      current: "0",
+      current: 2,
       tabs: [
-        { title: "全部", name: "0" },
-        { title: "绝地求生", name: "1" },
-        { title: "英雄联盟", name: "2" },
-        { title: "DOTA2", name: "3" },
-        { title: "DOTA", name: "4" },
-        { title: "穿越火线", name: "5" },
-        { title: "CS:GO", name: "6" },
-        { title: "DNF", name: "7" },
-        { title: "炉石传说", name: "8" },
+        { title: "全部", img: require("@/assets/img/fl.svg") },
+        { title: "绝地求生", img: require("@/assets/img/fupin.svg") },
+        { title: "英雄联盟", img: require("@/assets/img/yx.jpg") },
+        { title: "DOTA2", img: require("@/assets/img/xiaokang.svg") },
+        { title: "DOTA", img: require("@/assets/img/zhongguo.svg") },
+        { title: "穿越火线", img: require("@/assets/img/feiyi.svg") },
+        { title: "CS:GO", img: require("@/assets/img/qiyao.svg") },
+        { title: "DNF", img: require("@/assets/img/yiliao.svg") },
+        { title: "炉石传说", img: require("@/assets/img/bao.svg") },
       ],
+      morestatus: false,
     };
   },
 
   mixins: [usersdata],
 
-  components: { vicon, vtabs, list, vrefresh, vlist },
+  components: { vicon, list, vrefresh, vlist, vpopup, tabcon },
 
   computed: {},
 
@@ -103,9 +132,22 @@ export default {
         this.getdetail(this.current);
       }, 1000);
     },
-    change(val) {
-      this.current = val;
-      //console.log(val)
+    openpop() {
+      this.morestatus = true;
+    },
+    closepop() {
+      this.morestatus = false;
+    },
+    statusch(val) {
+      this.morestatus = val;
+    },
+    totabs(i) {
+      this.current = i;
+      this.morestatus = false;
+      scrollTo(0, 0);
+    },
+    tabclick(i) {
+      this.current = i;
     },
   },
 };
@@ -124,5 +166,59 @@ export default {
 }
 .right {
   margin-left: auto;
+}
+.tabs {
+  position: relative;
+}
+.fenlei {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+}
+.fenlei img {
+  height: 40px;
+  width: 30px;
+  box-shadow: -2px 0 1px #ddd;
+  padding: 0;
+  margin: 0;
+}
+.shang {
+  display: flex;
+  height: 44px;
+  padding: 0 10px;
+  box-shadow: 0 2px 2px #f4f4f4;
+  align-items: center;
+  justify-content: space-between;
+  color: #fb7299;
+}
+.xia {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.items {
+  width: 100px;
+  text-align: center;
+  margin: 10px 5px;
+  font-size: 14px;
+  color: #666;
+}
+.items img {
+  height: 40px;
+  width: 40px;
+}
+.tabbar {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  box-shadow: 0 1px 1px #ddd;
+  margin-bottom: 5px;
 }
 </style>
