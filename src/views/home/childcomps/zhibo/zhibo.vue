@@ -79,7 +79,11 @@ export default {
           img: require("@/assets/img/yule.svg"),
           path: "/zhibo/yule",
         },
-        { title: "单机游戏", img: require("@/assets/img/youxi.svg") },
+        {
+          title: "单机游戏",
+          img: require("@/assets/img/youxi.svg"),
+          path: "/zhibo/danji",
+        },
         { title: "电台直播", img: require("@/assets/img/diantai.svg") },
         { title: "虚拟直播", img: require("@/assets/img/xn.svg") },
         { title: "英雄联盟手游", img: require("@/assets/img/yxsy.jpg") },

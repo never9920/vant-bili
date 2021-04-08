@@ -46,6 +46,8 @@ const quanping = () =>
     import ('../views/home/childcomps/zhibo/childcomps/quanping')
 const yule = () =>
     import ('../views/home/childcomps/zhibo/childcomps/yule')
+const danji = () =>
+    import ('../views/home/childcomps/zhibo/childcomps/danji')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -178,6 +180,13 @@ const routes = [{
     {
         path: '/zhibo/yule',
         component: yule,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/zhibo/danji',
+        component: danji,
         meta: {
             isshow: true
         }
