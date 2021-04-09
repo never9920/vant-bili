@@ -121,7 +121,7 @@ export default {
   margin: 5px 0;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 .shang {
   position: relative;

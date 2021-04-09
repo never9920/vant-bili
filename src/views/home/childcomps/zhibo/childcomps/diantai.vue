@@ -7,7 +7,7 @@
         color="white"
         @click.native="toback"
       ></vicon>
-      <div class="text">单机游戏</div>
+      <div class="text">电台直播</div>
       <vicon
         name="search"
         size="20px"
@@ -51,7 +51,7 @@
     >
       <div class="shang">
         <div>全部</div>
-        <div>单机游戏</div>
+        <div>电台直播</div>
         <div @click="closepop">×</div>
       </div>
       <div class="xia">
@@ -78,23 +78,19 @@ import vlist from "components/vant/vlist.vue";
 import vpopup from "components/vant/vpopup.vue";
 import tabcon from "./tabcon.vue";
 export default {
-  name: "danji",
+  name: "diantai",
   data() {
     return {
       pagesize: 10,
-      numsize: 10,
+      numsize: 5,
       loading: false,
-      current: 2,
+      current: 1,
       tabs: [
-        { title: "全部", img: require("@/assets/img/fl.svg") },
-        { title: "主机游戏", img: require("@/assets/img/zb.svg") },
-        { title: "我的世界", img: require("@/assets/img/cj.svg") },
-        { title: "独立游戏", img: require("@/assets/img/shanghai.svg") },
-        { title: "恐怖游戏", img: require("@/assets/img/cun.svg") },
-        { title: "怀旧游戏", img: require("@/assets/img/xn.svg") },
-        { title: "饥荒", img: require("@/assets/img/yule.svg") },
-        { title: "植物大战僵尸", img: require("@/assets/img/yiliao.svg") },
-        { title: "格斗游戏", img: require("@/assets/img/subao.svg") },
+        { title: "全部电台", img: require("@/assets/img/fl.svg") },
+        { title: "放松电台", img: require("@/assets/img/diantai.svg") },
+        { title: "唱见电台", img: require("@/assets/img/fen.svg") },
+        { title: "聊天电台", img: require("@/assets/img/add.svg") },
+        { title: "配音", img: require("@/assets/img/bao.svg") }
       ],
       morestatus: false,
     };
@@ -202,6 +198,13 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+.xia:after{
+    display: inline-block;
+    content: "";
+    height: 0;
+    width: 100px;
+    margin: 10px;
 }
 .items {
   width: 100px;

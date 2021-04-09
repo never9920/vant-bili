@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="zhibo">
     <vrefresh
       @refresh="refresh"
       :loading="loading"
@@ -84,7 +84,11 @@ export default {
           img: require("@/assets/img/youxi.svg"),
           path: "/zhibo/danji",
         },
-        { title: "电台直播", img: require("@/assets/img/diantai.svg") },
+        {
+          title: "电台直播",
+          img: require("@/assets/img/diantai.svg"),
+          path: "/zhibo/diantai",
+        },
         { title: "虚拟直播", img: require("@/assets/img/xn.svg") },
         { title: "英雄联盟手游", img: require("@/assets/img/yxsy.jpg") },
         { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
@@ -125,6 +129,9 @@ export default {
 };
 </script>
 <style scoped>
+#zhibo{
+  background-color: #f6f6f6;
+}
 .top {
   margin: 8px 10px 0 8px;
 }

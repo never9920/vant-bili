@@ -69,7 +69,7 @@ export default {
 </script>
 <style scoped>
 .items {
-  background-color: rgb(233, 233, 233);
+  background-color: #f9f9f9;
   margin-right: 10px;
   border-radius: 5px;
 }

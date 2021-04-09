@@ -95,7 +95,6 @@ export default {
 <style scoped>
 .listitem {
   position: relative;
-  background-color: #f9f9f9;
 }
 .detailimg {
   width: 100%;

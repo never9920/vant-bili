@@ -48,6 +48,8 @@ const yule = () =>
     import ('../views/home/childcomps/zhibo/childcomps/yule')
 const danji = () =>
     import ('../views/home/childcomps/zhibo/childcomps/danji')
+const diantai = () =>
+    import ('../views/home/childcomps/zhibo/childcomps/diantai')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -187,6 +189,13 @@ const routes = [{
     {
         path: '/zhibo/danji',
         component: danji,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/zhibo/diantai',
+        component: diantai,
         meta: {
             isshow: true
         }

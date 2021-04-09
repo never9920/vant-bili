@@ -119,7 +119,7 @@ export default {
   width: 100px;
   overflow: hidden;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 .left {
   position: relative;

@@ -60,7 +60,7 @@ export default {
 .detail {
   width: 48.5%;
   font-size: 10px;
-  background-color: #f9f9f9;
+  background-color: #fff;
   border-radius: 5px;
   margin: 3px 0;
   box-shadow: 0px 2px 2px #f6f6f6;

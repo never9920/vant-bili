@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="tuijian">
     <vrefresh
       @refresh="refresh"
       :loading="loading"
@@ -84,6 +84,9 @@ export default {
 };
 </script>
 <style scoped>
+#tuijian {
+  background-color: #f6f6f6;
+}
 .top {
   margin: 10px 8px 0 8px;
 }
