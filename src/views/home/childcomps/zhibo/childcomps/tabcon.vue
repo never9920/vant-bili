@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class="tabcontrol" ref="conrol">
+  <div class="tabcontrol" ref="conrol" :class="{ btns: btns }">
     <div
       v-for="(item, index) in titles"
       :class="{ active: index === current }"
@@ -26,16 +26,20 @@ export default {
     current: {
       type: Number,
     },
+    btns: {
+      type: Boolean,
+      default: true,
+    },
   },
 
-  watch:{
-    current(index){
-      if(index>4){
-        this.$refs.conrol.scrollTo({left:70*index,behavior:'smooth'})
-      }else{
-        this.$refs.conrol.scrollTo({left:0,behavior:'smooth'})
+  watch: {
+    current(index) {
+      if (index > 4) {
+        this.$refs.conrol.scrollTo({ left: 70 * index, behavior: "smooth" });
+      } else {
+        this.$refs.conrol.scrollTo({ left: 0, behavior: "smooth" });
       }
-    }
+    },
   },
 
   data() {
@@ -49,10 +53,10 @@ export default {
   methods: {
     itemclick(index) {
       this.$emit("tabclick", index);
-      if(index>4){
-        this.$refs.conrol.scrollTo({left:70*index,behavior:'smooth'})
-      }else{
-        this.$refs.conrol.scrollTo({left:0,behavior:'smooth'})
+      if (index > 4) {
+        this.$refs.conrol.scrollTo({ left: 70 * index, behavior: "smooth" });
+      } else {
+        this.$refs.conrol.scrollTo({ left: 0, behavior: "smooth" });
       }
     },
   },
@@ -66,10 +70,12 @@ export default {
   height: 40px;
   line-height: 40px;
   background-color: #fff;
-  width: calc(100% - 32px);
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+}
+.btns {
+  width: calc(100% - 32px);
 }
 .tabcontrol::-webkit-scrollbar {
   display: none; /* Chrome Safari */

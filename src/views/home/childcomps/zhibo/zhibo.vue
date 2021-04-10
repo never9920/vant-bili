@@ -89,7 +89,11 @@ export default {
           img: require("@/assets/img/diantai.svg"),
           path: "/zhibo/diantai",
         },
-        { title: "虚拟直播", img: require("@/assets/img/xn.svg") },
+        {
+          title: "虚拟直播",
+          img: require("@/assets/img/xn.svg"),
+          path: "/zhibo/xuni",
+        },
         { title: "英雄联盟手游", img: require("@/assets/img/yxsy.jpg") },
         { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
         { title: "全部标签", img: require("@/assets/img/fl.svg") },
@@ -129,7 +133,7 @@ export default {
 };
 </script>
 <style scoped>
-#zhibo{
+#zhibo {
   background-color: #f6f6f6;
 }
 .top {
