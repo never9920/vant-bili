@@ -52,6 +52,8 @@ const diantai = () =>
     import ('../views/home/childcomps/zhibo/childcomps/diantai')
 const xuni = () =>
     import ('../views/home/childcomps/zhibo/childcomps/xuni')
+const quanbu = () =>
+    import ('../views/home/childcomps/zhibo/childcomps/quanbu')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -205,6 +207,13 @@ const routes = [{
     {
         path: '/zhibo/xuni',
         component: xuni,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/zhibo/quanbu',
+        component: quanbu,
         meta: {
             isshow: true
         }

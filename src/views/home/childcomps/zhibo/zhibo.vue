@@ -94,9 +94,21 @@ export default {
           img: require("@/assets/img/xn.svg"),
           path: "/zhibo/xuni",
         },
-        { title: "英雄联盟手游", img: require("@/assets/img/yxsy.jpg") },
-        { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
-        { title: "全部标签", img: require("@/assets/img/fl.svg") },
+        {
+          title: "英雄联盟手游",
+          img: require("@/assets/img/yxsy.jpg"),
+          path: "/zhibo/game",
+        },
+        {
+          title: "视屏唱见",
+          img: require("@/assets/img/cj.svg"),
+          path: "/zhibo/yule",
+        },
+        {
+          title: "全部标签",
+          img: require("@/assets/img/fl.svg"),
+          path: "/zhibo/quanbu",
+        },
       ],
     };
   },
