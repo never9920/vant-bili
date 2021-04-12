@@ -44,6 +44,7 @@ export default {
 
   created() {
     this.getact();
+    this.routerpath();
   },
 
   mounted() {
@@ -65,6 +66,9 @@ export default {
       if (a) {
         this.activename = getnamestorage();
       }
+    },
+    routerpath() {
+      this.activename = this.$route.path;
     },
   },
 };

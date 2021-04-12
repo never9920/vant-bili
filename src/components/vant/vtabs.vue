@@ -3,7 +3,7 @@
     <van-tabs
       v-model="activename"
       title-active-color="#fb7a9f"
-      color="#fff"
+      color="#fb7a9f"
       swipeable
       sticky
     >

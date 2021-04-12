@@ -32,16 +32,6 @@ export default {
     },
   },
 
-  watch: {
-    current(index) {
-      if (index > 4) {
-        this.$refs.conrol.scrollTo({ left: 70 * index, behavior: "smooth" });
-      } else {
-        this.$refs.conrol.scrollTo({ left: 0, behavior: "smooth" });
-      }
-    },
-  },
-
   data() {
     return {};
   },
@@ -53,8 +43,8 @@ export default {
   methods: {
     itemclick(index) {
       this.$emit("tabclick", index);
-      if (index > 4) {
-        this.$refs.conrol.scrollTo({ left: 70 * index, behavior: "smooth" });
+      if (index > 3) {
+        this.$refs.conrol.scrollTo({ left: 45 * index, behavior: "smooth" });
       } else {
         this.$refs.conrol.scrollTo({ left: 0, behavior: "smooth" });
       }
@@ -82,11 +72,15 @@ export default {
 }
 .controlitem {
   flex: 1;
+  margin: 0 5px;
 }
 .controlitem span {
   padding: 5px;
 }
 .active {
   color: #fb7299;
+}
+.active span {
+  border-bottom: solid 1px #fb7299;
 }
 </style>
