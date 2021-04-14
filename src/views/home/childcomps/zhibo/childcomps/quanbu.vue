@@ -12,7 +12,12 @@
     </div>
     <vtabs :tabs="tabs" :current="current" @change="change" class="vtab">
       <div class="xia">
-        <div v-for="(item, i) in xiabiao[num]" :key="i" class="items">
+        <div
+          v-for="(item, i) in xiabiao[num]"
+          :key="i"
+          class="items"
+          @click="todetail"
+        >
           <img :src="item.img" alt="" />
           <div>{{ item.title }}</div>
         </div>
@@ -30,8 +35,8 @@ export default {
     return {
       tabs: [
         { title: "推荐", name: "tuijian" },
-        { title: "网游", name: "wangyou" },
-        { title: "手游", name: "shouyou" },
+        { title: "网游", name: "quanping" },
+        { title: "手游", name: "game" },
         { title: "单机游戏", name: "danji" },
         { title: "娱乐", name: "yule" },
         { title: "电台", name: "diantai" },
@@ -96,7 +101,14 @@ export default {
           { title: "虚拟主播", img: require("@/assets/img/diantai.svg") },
           { title: "赛博朋克2077虚拟区", img: require("@/assets/img/fen.svg") },
         ],
-        [{ title: "全部生活", img: require("@/assets/img/fl.svg") }],
+        [
+          { title: "全部生活", img: require("@/assets/img/fl.svg") },
+          { title: "搞笑", img: require("@/assets/img/time.svg") },
+          { title: "手工", img: require("@/assets/img/zongyi.svg") },
+          { title: "绘画", img: require("@/assets/img/qiuzhu.svg") },
+          { title: "运动", img: require("@/assets/img/pai.svg") },
+          { title: "汽车", img: require("@/assets/img/jiang.svg") },
+        ],
         [{ title: "全部学习", img: require("@/assets/img/fl.svg") }],
       ],
     };
@@ -116,6 +128,11 @@ export default {
         if (this.tabs[i].name === val) {
           this.num = i;
         }
+      }
+    },
+    todetail() {
+      if (this.current !== "tuijian") {
+        this.$router.push("/zhibo/" + this.current);
       }
     },
   },
