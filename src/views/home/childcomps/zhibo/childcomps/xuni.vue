@@ -17,7 +17,12 @@
       ></vicon>
     </div>
     <div class="tabbar">
-      <tabcon :titles="tabs" @tabclick="tabclick" :current="current" :btns="false"></tabcon>
+      <tabcon
+        :titles="tabs"
+        @tabclick="tabclick"
+        :current="current"
+        :btns="false"
+      ></tabcon>
     </div>
     <vrefresh
       @refresh="refresh"
@@ -51,7 +56,7 @@ import vrefresh from "components/vant/vrefresh.vue";
 import vlist from "components/vant/vlist.vue";
 import tabcon from "./tabcon.vue";
 export default {
-  name: "diantai",
+  name: "xuni",
   data() {
     return {
       pagesize: 10,
@@ -61,7 +66,7 @@ export default {
       tabs: [
         { title: "全部", img: require("@/assets/img/fl.svg") },
         { title: "虚拟主播", img: require("@/assets/img/diantai.svg") },
-        { title: "赛博朋克2077虚拟区", img: require("@/assets/img/fen.svg") } 
+        { title: "赛博朋克2077虚拟区", img: require("@/assets/img/fen.svg") },
       ],
     };
   },

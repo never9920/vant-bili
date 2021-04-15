@@ -54,9 +54,10 @@ const xuni = () =>
     import ('../views/home/childcomps/zhibo/childcomps/xuni')
 const quanbu = () =>
     import ('../views/home/childcomps/zhibo/childcomps/quanbu')
-    
 const shenghuo = () =>
-import ('../views/home/childcomps/zhibo/childcomps/shenghuo')
+    import ('../views/home/childcomps/zhibo/childcomps/shenghuo')
+const xuexi = () =>
+    import ('../views/home/childcomps/zhibo/childcomps/xuexi')
 Vue.use(VueRouter)
 
 const routes = [{
@@ -224,6 +225,13 @@ const routes = [{
     {
         path: '/zhibo/shenghuo',
         component: shenghuo,
+        meta: {
+            isshow: true
+        }
+    },
+    {
+        path: '/zhibo/xuexi',
+        component: xuexi,
         meta: {
             isshow: true
         }

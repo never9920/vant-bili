@@ -87,11 +87,10 @@ export default {
       current: 2,
       tabs: [
         { title: "全部", img: require("@/assets/img/fl.svg") },
-        { title: "搞笑", img: require("@/assets/img/time.svg") },
-        { title: "手工", img: require("@/assets/img/zongyi.svg") },
-        { title: "绘画", img: require("@/assets/img/qiuzhu.svg") },
-        { title: "运动", img: require("@/assets/img/pai.svg") },
-        { title: "汽车", img: require("@/assets/img/jiang.svg") },
+        { title: "美食", img: require("@/assets/img/time.svg") },
+        { title: "萌宠", img: require("@/assets/img/zongyi.svg") },
+        { title: "时尚", img: require("@/assets/img/qiuzhu.svg") },
+        { title: "影音馆", img: require("@/assets/img/pai.svg") },
       ],
       morestatus: false,
     };

@@ -7,7 +7,7 @@
         color="white"
         @click.native="toback"
       ></vicon>
-      <div class="text">娱乐</div>
+      <div class="text">学习</div>
       <vicon
         name="search"
         size="20px"
@@ -51,7 +51,7 @@
     >
       <div class="shang">
         <div>全部</div>
-        <div>娱乐</div>
+        <div>学习</div>
         <div @click="closepop">×</div>
       </div>
       <div class="xia">
@@ -78,7 +78,7 @@ import vlist from "components/vant/vlist.vue";
 import vpopup from "components/vant/vpopup.vue";
 import tabcon from "./tabcon.vue";
 export default {
-  name: "yule",
+  name: "xuexi",
   data() {
     return {
       pagesize: 10,
@@ -87,11 +87,11 @@ export default {
       current: 2,
       tabs: [
         { title: "全部", img: require("@/assets/img/fl.svg") },
-        { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
-        { title: "视屏聊天", img: require("@/assets/img/zb.svg") },
-        { title: "舞见", img: require("@/assets/img/yule.svg") },
-        { title: "户外", img: require("@/assets/img/cun.svg") },
-        { title: "日常", img: require("@/assets/img/xn.svg") },
+        { title: "人文社科", img: require("@/assets/img/shanghai.svg") },
+        { title: "科技科普", img: require("@/assets/img/zongyi.svg") },
+        { title: "职业技能", img: require("@/assets/img/pai.svg") },
+        { title: "陪伴学习", img: require("@/assets/img/diantai.svg") },
+        { title: "绘画", img: require("@/assets/img/youxi.svg") },
       ],
       morestatus: false,
     };
@@ -217,5 +217,12 @@ export default {
   top: 0;
   box-shadow: 0 1px 1px #ddd;
   margin-bottom: 5px;
+}
+.xia:after {
+  display: inline-block;
+  content: "";
+  height: 0;
+  width: 100px;
+  margin: 10px;
 }
 </style>

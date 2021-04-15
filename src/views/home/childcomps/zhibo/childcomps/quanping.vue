@@ -78,7 +78,7 @@ import vlist from "components/vant/vlist.vue";
 import vpopup from "components/vant/vpopup.vue";
 import tabcon from "./tabcon.vue";
 export default {
-  name: "game",
+  name: "quanping",
   data() {
     return {
       pagesize: 10,
