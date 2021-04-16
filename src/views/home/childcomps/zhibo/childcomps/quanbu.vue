@@ -16,7 +16,7 @@
           v-for="(item, i) in xiabiao[num]"
           :key="i"
           class="items"
-          @click="todetail"
+          @click="todetail(i)"
         >
           <img :src="item.img" alt="" />
           <div>{{ item.title }}</div>
@@ -47,7 +47,28 @@ export default {
       current: "tuijian",
       num: 0,
       xiabiao: [
-        [{ title: "全部推荐", img: require("@/assets/img/fl.svg") }],
+        [
+          { title: "英雄联盟", img: require("@/assets/img/yx.jpg") },
+          { title: "DOTA2", img: require("@/assets/img/xiaokang.svg") },
+          { title: "DOTA", img: require("@/assets/img/zhongguo.svg") },
+          { title: "穿越火线", img: require("@/assets/img/feiyi.svg") },
+          { title: "王者荣耀", img: require("@/assets/img/wz.jpg") },
+          { title: "和平精英", img: require("@/assets/img/zb.svg") },
+          { title: "原神", img: require("@/assets/img/yx.jpg") },
+          { title: "怀旧游戏", img: require("@/assets/img/xn.svg") },
+          { title: "饥荒", img: require("@/assets/img/yule.svg") },
+          { title: "植物大战僵尸", img: require("@/assets/img/yiliao.svg") },
+          { title: "视屏唱见", img: require("@/assets/img/cj.svg") },
+          { title: "视屏聊天", img: require("@/assets/img/zb.svg") },
+          { title: "舞见", img: require("@/assets/img/yule.svg") },
+          { title: "放松电台", img: require("@/assets/img/diantai.svg") },
+          { title: "唱见电台", img: require("@/assets/img/fen.svg") },
+          { title: "虚拟主播", img: require("@/assets/img/diantai.svg") },
+          { title: "美食", img: require("@/assets/img/time.svg") },
+          { title: "萌宠", img: require("@/assets/img/zongyi.svg") },
+          { title: "人文社科", img: require("@/assets/img/shanghai.svg") },
+          { title: "科技科普", img: require("@/assets/img/zongyi.svg") },
+        ],
         [
           { title: "全部网游", img: require("@/assets/img/fl.svg") },
           { title: "绝地求生", img: require("@/assets/img/fupin.svg") },
@@ -136,9 +157,27 @@ export default {
         }
       }
     },
-    todetail() {
+    todetail(i) {
       if (this.current !== "tuijian") {
         this.$router.push("/zhibo/" + this.current);
+      } else {
+        if (i < 4) {
+          this.$router.push("/zhibo/quanping");
+        } else if (4 <= i && i < 7) {
+          this.$router.push("/zhibo/game");
+        } else if (7 <= i && i < 10) {
+          this.$router.push("/zhibo/danji");
+        } else if (10 <= i && i < 13) {
+          this.$router.push("/zhibo/yule");
+        } else if (13 <= i && i < 15) {
+          this.$router.push("/zhibo/diantai");
+        } else if (15 <= i && i < 16) {
+          this.$router.push("/zhibo/xuni");
+        } else if (16 <= i && i < 18) {
+          this.$router.push("/zhibo/shenghuo");
+        } else {
+          this.$router.push("/zhibo/xuexi");
+        }
       }
     },
   },
