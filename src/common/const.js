@@ -107,12 +107,13 @@ export const usersdata = {
         async getdetail(id) {
             const page = this.hometab[id].page + 1;
             const res = await getdetails(this.hometab[id]._id, { page, pagesize: this.pagesize });
+            if (res.length < this.pagesize) {
+                this.hometab[id].finished = true;
+                return
+            }
             this.hometab[id].list.push(...res);
             this.hometab[id].page += 1;
             this.hometab[id].loading = false;
-            if (res.length < this.pagesize) {
-                this.hometab[id].finished = true;
-            }
             this.show = true;
             //console.log(this.hometab)
         },

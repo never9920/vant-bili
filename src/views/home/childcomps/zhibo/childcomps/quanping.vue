@@ -17,7 +17,12 @@
       ></vicon>
     </div>
     <div class="tabbar">
-      <tabcon :titles="tabs" @tabclick="tabclick" :current="current"></tabcon>
+      <tabcon
+        :titles="tabs"
+        @tabclick="tabclick"
+        :current="current"
+        ref="tab"
+      ></tabcon>
       <div @click="openpop" class="fenlei">
         <img src="@/assets/img/heng.svg" alt="" />
       </div>
@@ -145,6 +150,14 @@ export default {
       this.current = i;
       this.morestatus = false;
       scrollTo(0, 0);
+      if (i > 3) {
+        this.$refs.tab.$refs.conrol.scrollTo({
+          left: 45 * i,
+          behavior: "smooth",
+        });
+      } else {
+        this.$refs.tab.$refs.conrol.scrollTo({ left: 0, behavior: "smooth" });
+      }
     },
     tabclick(i) {
       this.current = i;

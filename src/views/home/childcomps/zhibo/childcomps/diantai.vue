@@ -17,7 +17,12 @@
       ></vicon>
     </div>
     <div class="tabbar">
-      <tabcon :titles="tabs" @tabclick="tabclick" :current="current"></tabcon>
+      <tabcon
+        :titles="tabs"
+        @tabclick="tabclick"
+        :current="current"
+        ref="tab"
+      ></tabcon>
       <div @click="openpop" class="fenlei">
         <img src="@/assets/img/heng.svg" alt="" />
       </div>
@@ -90,7 +95,7 @@ export default {
         { title: "放松电台", img: require("@/assets/img/diantai.svg") },
         { title: "唱见电台", img: require("@/assets/img/fen.svg") },
         { title: "聊天电台", img: require("@/assets/img/add.svg") },
-        { title: "配音", img: require("@/assets/img/bao.svg") }
+        { title: "配音", img: require("@/assets/img/bao.svg") },
       ],
       morestatus: false,
     };
@@ -141,6 +146,14 @@ export default {
       this.current = i;
       this.morestatus = false;
       scrollTo(0, 0);
+      if (i > 3) {
+        this.$refs.tab.$refs.conrol.scrollTo({
+          left: 45 * i,
+          behavior: "smooth",
+        });
+      } else {
+        this.$refs.tab.$refs.conrol.scrollTo({ left: 0, behavior: "smooth" });
+      }
     },
     tabclick(i) {
       this.current = i;
@@ -199,12 +212,12 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.xia:after{
-    display: inline-block;
-    content: "";
-    height: 0;
-    width: 100px;
-    margin: 10px;
+.xia:after {
+  display: inline-block;
+  content: "";
+  height: 0;
+  width: 100px;
+  margin: 10px;
 }
 .items {
   width: 100px;
