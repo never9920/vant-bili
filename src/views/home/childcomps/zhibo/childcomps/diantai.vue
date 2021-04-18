@@ -55,7 +55,7 @@
       :over="true"
     >
       <div class="shang">
-        <div>全部</div>
+        <div @click="toquan">全部</div>
         <div>电台直播</div>
         <div @click="closepop">×</div>
       </div>
@@ -157,6 +157,9 @@ export default {
     },
     tabclick(i) {
       this.current = i;
+    },
+    toquan() {
+      this.$router.push("/zhibo/quanbu");
     },
   },
 };
