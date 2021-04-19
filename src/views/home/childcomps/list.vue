@@ -11,6 +11,7 @@
         :type="type"
         :danhang="danhang"
         :gaodu="gaodu"
+        @delitem="delitem(item.id)"
       ></listitem>
     </div>
   </div>
@@ -47,6 +48,9 @@ export default {
     tovideo(val) {
       this.$router.push("/detail/" + val.id);
     },
+    delitem(i){
+      this.$emit('delitem',i)
+    }
   },
 };
 </script>

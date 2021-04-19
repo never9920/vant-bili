@@ -45,7 +45,7 @@
     </div>
     <div class="zhiboxia" v-if="type === 'zhibo'">
       <span>直播电台</span>
-      <img src="~assets/img/cha.svg" alt="" />
+      <img @click.stop="delitem" src="~assets/img/cha.svg" alt="" />
     </div>
     <div class="zhiboxia" v-if="type === 'xiaokang'">
       <span>热点</span>
@@ -89,7 +89,11 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    delitem(){
+      this.$emit('delitem')
+    }
+  },
 };
 </script>
 <style scoped>

@@ -28,6 +28,7 @@
           type="zhibo"
           :danhang="true"
           gaodu="140px"
+          @delitem="delitem"
         ></list>
         <list
           v-if="show"
@@ -35,6 +36,7 @@
           type="zhibo"
           :danhang="true"
           gaodu="140px"
+          @delitem="delitem"
         ></list>
       </vlist>
     </vrefresh>
@@ -140,6 +142,21 @@ export default {
     changecare(val) {
       //console.log(val);
       this.hometab[0].loading = val;
+    },
+    delitem(id) {
+      for (let i in this.hometab[0].list) {
+        if (id === this.hometab[0].list[i].id) {
+          this.hometab[0].list.splice(i, 1);
+          return
+        }
+      }
+      for (let j in this.firsttab[0].list) {
+        if (id === this.firsttab[0].list[j].id) {
+          this.firsttab[0].list.splice(j, 1);
+          console.log(this.firsttab[0].list)
+          return
+        }
+      }
     },
   },
 };
